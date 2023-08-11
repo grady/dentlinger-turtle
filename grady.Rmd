@@ -31,52 +31,57 @@ turtles <- read_excel("Stranding Data Set.xlsx")
 turtles_clean <- turtles %>% 
   mutate(date = parse_date_time(paste(Month, Year), "my"), 
          year = year(date),
-         cause=fct_collapse(Cause, natural=c("Shark attack", "FP"), 
+         cause=fct_collapse(Cause, natural=c("Shark attack", "Misc.", "FP"), 
                             human=c("Human take", "Net", "Hook/line", "Boat impact"),
-                            unknown=c("Unknown", "Misc."))) %>%
+                            #FP="FP",
+                            unknown=c("Unknown"))) %>%
   select(date, cause, everything(), -Year, -Month)
 turtles_clean  
-
+write.csv(turtles_clean, "turtles_clean.csv")
 turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=FALSE)
 turtles_count
-turtles_count %>% group_by(cause) %>% summarize(n = sum(strandings)) %>% mutate(p=n/sum(n))
+turtles_count %>% group_by(cause) %>% filter(year >= 1985, year != 2011) %>% summarize(n = sum(strandings)) %>% mutate(p=n/sum(n))
 ```
 
 ## Exploration
 
 ```{r}
-ggplot(turtles_count) + 
+timecountplot <- ggplot(turtles_count) + 
   aes(year, strandings, color=cause, shape=year<2020) + 
   geom_point(position=position_dodge(width=1)) + 
   scale_shape_manual(values = c(1,16), guide="none") +
-  geom_smooth(data= ~filter(.x, year<2020), 
-              formula = y~x,
-              method="loess", span=1)
+  scale_color_brewer(palette="Dark2")
+timecountplot + geom_smooth(data= ~filter(.x, year<2020), 
+                            formula = y~x,
+                            method="loess", span=1)
 ```
 
 ```{r}
 # turtles_count %>% filter(cause!="unknown") %>% group_by(year) %>% mutate(total=sum(strandings), prop=strandings/total)
 
-triclassplot <- ggplot( turtles_count %>% 
+(triclassplot <- ggplot( turtles_count %>% 
          filter() %>% 
          group_by(year) %>% 
-         mutate(total=sum(strandings), prop=strandings/total, cause=fct_relevel(cause, "natural", "unknown", "human"))) + 
+         mutate(total=sum(strandings), 
+                prop=strandings/total, 
+                cause=fct_relevel(cause, "human", "unknown", "natural"))) + 
   aes(year, prop, color=cause) + geom_col(aes(fill=cause)) +
-  geom_hline(yintercept=c(0.312, 1-0.103), lty=2, color="white") + 
-  labs(title="Cause proportion over years")
-triclassplot  
+  geom_hline(yintercept=c(0.12, 1-0.30), lty=2, color="white") + 
+  labs(title="Cause proportion over years")) + 
+  scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2")
 ```
 
 And with unknown cases removed.
 
 ```{r,  warning=FALSE}
-ggplot( turtles_count %>% 
+(biclassplot <- ggplot( turtles_count %>% 
          filter(cause!="unknown") %>% 
          group_by(year) %>% 
          mutate(total=sum(strandings), prop=strandings/total)) + 
   aes(year, prop, color=cause) + geom_col(aes(fill=cause)) +
   geom_hline(yintercept=0.249, lty=2) +
-  labs(title="Cause proportion over years")
+  labs(title="Cause proportion over years")) + 
+  scale_color_brewer(palette="Set2", aesthetics = c("color", "fill"))
 ```
 
 
@@ -103,9 +108,9 @@ countsmodel <- glm(strandings~year * cause,
 
 countsmodel
 
-
-ggplot(turtles_count %>% filter(year < 2020), aes(year, strandings, color=cause)) + 
-  geom_point() + geom_line(aes(y=predict(countsmodel, type="response")))
+timecountplot + geom_line(aes(y=predict(countsmodel, newdata=turtles_count, type="response"), shape=NULL))
+#ggplot(turtles_count %>% filter(year < 2020), aes(year, strandings, color=cause)) + 
+#  geom_point() + geom_line(aes(y=predict(countsmodel, type="response")))
 ```
 
 ### Log link Poisson
@@ -113,14 +118,17 @@ ggplot(turtles_count %>% filter(year < 2020), aes(year, strandings, color=cause)
 Below is a more conventional Poisson regression model, where the Poisson mean parameter $\mu$ is controlled exponentially by the year as $\log \mu = a + b\times\text{year}$. The interaction is not significant, which implies that the ratios between the Poisson rates for the different causes are constant over time. This is our first formal evidence of what we observed in the proportion charts above. 
 
 ```{r}
-countsmodel2 <- glm(strandings~year * cause, poisson(link = "log"), turtles_count %>% filter(year < 2020))
+countsmodel2 <- glm(strandings~year * cause, poisson(link = "log"), turtles_count %>% filter(year < 2020, year > 1984))
 
 countsmodel2 %>% anova(test="LRT")
 
+countsmodel3 <- update(countsmodel2, . ~ . - year:cause)
 
-ggplot(turtles_count %>% filter(year < 2020), aes(year, strandings, color=cause)) + 
-  geom_point() + 
-  geom_line(aes(y=predict(update(countsmodel2, .~ . - year:cause), type="response"))) #+
+timecountplot + geom_line(aes(y=predict(countsmodel3, newdata = turtles_count, type="response"), shape=NULL))
+
+#ggplot(turtles_count %>% filter(year < 2020), aes(year, strandings, color=cause)) + 
+#  geom_point() + 
+#  geom_line(aes(y=predict(update(countsmodel2, .~ . - year:cause), type="response"))) #+
   #geom_line(aes(y=predict(glm(strandings~year, poisson), type="response")), color=1)
 
 ```
@@ -131,13 +139,15 @@ Now we'll try some logistic regression. Remove the unknown category. The model i
 
 ```{r binomident, class.source = 'fold-show'}
 turtles_known <- turtles_clean %>% filter(cause!="unknown") #, year < 2020)
-binommodel <- glm(cause ~ year, binomial(link="identity"), turtles_known)
+binommodel <- glm(cause ~ year, binomial(link="identity"), turtles_known, weights = (turtles_known$year>1984) + 0)
 
 binommodel  %>% anova(test="LRT")
 ```
 
 ```{r, warning=FALSE}
 #glm(cause ~ 1, binomial(link="identity"), turtles_known) 
+
+turtles_known %>% count(cause) %>% mutate(proportions(n))
 
 ggplot(cbind(turtles_known, predict(binommodel, type="response", se.fit=TRUE))) +
   geom_col(aes(year, prop, color=cause, fill=cause), inherit.aes = FALSE,
@@ -147,9 +157,8 @@ ggplot(cbind(turtles_known, predict(binommodel, type="response", se.fit=TRUE))) 
   aes(year, fit, ymin=fit - 2*se.fit, ymax = fit + 2*se.fit) + 
   geom_line() + 
   geom_ribbon(alpha=0.2) + 
-  geom_hline(yintercept=0.249, lty=3) + 
+  geom_hline(yintercept=0.311, lty=3) + 
   labs(y="Proportion")
-  
 ```
 
 ### Logit link binomial
@@ -168,12 +177,13 @@ binommodel2  %>% anova(test="LRT")
 #glm(cause ~ 1, binomial(link="logit"), turtles_known)
 #1/(1+exp(--1.103))
 
-ggplot(cbind(turtles_known, predict(binommodel2, type="response", se.fit=TRUE))) +
+ggplot(cbind(turtles_known, predict(binommodel2, newdata=turtles_known, type="response", se.fit=TRUE))) +
   geom_col(aes(year, prop, color=cause, fill=cause), inherit.aes = FALSE,
            turtles_count %>% filter(cause!="unknown") %>% 
              group_by(year) %>% 
              mutate(total=sum(strandings), prop=strandings/total) ) + 
-  aes(year, fit, ymin=fit - 2*se.fit, ymax = fit + 2*se.fit) + 
+  scale_color_brewer(palette="Set2", aesthetics = c("fill", "color")) + 
+  aes(year, fit, ymin=fit - 2*se.fit, ymax = fit + 2*se.fit, ) + 
   geom_line() + 
   geom_ribbon(alpha=0.2) + 
   geom_hline(yintercept=0.249, lty=3) + 
@@ -191,14 +201,15 @@ multinom(cause~year, turtles_clean, trace=FALSE) %>% step
 
 ### Multinomial regression with natural splines
 
-Here's some spline fit multinomial models. The AIC selects 4 degrees of freedom as optimal. I'm suspicious of that, the AIC is only marginally improved for the 4 dof model over the null model.
+Here's some spline fit multinomial models. The AIC selects 5 degrees of freedom as optimal. I'm suspicious of that, the AIC is only marginally improved for the 4 dof model over the null model.
 
 ```{r}
-cubicmultnom <- multinom(cause~ns(year, df=4), turtles_clean, trace=FALSE)
+cubicmultnom <- multinom(cause~ns(year, df=5), turtles_clean, trace=FALSE)
 cubicmultnom
 triclassplot +
-  geom_line(aes(y=human, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs"))) + 
-  geom_line(aes(y=human+unknown, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs")))
+  scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2") + 
+  geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs"))) + 
+  geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs")))
 
 ```
 
@@ -211,10 +222,11 @@ bootns <- purrr::rerun(100, multinom(cause~ns(year, df=4), turtles_clean %>% sli
 #bootns
 
 triclassplot + 
-  geom_line(aes(y=human, group=run, color=NULL), bootns, color=1, alpha=0.15) + 
-  geom_line(aes(y=human+unknown, group=run, color=NULL), bootns, color=1, alpha=0.15) + 
-  geom_line(aes(y=human, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs")), color=2, lwd=1, lty=2) + 
-  geom_line(aes(y=human+unknown, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs")), color=2, lwd=1, lty=2)
+  geom_line(aes(y=1-human, group=run, color=NULL), bootns, color=1, alpha=0.15) + 
+  geom_line(aes(y=natural, group=run, color=NULL), bootns, color=1, alpha=0.15) + 
+  scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2") + 
+  geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs")), color=3, lwd=1, lty=2) + 
+  geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(cubicmultnom, type="probs")), color=3, lwd=1, lty=2)
 
 
 ```
@@ -224,35 +236,94 @@ triclassplot +
 Without the years before 1985 included in the data, there really does not appear to be a need for any dependence on year. The AIC changes by less than 1 going from a 1 df spline to 4.
 
 ```{r, message=FALSE, warning=FALSE}
-cubicmultnom2 <- multinom(cause~ns(year, df=3), turtles_clean, year >= 1985, trace=FALSE)
+cubicmultnom2 <- multinom(cause~ns(year, df=3), turtles_clean, year >= 1985 & year != 2011, trace=FALSE)
 cubicmultnom2
-bootns2 <- purrr::rerun(100, 
+
+bootns2 <- purrr::rerun(2000, 
                        multinom(cause~ns(year, df=3), 
                                 turtles_clean %>% slice_sample(prop=1, replace=TRUE), 
-                                year>=1985,
+                                year>=1985 & year != 2011,
                                 trace=FALSE) %>% 
                          predict(newdata=turtles_clean, type="probs") %>% 
                          cbind(turtles_clean,.)) %>% 
   bind_rows(.id="run")
-#bootns
+
+bootci <- bootns2 %>% 
+  group_by(year) %>% 
+  summarize(human_L=1-quantile(human, 0.025), 
+            human_U=1-quantile(human,1-0.025),
+            natural_L=quantile(natural,0.025),
+            natural_U=quantile(natural,1-0.025)) %>%
+  pivot_longer(-year, names_sep = "_", names_to = c("cause", "bound")) %>%
+  pivot_wider(names_from = "bound", values_from = "value")
+#bootci
+save(bootci, cubicmultnom2, file="bootci.rda")
 
 triclassplot +
-  geom_line(aes(y=human, group=run, color=NULL), bootns2, color=1, alpha=0.15) + 
-  geom_line(aes(y=human+unknown, group=run, color=NULL), bootns2, color=1, alpha=0.15) + 
-  geom_line(aes(y=human, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=2, lwd=1, lty=2) + 
-  geom_line(aes(y=human+unknown, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=2, lwd=1, lty=2)
-
-
+  #geom_line(aes(y=1-human, group=run, color=NULL), bootns2, color=1, alpha=0.15) + 
+  #geom_line(aes(y=natural, group=run, color=NULL), bootns2, color=1, alpha=0.15) + 
+  scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2",
+                    name="Cause", labels=c("Human", "Unknown", "Predation, disease\nand weather")) + 
+  geom_ribbon(aes(year,ymin=L, ymax=U, group=cause), data=bootci, inherit.aes = FALSE,alpha=0.25) +
+  geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
+  geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
+  annotate("text", x=c(1983,1984,2011), y=0.01, label="*", size=4) + 
+  labs(y="proportion") + 
+  theme(legend.position=c(0.5,0.96), legend.direction = "horizontal", legend.justification = c(0.5,1), 
+         legend.background = element_rect(fill=alpha("white", 0.55)) )
+  #theme(legend.position="top", legend.direction = "horizontal")
+  #guides(fill="none", color="none")
+ggsave("splineplot.png", width=6, height=4)
 ```
+
+
+
+```{r, message=FALSE, warning=FALSE}
+quarticmultnom2 <- multinom(cause~ns(year, df=4), turtles_clean, year >= 1985 & year != 2011, trace=FALSE)
+quarticmultnom2
+bootns4 <- purrr::rerun(2000, 
+                       multinom(cause~ns(year, df=4), 
+                                turtles_clean %>% slice_sample(prop=1, replace=TRUE), 
+                                year>=1985 & year != 2011,
+                                trace=FALSE) %>% 
+                         predict(newdata=turtles_clean, type="probs") %>% 
+                         cbind(turtles_clean,.)) %>% 
+  bind_rows(.id="run")
+
+bootci4 <- bootns4 %>% 
+  group_by(year) %>% 
+  summarize(human_L=1-quantile(human, 0.025), 
+            human_U=1-quantile(human,1-0.025),
+            natural_L=quantile(natural,0.025),
+            natural_U=quantile(natural,1-0.025)) %>%
+  pivot_longer(-year, names_sep = "_", names_to = c("cause", "bound")) %>%
+  pivot_wider(names_from = "bound", values_from = "value")
+#bootci
+
+
+triclassplot +
+  #geom_line(aes(y=1-human, group=run, color=NULL), bootns2, color=1, alpha=0.15) + 
+  #geom_line(aes(y=natural, group=run, color=NULL), bootns2, color=1, alpha=0.15) + 
+  scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2",
+                    name="Cause", labels=c("Human", "Unknown", "Predation, disease\n and weather")) + 
+  geom_ribbon(aes(year,ymin=L, ymax=U, group=cause), data=bootci4, inherit.aes = FALSE,alpha=0.25) +
+  geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(quarticmultnom2, type="probs")), color=1, lty=1) + 
+  geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(quarticmultnom2, type="probs")), color=1, lty=1) + 
+   theme(legend.position=c(0.5,0.96), legend.direction = "horizontal", legend.justification = c(0.5,1), 
+         legend.background = element_rect(fill=alpha("white", 0.65)) )
+  #theme(legend.position="top", legend.direction = "horizontal")
+  #guides(fill="none", color="none")
+```
+
 
 ## Request: Don't Lump FP with natural
 
 ```{r}
 turtles_clean <- turtles_clean %>% mutate(cause4=fct_collapse(Cause,
                                              human = c( "Human take", "Net", "Hook/line", "Boat impact"),
-                                             unknown = c("Misc.", "Unknown"),
-                                             fp = "FP",
-                                             shark="Shark attack"
+                                             unknown = c("Unknown"),
+                                             #fp = "FP",
+                                             natural=c("Misc.", "Shark attack", "FP")
                                              ))
 turtles_count4 <- turtles_clean %>% count(year, cause4, name="strandings", .drop=FALSE)
 #turtles_count4
@@ -263,23 +334,74 @@ quadclassplot <- ggplot( turtles_count4 %>%
          filter() %>% 
          group_by(year) %>% 
          mutate(total=sum(strandings), prop=strandings/total,
-                cause4=fct_relevel(cause4, "human", "unknown", "shark"))) + 
+                cause4=fct_relevel(cause4, "human", "unknown", "natural"))) + 
   aes(year, prop, color=cause4) + geom_col(aes(fill=cause4)) +
   #geom_hline(yintercept=c(0.312, 1-0.103), lty=2, color="white") + 
   labs(title="Cause proportion over years")
 quadclassplot  
-multnom4 <- multinom(cause4~ns(year, df=4), turtles_clean, year>=1985, trace=TRUE)
+multnom4 <- multinom(cause4~ns(year, df=4), turtles_clean, year>=1985 & year !=2011, trace=TRUE)
 multnom4 %>% summary
 
 quadclassplot +
   geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(multnom4, type="probs"))) + 
-  geom_line(aes(y=1-human-unknown, color=NULL), cbind(turtles_clean, predict(multnom4, type="probs"))) +
-  geom_line(aes(y=shark, color=NULL), cbind(turtles_clean, predict(multnom4, type="probs")))
+  #geom_line(aes(y=fp, color=NULL), cbind(turtles_clean, predict(multnom4, type="probs"))) +
+  geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(multnom4, type="probs")))
+
+```
+
+Predation + Disease + Natural Disaster
+
+Exclude 2011 due to Tohoku quake causing non-predictive spike in natural distaster (misc.) category.s
+
+## Discussion
+
+The different approaches mostly seem to agree on the same qualitative conclusion: While the number of strandings is going up over time, we don't see convincing evidence that the proportions between human/natural causes are changing over time. (The same holds when we include a third "unknown" cause category.)
+
+
+```{r}
+anova(
+  multinom(cause~ns(year, df=4), turtles_clean, year >= 1980 & year != 2011, trace=FALSE),
+  multinom(cause~ns(year, df=3), turtles_clean, year >= 1980 & year != 2011, trace=FALSE),
+  multinom(cause~ns(year, df=2), turtles_clean, year >= 1980 & year != 2011, trace=FALSE),
+  multinom(cause~year, turtles_clean, year >= 1980 & year != 2011, trace=FALSE),
+  multinom(cause~1, turtles_clean, year >= 1980 & year != 2011, trace=FALSE)
+  )
+
+multinom(cause~ns(year, df=4), turtles_clean, year >= 1985 & year != 2011, trace=FALSE) %>% AIC
+multinom(cause~ns(year, df=3), turtles_clean, year >= 1985 & year != 2011, trace=FALSE) %>% AIC
+multinom(cause~ns(year, df=2), turtles_clean, year >= 1985 & year != 2011, trace=FALSE) %>% AIC
+multinom(cause~year, turtles_clean, year >= 1985 & year != 2011, trace=FALSE) %>% AIC
+multinom(cause~1, turtles_clean, year >= 1985 & year != 2011, trace=FALSE) %>% AIC
+```
+
+
+## Pie chart
+
+
+```{r}
+turtles_clean %>% count(Cause, Side) %>% 
+  pivot_wider(names_from = Side, values_from=n) %>% 
+  mutate(Total=E+W, across(-Cause, ~paste0(.x, " (", round(.x/sum(.x)*100, 1), "\\%)"))) %>%
+  knitr::kable("latex")
+  
+```
+
+
+```{r}
+turtles_clean %>% count(Cause, Status, .drop = FALSE) %>% 
+  pivot_wider(names_from = Status, values_from = n) %>% 
+  replace_na(replace=list(U=0)) %>% 
+  rename(Alive=A, Dean=D, Unknown=U) %>%
+  knitr::kable("latex")
 
 ```
 
 
 
-## Discussion
+## Bar graphs
 
-The different approaches mostly seem to agree on the same qualitative conclusion: While the number of strandings is going up over time, we don't see convincing evidence that the proportions between human/natural causes are changing over time. (The same holds when we include a third "unknown" cause category.)
+```{r}
+ggplot(turtles_clean) + aes(x=Cause, y=SCL) + geom_boxplot() + 
+  labs(y="Carapace length (cm) ")
+```
+
