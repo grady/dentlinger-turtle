@@ -5,3 +5,11 @@
 *.html
 *.pdf
 *.docx
+
+springer/
+bst/
+
+*.log
+*.aux
+*concordance.tex
+*synctex.gz
