@@ -80,9 +80,14 @@ These results provide the first analyses of stranding data from \Hawaii\ Island 
 
 
 <<turtles_clean, include=FALSE>>=
+mm2in <- 0.0393701
+twocol <- 84 * mm2in
+bigcol <- 174 * mm2in
+smallcol <- 119 * mm2in
+
 knitr::opts_chunk$set(
   echo = FALSE, warning = FALSE, message = FALSE, 
-  fig.width = 6.85, fig.height = 6
+  fig.width = bigcol, fig.height = 6
 )
 library(tidyr)
 library(dplyr)
@@ -168,7 +173,7 @@ A total of 754 green turtles stranded on \Hawaii\ Island from June 1983 to June 
 \centering
 %\fbox{\begin{minipage}[c][3in][c]{3in}\centering PLACEHOLDER \end{minipage}}
 
-<<map, fig.width=3.31, fig.height=3.31>>=
+<<map, fig.width=twocol, fig.height=twocol>>=
 library(tmap)
 library(sf)
 hawaii.sf <- read_sf("Coastline/Coastline.shp") 
