@@ -1,5 +1,6 @@
 \documentclass[sn-basic,NameDate]{sn-jnl}
 
+\usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{manyfoot}
 \usepackage{booktabs}
@@ -11,7 +12,7 @@
 \hbadness=10000
 
 \usepackage{setspace}
-%\onehalfspacing
+\onehalfspacing
 
 \bibpunct{(}{)}{;}{a}{}{,}
 
@@ -56,6 +57,7 @@
 \affil[4]{\orgname{Golden Honu Services of Oceania}, 
 \orgaddress{\city{Honolulu} \state{Hawaii}, \country{USA}}}
 
+\miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii. In publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
 
 \abstract{
 Hawaiian populations of green turtles (\emph{Chelonia mydas}) have increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
@@ -72,6 +74,8 @@ These results provide the first analyses of stranding data from \Hawaii\ Island 
 \begin{document}
 
 \maketitle
+
+
 
 <<turtles_clean, include=FALSE>>=
 library(tidyr)
@@ -126,6 +130,7 @@ The west and east coasts of \Hawaii\ Island are different in terms of weather, t
 West \Hawaii\ included locations from \Milolii\ north to Kawaihae, and east \Hawaii\ included locations from South Point north to Hawi (Figure \ref{fig:map}). 
 
 For each stranded turtle, the following information was collected: date of stranding, stranding location, stranding status (alive/dead), and cause of stranding. Data on species, sex, straight carapace length (SCL), curved carapace length (CCL), and the presence or absence of tumors indicative of fibropapillomatosis were also recorded whenever possible. SCL was used in size analyses because it was reported more frequently than CCL. In cases where CCL was recorded, but not SCL, CCL was converted to SCL following \cite{chaloupka2008cause} using the following linear regression function: $\text{SCL} = 1.245 +0.913\cdot\text{CCL}$. Determination of size classes of turtles followed \cite{balazs1980synopsis}: juvenile -- post hatchling to 65 cm SCL; subadult -- from 65 to 81 cm SCL; adult -- greater than $81$ cm SCL. 
+
 The primary cause of stranding was based on direct observation and/or necropsy when available. Causes of stranding were classified into eight categories used previously by \cite{chaloupka2008cause}: fibropapillomatosis (FP), hook-and-line fishing gear, net and gillnet fishing gear, boat impact, shark attack, human-take, miscellaneous, and unknown. FP strandings were turtles that had gross evidence of external tumors. 
 Fishing gear strandings were identified by obvious signs of an interaction or entanglement with the particular gear (hook-and-line or net) \citep{boulon2000trends, chaloupka2008cause}. 
 Boat impact strandings were recognized by the presence of a crushed carapace or deep cuts from propellers or hulls of boats \citep{boulon2000trends, guimares2021distribution}. 
@@ -134,7 +139,7 @@ Human-take (take is defined under the Endangered Species Act as ``to harass, har
 Miscellaneous strandings included turtles with natural, non-anthropogenic causes not fitting in any of the other categories (e.g., natural disasters, including weather and tsunami events; and internal diseases confirmed by necropsy), and unknown strandings were those for which no cause could be determined \citep{chaloupka2008cause}. 
 
 \subsection{Statistical methods}
-Chi-square (X2) goodness of fit tests were used to determine if there were equal proportions among months of stranding, stranding status, causes of stranding, and sex of stranded turtles for all of \Hawaii\ Island. When comparing west and east \Hawaii, contingency tables and chi-square tests of independence were used. All analyses were performed using the statistical software R version 4.2 \citep{rcore2022}. Multinomial linear models were fit using the nnet package \citep{nnet}. Statistical significance was accepted at $p < 0.05$. 
+Chi-square goodness of fit tests were used to determine if there were equal proportions among months of stranding, stranding status, causes of stranding, and sex of stranded turtles for all of \Hawaii\ Island. When comparing west and east \Hawaii, contingency tables and chi-square tests of independence were used. All analyses were performed using the statistical software R version 4.2 \citep{rcore2022}. Multinomial linear models were fit using the nnet package \citep{nnet} and model selection was carried out using Akaike Information Criterion \citep{akaike1974new}. Statistical significance was accepted at $p < 0.05$. 
 
 \section{Results}
 
@@ -142,8 +147,32 @@ Chi-square (X2) goodness of fit tests were used to determine if there were equal
 A total of 754 green turtles stranded on \Hawaii\ Island from June 1983 to June 2022. Of those strandings, 376 (49.9\%) of those strandings were located on the leeward or west coast of \Hawaii\ Island, while 378 (50.1\%) were located on the windward side or east coast of \Hawaii\ Island (Figure \ref{fig:map}). 
 
 \begin{figure}[tb]
-PLACEHOLDER
-\caption{Stranding locations and the division into eastern and western \Hawaii\ island.}\label{fig:map}
+\centering
+%\fbox{\begin{minipage}[c][3in][c]{3in}\centering PLACEHOLDER \end{minipage}}
+
+<<map, fig.width=3.31, fig.height=3.31, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(tmap)
+library(sf)
+hawaii.sf <- read_sf("Coastline/Coastline.shp")# %>% filter(isle=="Hawaii")
+#hawaii.sf <- read_sf("coast_n83.shp")
+#st_bbox(hawaii.sf)
+
+turtlepoints <- data.frame(lat=c(19.6, 19.3), 
+                           long=c(-155.23, -155.85), 
+                           Side=c("East","West")) %>% st_as_sf(coords=c("long", "lat"), crs=4326)
+
+
+tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) + 
+  tm_graticules(alpha=0.4, n.x=4, n.y=4) + 
+  tm_borders() + tm_compass() + tm_scale_bar() + 
+  tm_fill(alpha=0.6) + 
+  tm_credits("PLACEHOLDER", position=c("center", "center")) + 
+  #tm_credits("USGS\\Hawaii GIS Program", position=c("left", "bottom")) + 
+  tm_shape(turtlepoints) + tm_symbols(shape="Side", alpha=0.3, size=0.3, col="black") + 
+  tm_legend(position=c(0.95,0.95), just=c(1,1), frame=TRUE) 
+@
+
+\caption{Stranding locations and the division into eastern (windward) and western (leeward) sides of \Hawaii\ island. Map data: United States Geological Service (USGS) and Hawaii Statewide GIS Program.}\label{fig:map}
 \end{figure}
 
 \subsection{Temporal trends}
