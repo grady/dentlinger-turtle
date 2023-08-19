@@ -35,7 +35,7 @@
 
 \title{Four decades of green turtle (\emph{Chelonia mydas}) strandings on \Hawaii\ Island (1983--2022): Causes and trends
 }
-\author[1]{\fnm{Skylar} \sur{Dentlinger}}
+\author[1]{\fnm{Skylar} \sur{Dentlinger}\textsuperscript{\dag}}
 
 \author*[1]{\fnm{Karla J.} \sur{McDermid}}\email{mcdermid@hawaii.edu, orcid.org/0000-0002-7663-6545}
 %\equalcont{These authors contributed equally to this work.}
@@ -48,18 +48,21 @@
 \author[4]{\fnm{George H.} \sur{Balazs}}
 
 \affil[1]{\orgdiv{Department of Marine Science}, \orgname{University of \Hawaii\ at Hilo},
-\orgaddress{\city{Hilo} \state{Hawaii}, \postcode{96720}, \country{USA}}}
+\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}}}
 
 \affil[2]{\orgdiv{Department of Mathematics}, \orgname{University of \Hawaii\ at Hilo}, 
-\orgaddress{\city{Hilo} \state{Hawaii}, \postcode{96720}, \country{USA}}}
+\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}}}
 
 \affil[3]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
-\orgaddress{\city{Kamuela} \state{Hawaii}, \postcode{96743}, \country{USA}}}
+\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}}}
 
 \affil[4]{\orgname{Golden Honu Services of Oceania}, 
-\orgaddress{\city{Honolulu} \state{Hawaii}, \country{USA}}}
+\orgaddress{\city{Honolulu}, \state{Hawaii}, \country{USA}}}
 
-\miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii. In electronic publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
+\presentaddress{\textsuperscript{\dag} \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}}}
+
+
+\miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii, \Oahu, \Milolii. In electronic publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
 
 \abstract{
 Hawaiian populations of green turtles (\emph{Chelonia mydas}) have increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
@@ -183,18 +186,19 @@ hawaii.sf <- read_sf("Coastline/Coastline.shp")
 turtlepoints <- data.frame(lat=c(19.75, 19.3), 
                            long=c(-155.0, -155.85), 
                            Side=c("East","West")) %>% st_as_sf(coords=c("long", "lat"), crs=4326)
+BigIslandStrandings <- readr::read_csv("BigIslandStrandings.csv") %>% st_as_sf(coords=c("Long", "Lat"), crs=4326, na.fail=FALSE)
 
-turtlepoints <- hawaii.sf %>% filter(isle=="Hawaii") %>% 
-  rmapshaper::ms_simplify(0.001) %>% st_segmentize(1000) %>% 
-  st_coordinates() %>% as.data.frame() %>% slice_sample(n=100) %>% 
-  cbind(., Side=ifelse(.$X< -155.8, "West", "East")) %>% st_as_sf(coords=c("X", "Y"), crs=4326)
+# turtlepoints <- hawaii.sf %>% filter(isle=="Hawaii") %>% 
+#   rmapshaper::ms_simplify(0.001) %>% st_segmentize(1000) %>% 
+#   st_coordinates() %>% as.data.frame() %>% slice_sample(n=100) %>% 
+#   cbind(., Side=ifelse(.$X< -155.8, "West", "East")) %>% st_as_sf(coords=c("X", "Y"), crs=4326)
 
 tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) + 
   tm_graticules(alpha=0.4, n.x=4, n.y=4) + 
   tm_borders() + tm_compass() + tm_scale_bar() + 
   tm_fill(alpha=0.3) + 
-  tm_credits("PLACEHOLDER", position=c("center", "center"), size=1.5) + 
-  tm_shape(turtlepoints) + 
+  #tm_credits("PLACEHOLDER", position=c("center", "center"), size=1.5) + 
+  tm_shape(BigIslandStrandings) + 
   tm_symbols(shape="Side", alpha=0.2, size=0.3, col="black", border.alpha=1, border.lwd =  1) + 
   tm_legend(position=c(0.95,0.95), just=c(1,1), frame=TRUE) 
 @
