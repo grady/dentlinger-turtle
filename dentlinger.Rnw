@@ -80,8 +80,6 @@ These results provide the first analyses of stranding data from \Hawaii\ Island 
 
 \maketitle
 
-
-
 <<turtles_clean, include=FALSE>>=
 mm2in <- 0.0393701
 twocol <- 84 * mm2in
@@ -103,7 +101,6 @@ library(splines)
 turtles_clean <- read.csv("turtles_clean.csv")
 turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=FALSE)
 @
-
 
 \section{Introduction}
 Green turtles (\emph{Chelonia mydas}) are the most abundant large marine herbivores found throughout the world and in the Hawaiian Islands. 
@@ -139,7 +136,7 @@ In the present study, a comprehensive analysis of 39 years of \Hawaii\ Island gr
 \section{Methods}
 
 \subsection{Data Collection}
-Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Response Program. 
+Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Response Program. {\color{red} (Make clear how to access the public databases.)}
 The west and east coasts of \Hawaii\ Island are different in terms of weather (the east coast receives much more rainfall than the west coast), terrain, currents, and population, so the data used in this study were analyzed for the island as a whole, as well as by west and east coast. 
 West \Hawaii\ included locations from \Milolii\ north to Kawaihae, and east \Hawaii\ included locations from South Point north to Hawi (Figure \ref{fig:map}). 
 
