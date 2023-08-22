@@ -195,8 +195,8 @@ tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) +
   tm_borders() + tm_compass() + tm_scale_bar() + 
   tm_fill(alpha=0.3) + 
   #tm_credits("PLACEHOLDER", position=c("center", "center"), size=1.5) + 
-  tm_shape(BigIslandStrandings) + 
-  tm_symbols(shape="Side", alpha=0.2, size=0.3, col="black", border.alpha=1, border.lwd =  1) + 
+  tm_shape(BigIslandStrandings %>% filter(Site != "Mountain View")) + 
+  tm_symbols(shape="Coast", alpha=0.2, size=0.3, col="black", border.alpha=1, border.lwd =  1) + 
   tm_legend(position=c(0.95,0.95), just=c(1,1), frame=TRUE) 
 @
 
