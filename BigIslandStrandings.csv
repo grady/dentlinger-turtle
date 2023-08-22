@@ -700,7 +700,7 @@ Date,Year,Month,Coast,Site,Cause,InitialStatus,FinalStatus,Sex,SCL,CCL,SCW,CCW,P
 2016-12-14,2016,December,West,Puako,line,D,D,F,45.4342,48.4,35.1,40.5,35.9,N,19.974355,-155.832734
 2017-01-03,2017,January,West,Puako (64 PBR),line,A,A,U,64.6985,69.5,,61.5,,N,19.968256,-155.84652
 2017-02-22,2017,February,West,Kona,boat impact,A,D,F,40.5,43.5,33.7,30,32.7,N,19.64771,-156.021223
-2017-04-27,2017,April,West,Kaalualu,unknown,D,D,M,49.1,52.5,39.4,47,39.6,N,18.9695,-155.6175
+2017-04-27,2017,April,East,Kaalualu,unknown,D,D,M,49.1,52.5,39.4,47,39.6,N,18.9695,-155.6175
 2017-05-07,2017,May,West,Puako Beach Road #56,shark attack,D,D,U,,,50.2,59.5,,N,19.968585,-155.845673
 2017-05-07,2017,May,West,Puako,unknown,D,D,U,66.8,72.4,52,,,N,19.9733,-155.8386
 2017-05-29,2017,May,West,Kona,unknown,D,D,F,58.1,60.5,46,53,45.1,N,19.966035,-155.85234
