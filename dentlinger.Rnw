@@ -44,7 +44,7 @@
 %\equalcont{These authors contributed equally to this work.}
 
 \author[3]{\fnm{Laura R.} \sur{Jim}}
-\author[3]{\fnm{Marc} \sur{Rice}}\email{mrice@hpa.edu, orcid.org/0009-0008-5951-0749}
+\author[3]{\fnm{Marc R.} \sur{Rice}}\email{mrice@hpa.edu, orcid.org/0009-0008-5951-0749}
 \author[4]{\fnm{George H.} \sur{Balazs}}
 
 \affil[1]{\orgdiv{Department of Marine Science}, \orgname{University of \Hawaii\ at Hilo},
@@ -105,7 +105,8 @@ turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=F
 \section{Introduction}
 Green turtles (\emph{Chelonia mydas}) are the most abundant large marine herbivores found throughout the world and in the Hawaiian Islands. 
 Hawaiian populations of green turtles that were once depleted have increased since their 1974 protection under Hawaiian Law and their 1978 protection under the Endangered Species Act \citep{balazs2004thirty}. Green turtles migrate long distances during their lifetime, from nesting to foraging grounds \citep{balazs2015review}. 
-In the Hawaiian Islands, over 90\% of nesting occurs on the sand islets at French Frigate Shoals, located in the Northwestern Hawaiian Islands. Migration patterns and complicated life history patterns cause green turtles to occupy many habitats during their lifespans including pelagic environments during their early years and during migrations, as well coastal areas in their later years \citep{balazs1980synopsis, bolten2003variation}.
+In the Hawaiian Islands, 96\% of nesting occurs on the sand islets at French Frigate Shoals, located in the Northwestern Hawaiian Islands \citep{mtbap2022}. 
+Migration patterns and complicated life history patterns cause green turtles to occupy many habitats during their lifespans including pelagic environments during their early years and during migrations, as well coastal areas in their later years \citep{balazs1980synopsis, bolten2003variation}.
 Therefore, green turtles are susceptible to threats in both offshore and coastal environments \citep{bolten2003variation}.
 
 A long history of exploitation has been experienced by green turtles. 
@@ -116,7 +117,7 @@ However, large marine vertebrates, including green turtles, face other threats, 
 Bycatch is harmful to green turtles because it can cause drowning, and internal/external injuries from hooks and line entanglements. 
 
 Fibropapillomatosis (FP) is another major threat to sea turtle populations. 
-FP is a debilitating neoplastic disease associated with herpesvirus found in turtles worldwide \citep{jacobson1991herpesvirus, herbst1994fibropapillomatosis}.
+FP is a debilitating neoplastic disease associated with herpes virus found in turtles worldwide \citep{jacobson1991herpesvirus, herbst1994fibropapillomatosis}.
 The disease was first described in green turtles in the Florida Keys in 1938 and affects mostly immature turtles \citep{herbst1994fibropapillomatosis}. 
 FP is indicated by the presence of internal, external, and oral tumors. 
 Oral tumors are unique to Hawaiian green turtles and are often found in the glottis, making survival difficult \citep{work2004retrospective}.
@@ -136,7 +137,8 @@ In the present study, a comprehensive analysis of 39 years of \Hawaii\ Island gr
 \section{Methods}
 
 \subsection{Data Collection}
-Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Response Program. {\color{red} (Make clear how to access the public databases.)}
+Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Response Program. 
+The database used in this study was compiled from records available at \url{https://georgehbalazs.com/field-notebooks-by-george-h-balazs/hawaii/}. 
 The west and east coasts of \Hawaii\ Island are different in terms of weather (the east coast receives much more rainfall than the west coast), terrain, currents, and population, so the data used in this study were analyzed for the island as a whole, as well as by west and east coast. 
 West \Hawaii\ included locations from \Milolii\ north to Kawaihae, and east \Hawaii\ included locations from South Point north to Hawi (Figure \ref{fig:map}). 
 
@@ -406,15 +408,15 @@ The increase in population size will directly lead to additional observed strand
 Additionally, the human population increase on \Hawaii\ Island and in numbers of visitors at the shoreline increase the chance of reporting for a stranding. 
 In general, the locations of strandings shown in Figure \ref{fig:map} reflect beaches and other shoreline areas with easy public access.
 Increased public awareness of strandings and response programs also lead to more reporting over time, even if all else was constant. 
-As seen in Figure \ref{fig:sides}, the increase in reported strandings appears slow or halt in the early 2000s, stabilizing at a rate of approximately 25--30 per year.
+As seen in Figure \ref{fig:sides}, the increase in reported strandings appears to slow in the early 2000s, stabilizing at a rate of approximately 25--30 per year.
 This trend was also noticed in studies covering the other main Hawaiian Islands \citep{chaloupka2008cause}. 
 
 There are two years post 2005 which show an unusually large number of Green turtle strandings: 2011 and 2018. The peak in 2011 is associated with the March 2011 magnitude 9.0 T\={o}hoku earthquake off the coast of Japan and the tsunami, large waves, and hazardous currents that it caused around \Hawaii\ Island, and particuarly its western shoreline \citep{cheung2013surges}. 
 The waves and currents associated with tsunamis bring marine life onshore with them and can wash turtles inland. 
 Two hawksbill turtles were reported stranded in \Hawaii\ as a result of the 2011 earthquake \citep{brunson2022three}, and a 2009 tsunami in Samoa similarly led to 52 turtles stranding on land \citep{bell2011marine}. 
 The apparent downward trend of strandings after 2018 is probably not because fewer turtles stranded, but is rather due to human behavioral changes caused by the COVID-19 pandemic.
-Throughout the pandemic, people in general spent much less time in public locations, and for some periods \Hawaii\ County and State beach parks were even closed for recreational use by executive decree. 
-Similarly, tourism to the island and state were heavily resricted. {\color{red}(Citations?)}
+Throughout the pandemic, people in general spent much less time in public locations, and for some periods \Hawaii\ County and State beach parks were even closed for recreational use by executive decree \citep{emergencyNo2, emergencyFifth}. 
+Similarly, tourism to the island and state were heavily restricted.
 All of these factors lead to a sharp drop in the number of people visiting \Hawaii\ Island coasts, and subsequent reports of strandings. 
 
 The highest rates of green turtle strandings occurred during the Hawaiian spring and summer months, from March--August.
@@ -422,7 +424,7 @@ This is similar to the findings on \Oahu\ where green turtle strandings were hig
 Strandings of loggerhead, green, and leatherback turtles in Brazil were highest during their austral spring and summer seasons \citep{monteiro2016long}. 
 Strandings on \Hawaii\ Island were lowest during the months of September, November, and December, but a secondary peak in the month of October is seen. 
 This same peak was seen in the 2022 green turtle strandings on Maui \citep{cutt2023impact} and
-\Oahu\ showed a similar secondary peak of strandings in September {\color{red}(CITE?)}. 
+\Oahu\ showed a similar secondary peak of strandings in September \citep{chaloupka2008cause}. 
 This trend of strandings seen in the Hawaiian Islands may indicate seasonal abundance of turtles, seasonal activity of humans, or seasonality of currents and winds \citep{chaloupka2008cause}.
 
 Hook-and-line fishing gear was the most common known cause of stranding of green turtles on \Hawaii\ Island as a whole.
@@ -441,8 +443,8 @@ Green turtle strandings resulting from interactions with fishing gear are preval
 Fibropapillomatosis was the second most common cause of stranding in this study, whereas \cite{chaloupka2008cause} found FP to be the main cause of stranding in green turtles in \Oahu, Maui, and Kauai. 
 
 The relative rates of strandings by cause over time is of particular interest for managers and conservationists because it can indicate particular sources of danger to turtle populations. 
-The overall rate of observation depends on population size and human reporting behavior in a complex way that is difficult to disentangle, but by looking the distribution of causes over time we may be able to identify structural changes in the cause of strandings.
-While the record collection process kept 8 categories of cause, for modelling purposes we reduced these to 3 broad categories: direct intentional and accidental human causes, such as boat impacts and fishing and hunting related injuries; natural events, predation, and disease; and unknown cause. 
+The overall rate of observation depends on population size and human reporting behavior in a complex way that is difficult to disentangle, but by looking at the distribution of causes over time we may be able to identify structural changes in the cause of strandings.
+While the record collection process kept eight categories of cause, for modelling purposes we reduced these to 3 broad categories: direct intentional and accidental human causes, such as boat impacts and fishing and hunting related injuries; natural events, predation, and disease; and unknown causes. 
 
 The distribution of these three consolidated causes has been relatively stable since the early 1990s (Figure \ref{fig:model}), providing unconvincing evidence of any major shifts between the relative risks between direct human causes and the other categories. One way of interpreting this result is that the increased numbers of strandings over time can be explained entirely by the growth in turtle populations and increases in reporting by the public. While keeping the proportion of human-caused strandings constant over time may be regarded as a minor conservation success story, given the significant growth in human population and coastal activity over the same time period, humans remain a significant source of danger to turtles. There remains much room for improvement, in particular with regards to hook-and-line injuries.
 
@@ -486,7 +488,9 @@ The present study found that turtles that stranded as a result of FP were more l
 More turtles stranded dead than alive on west \Hawaii\ Island and more turtles stranded alive than dead on east \Hawaii\ Island, probably because shark attacks and boat impacts are more common on west \Hawaii\ Island, while FP is reported almost exclusively on eastern shores. 
 \cite{chaloupka2008cause} found that the probability of mortality in a stranding decreased with turtle size, and this pattern is also observed in this data across the two sides of \Hawaii\ Island.
 
-Despite the large percentage of unknown causes of stranding, this long-term data set provides important information on \Hawaii\ Island green turtle strandings. The continuing contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts focused on green turtle interactions with fisheries.
+Despite the large percentage of unknown causes of stranding, this long-term data set provides important information on \Hawaii\ Island green turtle strandings.
+Continued monitoring of turtle strandings and careful data collection on stranded individuals is critical to the conservation of green turtles.
+The considerable contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts focused on green turtle interactions with fisheries.
 
 \section{Acknowledgements}
 We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship: Summer Martin, Brittany Clemans, Jen Sims, Megan Lamson, Rebecca Ostertag, NOAA Marine Turtle Biology \& Assessment Program, University of  \Hawaii\ at Hilo Marine Option Program Sea Turtle Stranding Response Team, \Hawaii\ Preparatory Academy Sea Turtle Research Program, and the State of \Hawaii\ Department of Land and Natural Resources.
