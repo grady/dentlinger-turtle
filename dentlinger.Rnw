@@ -247,7 +247,7 @@ Of the 754 stranded turtles in the records, slightly over half had no known caus
 The most common known cause of stranding was hook-and-line fishing gear, accounting for about 1 in 5 strandings.
 %Of the 754 stranded turtles, 413 (54.8\%) had no known cause of stranding that could be determined (``unknown'' cause). 
 %The most common known cause of stranding was hook-and-line fishing gear, accounting for 161 (21.4\%) of all strandings. 
-A Chi-square test indicates that the distribution of causes is significantly different between the East and West sides of the island, with the effect being driven most strongly by the FP and Miscellaneous categories. (Table \ref{tab:cause}).
+The distribution of causes is significantly different between the East and West sides of the island (Chi-square test, $X_7=70$, $p < 10^{-10}$), with the effect being driven most strongly by the FP and Miscellaneous categories. (Table \ref{tab:cause}).
 Raw counts of hook-and-line fishing gear strandings have steadily increased over the years, and while strandings with FP as the chief cause of stranding have remained overall low, the rate is higher in the second half of the study than the first (Figure \ref{fig:cause}).
 %A chi-squared test reveals that the distribution of stranding causes varies by side of the island. 
 %Hook-and-line fishing gear was the most common cause on both sides of the island.
@@ -356,7 +356,7 @@ ggplot(turtles_clean) + aes(x=Cause, y=SCL) + geom_boxplot() +
 \subsection{FP tumor presence/absence}
 
 As shown in Table \ref{tab:tumor_side}, 460 records indicated the absence of FP tumors, 150 records presence of a tumor, and 144 records are missing this observation. Note that the presence of a FP tumor does not necessarily mean that the primary cause of stranding was recorded as FP. 
-Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii.
+Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii (Chi-square test, $X_2=198$, $p < 10^{-10}$).
 
 \begin{table}[tbp]
 \caption{Fibropapillomatosis tumor presence in stranded turtles by side of \Hawaii\ island.
@@ -376,7 +376,7 @@ turtles_clean %>% count(Side, Tumor, .drop = FALSE) %>%
 \end{table}
 
 \subsection{Stranding status}
-Of all the stranded turtles, 359 (47.6\%) stranded alive, 381 (50.5\%) stranded dead, and 14 (1.9\%) turtles had no stranding status reported. Stranding status was found to be significantly associated with cause. More turtles stranded alive than dead because of FP, hook-and-line, and miscellaneous, while boat impact, human take, shark attack, and unknown were causes more likely to result in dead stranded turtles. Net fishing gear strandings showed equal numbers of turtles that stranded alive and dead (Table \ref{tab:cause_status}).
+Of all the stranded turtles, 359 (47.6\%) stranded alive, 381 (50.5\%) stranded dead, and 14 (1.9\%) turtles had no stranding status reported. Stranding status was found to be significantly associated with cause (Chi-square test, $X_{14}=102$, $p < 10^{-10}$). More turtles stranded alive than dead because of FP, hook-and-line, and miscellaneous, while boat impact, human take, shark attack, and unknown were causes more likely to result in dead stranded turtles. Net fishing gear strandings showed equal numbers of turtles that stranded alive and dead (Table \ref{tab:cause_status}).
 More turtles stranded alive than dead in the months of November--March, while more turtles stranded dead than alive in the months of April--October (Table \ref{tab:month_status}).  Stranding status was also found to be significantly associated with stranding location (Chi-square test, $X_{df} = 23.2$, $p = 9.2 \times 10^{-6}$). West \Hawaii\ had 146 (39.7\%) turtles strand alive and 222 (60.3\%) strand dead, while east \Hawaii\ had 213 (57.3\%) turtles strand alive and 159 (42.7\%) strand dead. 
 
 \begin{table}[tbp]
