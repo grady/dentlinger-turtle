@@ -273,13 +273,16 @@ The second most common known cause of stranding in west \Hawaii\ was miscellaneo
   theme(legend.position=c(5/6,1/6), legend.direction = "vertical", legend.justification = c(0.5,0.5), 
          legend.background = element_rect(fill=alpha("white", 0.65)) )
 @
-\caption{Number of strandings from each cause, separated into east and west sides. Data for 2020 and beyond are incomplete due to COVID-19 disruptions to data collection.}
+\caption{Number of strandings from each cause, separated into east and west sides. Fibropapillomatosis is abbreviated FP. Data for 2020 and beyond are incomplete due to COVID-19 disruptions to data collection.}
 \label{fig:cause}
 \end{figure}
 
 
 \begin{table}[tbp]
-\caption{Cause of strandings from 1983--2022 for \Hawaii\ island, separated into east and west sides. The distribution is significantly different between sides (Chi-square test, $X_7=70$, $p < 10^{-10}$).}\label{tab:cause}
+\caption{Raw counts and proportions of stranding cause from 1983--2022 for \Hawaii\ island, separated into east and west sides.
+Fibropapillomatosis is abbreviated FP.
+%The distribution is significantly different between sides (Chi-square test, $X_7=70$, $p < 10^{-10}$).
+}\label{tab:cause}
 <<causetab>>=
 turtles_clean %>% count(Cause, Side) %>% 
   pivot_wider(names_from = Side, values_from=n) %>% 
@@ -323,7 +326,9 @@ print(triclassplot +
          legend.background = element_rect(fill=alpha("white", 0.55)) )
 )
 @
-\caption{A multinomial regression fit using natural splines with 3 degrees of freedom. 95\% confidence bands are constructed by bootstrapping. Records from years with asterisks (*) are excluded from the model. The dotted white lines correspond to a model with no dependence on year. Akaike Information Criterion (AIC) of various models: zero degrees of freedom, $\text{AIC}=1300.9$; 1 degree, $\text{AIC}=1302.9$; 2 degrees, $\text{AIC}=1304.7$; 3 degrees, $\text{AIC}=1301.0$; 4 degrees, $\text{AIC}=1299.7$} \label{fig:model}
+\caption{A multinomial regression fit using natural splines with 3 degrees of freedom. 95\% confidence bands are constructed by bootstrapping. Records from years with asterisks (*) are excluded from the model. The dotted white lines correspond to a model with no dependence on year. 
+%Akaike Information Criterion (AIC) of various models: zero degrees of freedom, $\text{AIC}=1300.9$; 1 degree, $\text{AIC}=1302.9$; 2 degrees, $\text{AIC}=1304.7$; 3 degrees, $\text{AIC}=1301.0$; 4 degrees, $\text{AIC}=1299.7$
+}\label{fig:model}
 \end{figure}
 
 
@@ -345,7 +350,7 @@ The records contain 154 (20.42\%) female, 145 (19.23\%) male, and 455 (60.35\%) 
 ggplot(turtles_clean) + aes(x=Cause, y=SCL) + geom_boxplot() + 
   labs(y="Carapace length (cm) ") +  theme_bw()
 @
-\caption{Straight carapace length (SCL) was measured in 488 records.}\label{fig:length_cause}
+\caption{Straight carapace length (SCL) was measured in 488 records, and and plotted for each stranding cause. Fibropapillomatosis is abbreviated FP. Boxplot outliers begin at 1.5 times the inter-quartile distance.}\label{fig:length_cause}
 \end{figure}
 
 \subsection{FP tumor presence/absence}
@@ -354,7 +359,9 @@ As shown in Table \ref{tab:tumor_side}, 460 records indicated the absence of FP 
 Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii.
 
 \begin{table}[tbp]
-\caption{Tumor presence by side of \Hawaii\ island. Tumor distribution is unequal on the two sides of the island (Chi-square test, $X_2=198$, $p < 10^{-10}$).}\label{tab:tumor_side}
+\caption{Fibropapillomatosis tumor presence in stranded turtles by side of \Hawaii\ island.
+%Tumor distribution is unequal on the two sides of the island (Chi-square test, $X_2=198$, $p < 10^{-10}$).
+}\label{tab:tumor_side}
 <<tumor_side>>=
 turtles_clean %>% count(Side, Tumor, .drop = FALSE) %>%
   mutate(Side=fct_recode(Side, East="E", West="W")) %>%
@@ -373,7 +380,9 @@ Of all the stranded turtles, 359 (47.6\%) stranded alive, 381 (50.5\%) stranded 
 More turtles stranded alive than dead in the months of November--March, while more turtles stranded dead than alive in the months of April--October (Table \ref{tab:month_status}).  Stranding status was also found to be significantly associated with stranding location (Chi-square test, $X_{df} = 23.2$, $p = 9.2 \times 10^{-6}$). West \Hawaii\ had 146 (39.7\%) turtles strand alive and 222 (60.3\%) strand dead, while east \Hawaii\ had 213 (57.3\%) turtles strand alive and 159 (42.7\%) strand dead. 
 
 \begin{table}[tbp]
-\caption{Status of stranded turtles by cause. Status is not independent of cause (Chi-square test, $X_{14}=102$, $p < 10^{-10})$.}\label{tab:cause_status}
+\caption{Survival status of stranded turtles by cause. Fibropapillomatosis is abbreviated FP.
+%Status is not independent of cause (Chi-square test, $X_{14}=102$, $p < 10^{-10})$.
+}\label{tab:cause_status}
 <<cause_status>>=
 turtles_clean %>% count(Cause, Status, .drop = FALSE) %>% 
   pivot_wider(names_from = Status, values_from = n) %>% 
@@ -385,7 +394,7 @@ turtles_clean %>% count(Cause, Status, .drop = FALSE) %>%
 \end{table}
 
 \begin{table}[tbp]
-\caption{Status of stranded turtles by month.}\label{tab:month_status}
+\caption{Survival status of stranded turtles by month.}\label{tab:month_status}
 <<month_status>>=
 turtles_clean %>% mutate(Month=month(date, label=TRUE, abbr=FALSE)) %>% count(Month, Status, .drop = FALSE) %>% 
   pivot_wider(names_from = Status, values_from = n) %>% 
