@@ -155,7 +155,7 @@ Miscellaneous strandings included turtles with natural, non-anthropogenic causes
 \subsection{Statistical methods}
 Chi-square goodness of fit tests were used to determine if there were equal proportions among months of stranding, stranding status, causes of stranding, and sex of stranded turtles for all of \Hawaii\ Island. When comparing west and east \Hawaii, contingency tables and chi-square tests of independence were used. All analyses were performed using the statistical software R version 4.2 \citep{rcore2022}. Statistical significance was accepted at $p < 0.05$. 
 
-It is reasonable to model the occurrance of turtle stranding events as a Poisson process with a rate $\lambda$ that potentially changes through time and space. 
+It is reasonable to model the occurrence of turtle stranding events as a Poisson process with a rate $\lambda$ that potentially changes through time and space. 
 If strandings are classified  into groups, then there are two equivalent ways of modelling this: 
 each class as an independent Poisson process with its own rate $\lambda_i$, 
 or as a single overall process at rate $\lambda$ that generates an event at time $T$, and this event is then distributed to a class by a categorical random draw from some class distribution $\pi$ that potentially also depends on time $T$.
@@ -203,7 +203,7 @@ tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) +
 The number of strandings on \Hawaii\ Island have fluctuated over the years but show an overall increase over time (Figure \ref{fig:sides}). 
 %Strandings rose after 1983 and leveled off until 1987 when strandings significantly declined. After 1987, strandings once again increased.
 %Two main peaks in strandings were seen throughout the years, one in 2011 and one in 2018. 
-Across both sides of the island, strandings were less frequent in winter, November--Febuary, than in other months (Table \ref{tab:monthside}). The highest totals were observed between March and August.
+Across both sides of the island, strandings were less frequent in winter, November--February, than in other months (Table \ref{tab:monthside}). The highest totals were observed between March and August.
 %For all of \Hawaii\ Island, strandings were most frequent from March--August, peaking in June.
 %West \Hawaii\ showed a similar trend with March--August having the highest intensity, peaking in March. 
 %East \Hawaii\ showed fewer strandings per month, with one main peak in June.
@@ -356,7 +356,7 @@ ggplot(turtles_clean) + aes(x=Cause, y=SCL) + geom_boxplot() +
 \subsection{FP tumor presence/absence}
 
 As shown in Table \ref{tab:tumor_side}, 460 records indicated the absence of FP tumors, 150 records presence of a tumor, and 144 records are missing this observation. Note that the presence of a FP tumor does not necessarily mean that the primary cause of stranding was recorded as FP. 
-Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii (Chi-square test, $X_2=198$, $p < 10^{-10}$).
+Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii\ (Chi-square test, $X_2=198$, $p < 10^{-10}$).
 
 \begin{table}[tbp]
 \caption{Fibropapillomatosis tumor presence in stranded turtles by side of \Hawaii\ island.
@@ -377,7 +377,7 @@ turtles_clean %>% count(Side, Tumor, .drop = FALSE) %>%
 
 \subsection{Stranding status}
 Of all the stranded turtles, 359 (47.6\%) stranded alive, 381 (50.5\%) stranded dead, and 14 (1.9\%) turtles had no stranding status reported. Stranding status was found to be significantly associated with cause (Chi-square test, $X_{14}=102$, $p < 10^{-10}$). More turtles stranded alive than dead because of FP, hook-and-line, and miscellaneous, while boat impact, human take, shark attack, and unknown were causes more likely to result in dead stranded turtles. Net fishing gear strandings showed equal numbers of turtles that stranded alive and dead (Table \ref{tab:cause_status}).
-More turtles stranded alive than dead in the months of November--March, while more turtles stranded dead than alive in the months of April--October (Table \ref{tab:month_status}).  Stranding status was also found to be significantly associated with stranding location (Chi-square test, $X_{df} = 23.2$, $p = 9.2 \times 10^{-6}$). West \Hawaii\ had 146 (39.7\%) turtles strand alive and 222 (60.3\%) strand dead, while east \Hawaii\ had 213 (57.3\%) turtles strand alive and 159 (42.7\%) strand dead. 
+More turtles stranded alive than dead in the months of November--March, while more turtles stranded dead than alive in the months of April--October (Table \ref{tab:month_status}).  Stranding status was also found to be significantly associated with stranding location (Chi-square test, $X_{df} = 23.2$, $p = 9.2 \times 10^{-6}$). West \Hawaii\ had 146 (39.7\%) turtles strand alive and 222 (60.3\%) strand dead, while east \Hawaii\ had 213 (57.3\%) turtles strand alive and 159 (42.7\%) strand dead. {\color{red}(These counts seem off slightly?)}
 
 \begin{table}[tbp]
 \caption{Survival status of stranded turtles by cause. Fibropapillomatosis is abbreviated FP.
@@ -421,7 +421,7 @@ Increased public awareness of strandings and response programs also lead to more
 As seen in Figure \ref{fig:sides}, the increase in reported strandings appears to slow in the early 2000s, stabilizing at a rate of approximately 25--30 per year.
 This trend was also noticed in studies covering the other main Hawaiian Islands \citep{chaloupka2008cause}. 
 
-There are two years post 2005 which show an unusually large number of Green turtle strandings: 2011 and 2018. The peak in 2011 is associated with the March 2011 magnitude 9.0 T\={o}hoku earthquake off the coast of Japan and the tsunami, large waves, and hazardous currents that it caused around \Hawaii\ Island, and particuarly its western shoreline \citep{cheung2013surges}. 
+There are two years post 2005 which show an unusually large number of Green turtle strandings: 2011 and 2018. The peak in 2011 is associated with the March 2011 magnitude 9.0 T\={o}hoku earthquake off the coast of Japan and the tsunami, large waves, and hazardous currents that it caused around \Hawaii\ Island, and particularly its western shoreline \citep{cheung2013surges}. 
 The waves and currents associated with tsunamis bring marine life onshore with them and can wash turtles inland. 
 Two hawksbill turtles were reported stranded in \Hawaii\ as a result of the 2011 earthquake \citep{brunson2022three}, and a 2009 tsunami in Samoa similarly led to 52 turtles stranding on land \citep{bell2011marine}. 
 The apparent downward trend of strandings after 2018 is probably not because fewer turtles stranded, but is rather due to human behavioral changes caused by the COVID-19 pandemic.
@@ -448,7 +448,7 @@ Hook-and-line fishing gear strandings were also prevalent on \Oahu, Maui, and Ka
 Similar to the findings of the present study, fishing gear was the foremost cause of stranding for green turtles on Maui in 2022, with 81\% of the total strandings showing interactions \citep{cutt2023impact}.
 
 However, the number of hook-and-line strandings may be even greater than estimated. 
-\cite{work2015causes} performed necropsies (post-mortem autopsies) on stranded turtles throughout the Pacific and found that 48\% of foreign body ingestion cases (mostly all associated with fishing gear) showed no external sign of fishing line interactions.
+\cite{work2015causes} performed necropsies (postmortem autopsies) on stranded turtles throughout the Pacific and found that 48\% of foreign body ingestion cases (mostly all associated with fishing gear) showed no external sign of fishing line interactions.
 Green turtle strandings resulting from interactions with fishing gear are prevalent around the world, including the U.S. Virgin Islands \citep{boulon2000trends}, Brazil \citep{guimares2021distribution}, Taiwan \citep{cheng2019twenty}, and Greece \citep{panagopoulos2003stranding}. 
 Fibropapillomatosis was the second most common cause of stranding in this study, whereas \cite{chaloupka2008cause} found FP to be the main cause of stranding in green turtles in \Oahu, Maui, and Kauai. 
 
