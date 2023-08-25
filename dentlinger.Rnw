@@ -64,22 +64,6 @@
 
 \miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii, \Oahu, \Milolii. In electronic publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
 
-\abstract{
-Hawaiian populations of green turtles (\emph{Chelonia mydas}) have increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
-This study analyzed \Hawaii\ Island data: stranding location, date, size, sex, presence/absence of tumors, stranding status, and cause of stranding. 
-A total of 754 stranded green turtles were reported from 1983--2022: 378 stranded on the east (windward) coast of \Hawaii\ Island and 376 on the west (leeward) coast. 
-Strandings peaked in 2011 and 2018 and were highest from March to August. 
-The most common known cause of stranding was hook-and-line fishing gear (21.4\% of total strandings), followed by fibropapillomatosis (7.2\%), human take (4.3\%), miscellaneous (3.7\%), boat impact (3.3\%), shark attack (3.2\%), and net (2.1\%); however, 54.8\% of strandings had no known cause. 
-Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillomatosis, whereas west \Hawaii\ stranded turtles showed higher incidence of shark attacks. 
-These results provide the first analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
-}
-
-\keywords{sea turtles, mortality, fishing gear, fibropapillomatosis, \Hawaii}
-
-\begin{document}
-
-\maketitle
-
 <<turtles_clean, include=FALSE>>=
 mm2in <- 0.0393701
 twocol <- 84 * mm2in
@@ -98,9 +82,31 @@ library(lubridate)
 library(forcats)
 library(nnet)
 library(splines)
+library(scales)
 turtles_clean <- read.csv("turtles_clean.csv")
 turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=FALSE)
+BigIslandStrandings <- read.csv("BigIslandStrandings.csv")
+CoastCount <- BigIslandStrandings %>% count(Coast) %>% pivot_wider(names_from = Coast, values_from = n)
+CauseCount <- BigIslandStrandings %>% count(Cause) %>% mutate(p=proportions(n) %>% percent(0.1, suffix="\\%")) %>% arrange(desc(n))
 @
+
+\abstract{
+Hawaiian populations of green turtles (\emph{Chelonia mydas}) have increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
+This study analyzed \Hawaii\ Island data: stranding location, date, size, sex, presence/absence of tumors, stranding status, and cause of stranding. 
+A total of \Sexpr{nrow(BigIslandStrandings)} (754) stranded green turtles were reported from 1983--2022: \Sexpr{CoastCount$East} (378) stranded on the east (windward) coast of \Hawaii\ Island and \Sexpr{CoastCount$West} (376) on the west (leeward) coast. 
+Strandings peaked in 2011 and 2018 and were highest from March to August. 
+The most common known cause of stranding was hook-and-line fishing gear (\Sexpr{CauseCount$p[2]} (21.4\%) of total strandings), followed by fibropapillomatosis (\Sexpr{CauseCount$p[3]} (7.2\%)), human take (\Sexpr{CauseCount$p[4]} (4.3\%)), miscellaneous (\Sexpr{CauseCount$p[5]} (3.7\%)), boat impact (\Sexpr{CauseCount$p[6]} (3.3\%)), shark attack (\Sexpr{CauseCount$p[7]} (3.2\%)), and net (\Sexpr{CauseCount$p[8]} (2.1\%)); however, \Sexpr{CauseCount$p[1]} (54.8\%) of strandings had no known cause.
+Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillomatosis, whereas west \Hawaii\ stranded turtles showed higher incidence of shark attacks. 
+These results provide the first analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
+}
+
+\keywords{sea turtles, mortality, fishing gear, fibropapillomatosis, \Hawaii}
+
+\begin{document}
+
+\maketitle
+
+
 
 \section{Introduction}
 Green turtles (\emph{Chelonia mydas}) are the most abundant large marine herbivores found throughout the world and in the Hawaiian Islands. 
@@ -183,14 +189,16 @@ hawaii.sf <- read_sf("Coastline/Coastline.shp")
 #hawaii.sf <- read_sf("coast_n83.shp")
 #st_bbox(hawaii.sf %>% filter(isle=="Hawaii"))
 
-BigIslandStrandings <- readr::read_csv("BigIslandStrandings.csv") %>% st_as_sf(coords=c("Long", "Lat"), crs=4326, na.fail=FALSE)
+#BigIslandStrandings <- readr::read_csv("BigIslandStrandings.csv") %>% st_as_sf(coords=c("Long", "Lat"), crs=4326, na.fail=FALSE)
 
 tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) + 
   tm_graticules(alpha=0.4, n.x=4, n.y=4) + 
   tm_borders() + tm_compass() + tm_scale_bar() + 
   tm_fill(alpha=0.3) + 
   #tm_credits("PLACEHOLDER", position=c("center", "center"), size=1.5) + 
-  tm_shape(BigIslandStrandings %>% filter(Site != "Mountain View")) + 
+  tm_shape(BigIslandStrandings %>% 
+             st_as_sf(coords=c("Long", "Lat"), crs=4326, na.fail=FALSE) %>% 
+             filter(Site != "Mountain View")) + 
   tm_symbols(shape="Coast", title.shape="Side", alpha=0.2, size=0.3, col="black", border.alpha=1, border.lwd =  1) + 
   tm_legend(position=c(0.95,0.95), just=c(1,1), frame=TRUE) 
 @
