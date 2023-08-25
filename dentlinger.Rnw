@@ -104,7 +104,8 @@ turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=F
 
 \section{Introduction}
 Green turtles (\emph{Chelonia mydas}) are the most abundant large marine herbivores found throughout the world and in the Hawaiian Islands. 
-Hawaiian populations of green turtles that were once depleted have increased since their 1974 protection under Hawaiian Law and their 1978 protection under the Endangered Species Act \citep{balazs2004thirty}. Green turtles migrate long distances during their lifetime, from nesting to foraging grounds \citep{balazs2015review}. 
+Hawaiian populations of green turtles that were once depleted have increased since their 1974 protection under Hawaiian Law and their 1978 protection under the Endangered Species Act \citep{balazs2004thirty}. 
+Green turtles migrate long distances during their lifetime, from nesting to foraging grounds \citep{balazs2015review}. 
 In the Hawaiian Islands, 96\% of nesting occurs on the sand islets at French Frigate Shoals, located in the Northwestern Hawaiian Islands \citep{mtbap2022}. 
 Migration patterns and complicated life history patterns cause green turtles to occupy many habitats during their lifespans including pelagic environments during their early years and during migrations, as well coastal areas in their later years \citep{balazs1980synopsis, bolten2003variation}.
 Therefore, green turtles are susceptible to threats in both offshore and coastal environments \citep{bolten2003variation}.
@@ -122,7 +123,7 @@ The disease was first described in green turtles in the Florida Keys in 1938 and
 FP is indicated by the presence of internal, external, and oral tumors. 
 Oral tumors are unique to Hawaiian green turtles and are often found in the glottis, making survival difficult \citep{work2004retrospective}.
 The presence of these tumors can impact the turtles' ability to breathe, swim, dive, forage, and see \citep{perrault2021insights}. 
-On \Oahu, Maui, and Kauai from 1982-2003, FP was the most common cause of stranding, defined as an animal that has been found dead, injured, or exhibits ill health or abnormal behavior \citep{chaloupka2008cause}. 
+On \Oahu, Maui, and Kauai from 1982-2003, FP was the most common cause of stranding, defined as a turtle that has been found dead, injured, or exhibits ill health or abnormal behavior \citep{chaloupka2008cause}. 
 
 A variety of factors, both natural and anthropogenic, can cause sea turtle strandings. 
 The majority of strandings involve sea turtles that died at sea and washed ashore; however, most stranded turtles show no cause of death \citep{hart2006interpreting}. 
@@ -194,7 +195,7 @@ tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) +
   tm_legend(position=c(0.95,0.95), just=c(1,1), frame=TRUE) 
 @
 
-\caption{Stranding locations and the division into eastern (windward) and western (leeward) sides of \Hawaii\ island. Coastline map data: United States Geological Service (USGS) and \Hawaii\ Statewide GIS Program.}\label{fig:map}
+\caption{Stranding locations and the division into eastern (windward) and western (leeward) sides of \Hawaii\ island. Coastline map courtesy of United States Geological Service (USGS) and \Hawaii\ Statewide GIS Program.}\label{fig:map}
 \end{figure}
 
 \subsection{Temporal trends}
@@ -421,9 +422,9 @@ All of these factors lead to a sharp drop in the number of people visiting \Hawa
 
 The highest rates of green turtle strandings occurred during the Hawaiian spring and summer months, from March--August.
 This is similar to the findings on \Oahu\ where green turtle strandings were highest from March--June \citep{chaloupka2008cause}, and for adult hawksbills in the Hawaiian Archipelago where strandings were highest from June--September \citep{brunson2022three}. 
-Strandings of loggerhead, green, and leatherback turtles in Brazil were highest during their austral spring and summer seasons \citep{monteiro2016long}. 
-Strandings on \Hawaii\ Island were lowest during the months of September, November, and December, but a secondary peak in the month of October is seen. 
-This same peak was seen in the 2022 green turtle strandings on Maui \citep{cutt2023impact} and
+Strandings of loggerhead, green, and leatherback turtles in Brazil were highest during the austral spring and summer seasons \citep{monteiro2016long}. 
+Strandings on \Hawaii\ Island were lowest during the months of September, November, and December, but a secondary peak in the month of October was seen.
+This same peak was observed in the 2022 green turtle strandings on Maui \citep{cutt2023impact} and
 \Oahu\ showed a similar secondary peak of strandings in September \citep{chaloupka2008cause}. 
 This trend of strandings seen in the Hawaiian Islands may indicate seasonal abundance of turtles, seasonal activity of humans, or seasonality of currents and winds \citep{chaloupka2008cause}.
 
@@ -491,6 +492,17 @@ More turtles stranded dead than alive on west \Hawaii\ Island and more turtles s
 Despite the large percentage of unknown causes of stranding, this long-term data set provides important information on \Hawaii\ Island green turtle strandings.
 Continued monitoring of turtle strandings and careful data collection on stranded individuals is critical to the conservation of green turtles.
 The considerable contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts focused on green turtle interactions with fisheries.
+
+\section{Compliance with Ethical Standards}
+
+The authors declare that no funds, grants, or other support were received to assist in the preparation of this manuscript.
+The authors have no relevant financial or non-financial interests to disclose.
+
+Study conception and design by Skylar Dentlinger and Karla J. McDermid. Initial analysis and first draft prepared by Skylar Dentlinger. Follow-up analyses and modelling by Grady Weyenberg. All authors contributed to editing and revision of the manuscript and have read and approved the finalized version.
+
+This is an observational study compiled from publicly available records. No ethical approval is required.
+All data analysed during this study are included in this published article and its supplementary information files.
+
 
 \section{Acknowledgements}
 We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship: Summer Martin, Brittany Clemans, Jen Sims, Megan Lamson, Rebecca Ostertag, NOAA Marine Turtle Biology \& Assessment Program, University of  \Hawaii\ at Hilo Marine Option Program Sea Turtle Stranding Response Team, \Hawaii\ Preparatory Academy Sea Turtle Research Program, and the State of \Hawaii\ Department of Land and Natural Resources.
