@@ -317,32 +317,93 @@ BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% cou
 
 To investigate changes in the relative rates of stranding causes, multinomial log-linear models were fit using date of record as a predictor. To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: Human caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original unknown category. The 2011 T\={o}hoku tsunami-related strandings, as well as the records prior to 1985 were excluded from the model fit. The Akaike Information Criterion (AIC) is used to compare a series models of models using natural splines based on date of standing with increasing degrees of freedom. The AIC increases going from a null model with no dependence on year to a predictor function with 2 degrees of freedom, and then slightly decreases again, so that a 4 degree of freedom model has an AIC 1.2 smaller than the null model. Figure \ref{fig:model} displays a 3-degree of freedom model, with confidence bands constructed using the bootstrap. The null model is represented by dotted white lines, and apparently fits within the confidence bands of the model that includes dependence on year. These results show a lack of evidence that the date of stranding provides significant information about the relative rates of stranding among the three consolidated cause categories.
 
-\begin{figure}[tbp]
+<<modelfit, include=FALSE>>=
+threeClass <- BigIslandStrandings %>% 
+  mutate(Cause=case_match(Cause,
+                          c("Human take", "Hook/line", "Net", "Boat impact") ~ "Human",
+                          c("Shark attack", "Misc.", "FP") ~ "Natural",
+                          "Unknown" ~ "Unknown") %>% 
+           factor(c("Human", "Unknown", "Natural")))
 
+deg3model <- multinom(Cause~ns(Year, df=3), threeClass, Year >= 1985 & Year != 2011, trace=FALSE)
+predFrame <- tibble(Year=seq(1983, 2022, by=0.25))
+
+deg3preds <- predict(deg3model, newdata=predFrame, type="probs") %>% bind_cols(predFrame, .)
+@
+
+<<bootstrap, include=FALSE, cache=TRUE>>=
+library(purrr)
+bootReps <- 2000
+clevel <- 0.025
+
+bootReplicates <- rerun(bootReps,
+                        multinom(Cause~ns(Year, df=3), 
+                                 threeClass %>% slice_sample(prop=1, replace=TRUE), 
+                                 Year>=1985 & Year != 2011,
+                                 trace=FALSE) %>% 
+                          predict(newdata=predFrame, type="probs") %>% 
+                          bind_cols(predFrame,.)) %>% bind_rows(.id="run")
+
+bootCI <- bootReplicates %>% group_by(Year) %>% 
+  mutate(Human = 1-Human ) %>%
+  summarise(across(c(Human, Natural),
+                   list(Lower = ~ quantile(.x, clevel),
+                        Upper = ~ quantile(.x, 1-clevel)))) %>%
+  pivot_longer(-Year, names_to = c("Cause", ".value"), names_sep="_")
+@
+
+
+
+\begin{figure}[tbp]
 <<modelplot, fig.height=4>>=
 load("bootci.rda")
-triclassplot <- ggplot( turtles_count %>% 
-         filter() %>% 
-         group_by(year) %>% 
-         mutate(total=sum(strandings), 
-                prop=strandings/total, 
-                cause=fct_relevel(cause, "human", "unknown", "natural"))) + 
-  aes(year, prop, color=cause) + geom_col(aes(fill=cause)) +
-  geom_hline(yintercept=c(0.12, 1-0.30), lty=2, color="white") #+ 
-  #labs(title="Cause proportion over years")
-print(triclassplot +
+
+triclassplot <- BigIslandStrandings %>% 
+  mutate(Cause=case_match(Cause,
+                          c("Human take", "Hook/line", "Net", "Boat impact") ~ "Human",
+                          c("Shark attack", "Misc.", "FP") ~ "Natural",
+                          "Unknown" ~ "Unknown") %>% 
+           factor(c("Human", "Unknown", "Natural"))) %>%
+  count(Year, Cause, name="Strandings", .drop = TRUE) %>%
+  group_by(Year) %>%
+  mutate(Prop=proportions(Strandings)) %>% ggplot(aes(x=Year, y=Prop, color=Cause, fill=Cause))
+
+triclassplot + geom_col() +
+  geom_hline(yintercept=c(0.12, 1-0.30), lty=2, color="white") + 
   scale_fill_grey(start=0.8, end=0.2, aesthetics=c("color","fill"),
-  #scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2",
-                    name="Cause", labels=c("Human", "Unknown", "Predation, disease\nand weather")) + 
-  geom_ribbon(aes(year,ymin=L, ymax=U, group=cause), data=bootci, inherit.aes = FALSE,alpha=0.25, fill="white", color="white") +
-  geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
-  geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
+                  name="Cause", labels=c("Human", "Unknown", "Predation, disease\nand weather")) +
+  geom_ribbon(aes(x=Year,ymin=Lower, ymax=Upper, group=Cause), data=bootCI, 
+              inherit.aes = FALSE, alpha=0.25, fill="white", color="white") +
+  geom_line(aes(x=Year, y=1-Human), deg3preds, color=1, lty=1, inherit.aes = FALSE) +
+  geom_line(aes(x=Year, y=Natural), deg3preds, color=1, lty=1, inherit.aes = FALSE) +
   annotate("text", x=c(1983,1984,2011), y=0.01, label="*", size=5, color=c("black", "black", "white")) + 
   labs(y="Proportion of strandings", x="Year") + 
   theme_bw() + 
   theme(legend.position=c(0.5,0.96), legend.direction = "horizontal", legend.justification = c(0.5,1), 
-         legend.background = element_rect(fill=alpha("white", 0.55)) )
-)
+         legend.background = element_rect(fill=alpha("white", 0.55))) 
+
+# triclassplot <- ggplot( turtles_count %>% 
+#          filter() %>% 
+#          group_by(year) %>% 
+#          mutate(total=sum(strandings), 
+#                 prop=strandings/total, 
+#                 cause=fct_relevel(cause, "human", "unknown", "natural"))) + 
+#   aes(year, prop, color=cause) + geom_col(aes(fill=cause)) +
+#   geom_hline(yintercept=c(0.12, 1-0.30), lty=2, color="white") #+ 
+#   #labs(title="Cause proportion over years")
+# print(triclassplot +
+#   scale_fill_grey(start=0.8, end=0.2, aesthetics=c("color","fill"),
+#   #scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2",
+#                     name="Cause", labels=c("Human", "Unknown", "Predation, disease\nand weather")) + 
+#   geom_ribbon(aes(year,ymin=L, ymax=U, group=cause), data=bootci, inherit.aes = FALSE,alpha=0.25, fill="white", color="white") +
+#   geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
+#   geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
+#   annotate("text", x=c(1983,1984,2011), y=0.01, label="*", size=5, color=c("black", "black", "white")) + 
+#   labs(y="Proportion of strandings", x="Year") + 
+#   theme_bw() + 
+#   theme(legend.position=c(0.5,0.96), legend.direction = "horizontal", legend.justification = c(0.5,1), 
+#          legend.background = element_rect(fill=alpha("white", 0.55)) )
+# )
 @
 \caption{A multinomial regression fit using natural splines with 3 degrees of freedom. 95\% confidence bands are constructed by bootstrapping. Records from years with asterisks (*) are excluded from the model. The dotted white lines correspond to a model with no dependence on year. 
 %Akaike Information Criterion (AIC) of various models: zero degrees of freedom, $\text{AIC}=1300.9$; 1 degree, $\text{AIC}=1302.9$; 2 degrees, $\text{AIC}=1304.7$; 3 degrees, $\text{AIC}=1301.0$; 4 degrees, $\text{AIC}=1299.7$
