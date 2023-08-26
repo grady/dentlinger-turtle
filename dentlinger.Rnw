@@ -89,6 +89,7 @@ library(tibble)
 
 turtles_clean <- read.csv("turtles_clean.csv")
 turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=FALSE)
+
 BigIslandStrandings <- read_csv("BigIslandStrandings.csv") %>% 
   mutate(Cause=case_match(Cause,
                           "boat impact" ~ "Boat impact",
@@ -193,6 +194,7 @@ These models produce a prediction function which may be interpreted as the class
 \section{Results}
 
 %\subsection{Stranding summary}
+
 A total of \Sexpr{Ntot} \orig{754} green turtles stranded on \Hawaii\ Island from June 1983 to June 2022. Of those strandings, \Sexpr{CoastCount$West} (\Sexpr{percent(CoastCount$West/Ntot, 0.1, suffix="\\%")}) \orig{376 (49.9\%)} of those strandings were located on the leeward or west coast of \Hawaii\ Island, while \Sexpr{CoastCount$East} (\Sexpr{percent(CoastCount$East/Ntot, 0.1, suffix="\\%")}) \orig{378 (50.1\%)} were located on the windward side or east coast of \Hawaii\ Island (Figure \ref{fig:map}, Table \ref{tab:monthside}). 
 
 \begin{figure}[tbp]
@@ -223,10 +225,39 @@ tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) +
 \caption{Stranding locations and the division into eastern (windward) and western (leeward) sides of \Hawaii\ island. Coastline map courtesy of United States Geological Service (USGS) and \Hawaii\ Statewide GIS Program.}\label{fig:map}
 \end{figure}
 
+\begin{table}[tbp]
+\caption{Raw counts and proportions of stranding cause from 1983--2022 for \Hawaii\ island, separated into east and west sides.
+Fibropapillomatosis is abbreviated FP.
+%The distribution is significantly different between sides (Chi-square test, $X_7=70$, $p < 10^{-10}$).
+}\label{tab:cause}
+<<causetab>>=
+cause_side_table <- BigIslandStrandings %>% count(Cause,Coast) %>% pivot_wider(names_from = Coast, values_from = n) 
+cause_side_test <- cause_side_table %>% select(-Cause) %>% chisq.test()
+
+cause_side_table %>% mutate(Total=East+West, 
+                            across(-Cause, . %>% proportions %>% percent(0.1, suffix=""), .names="p_{.col}")) %>%
+  relocate(Cause, East, p_East, West, p_West, Total, p_Total) %>%
+  set_colnames(c("Cause", "n", "%", "n", "%", "n", "%")) %>%
+  knitr::kable("latex", booktabs=T, linesep=c(rep("",7), "\\addlinespace")) %>%
+  kableExtra::add_header_above(c(" ", "East"=2, "West"=2, "Total"=2))
+@
+\end{table}
+
+%\subsection{Causes of stranding}
+
+Of the \Sexpr{Ntot} \orig{754} stranded turtles in the records, slightly over half had no known cause that could be determined (the ``unknown'' cause).
+The most common known cause of stranding was hook-and-line fishing gear, accounting for about 1 in 5 strandings.
+The distribution of causes is significantly different between the East and West sides of the island (Chi-square test, $X_{\Sexpr{cause_side_test$parameter}}= \Sexpr{signif(cause_side_test$statistic, 3)}  \orig{70}$, $p < 10^{-10}$), with the effect being driven most strongly by the FP and Miscellaneous categories (Table \ref{tab:cause}).
+
 \subsection{Temporal trends}
 
 The number of strandings on \Hawaii\ Island have fluctuated over the years but show an overall increase over time (Figure \ref{fig:sides}). 
-Across both sides of the island, strandings were less frequent in winter, November--February, than in other months (Table \ref{tab:monthside}). The highest totals were observed between March and August.
+Across both sides of the island, strandings were less frequent in winter, November--February, than in other months (Table \ref{tab:monthside}). 
+The highest totals were observed between March and August.
+Raw counts of hook-and-line fishing gear strandings have steadily increased over the years, and while strandings with FP as the chief cause of stranding have remained overall low, the rate is higher in the second half of the study than the first (Figure \ref{fig:cause}).
+The second most common known cause of stranding in west \Hawaii\ was miscellaneous, a category that includes a significant number of strandings associated with the 2011 T\={o}hoku tsunami, while in East \Hawaii\ FP is the second leading cause (Table \ref{tab:cause}, Figure \ref{fig:cause}).
+%For both west and east \Hawaii, shark attack and boat impact strandings have increased over time (Figure8) (Figure 9). 
+%A reduction in human take strandings over time is seen on east \Hawaii, and a peak of miscellaneous strandings is seen in 2011 on west \Hawaii\ (Figure 8) (Figure 9). 
 
 \begin{figure}[tbp]
 
@@ -256,17 +287,7 @@ BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% cou
 \end{table}
 
 
-%\subsection{Causes of stranding}
 
-Of the \Sexpr{Ntot} \orig{754} stranded turtles in the records, slightly over half had no known cause that could be determined (the ``unknown'' cause).
-The most common known cause of stranding was hook-and-line fishing gear, accounting for about 1 in 5 strandings.
-%Of the 754 stranded turtles, 413 (54.8\%) had no known cause of stranding that could be determined (``unknown'' cause). 
-%The most common known cause of stranding was hook-and-line fishing gear, accounting for 161 (21.4\%) of all strandings. 
-The distribution of causes is significantly different between the East and West sides of the island (Chi-square test, $X_7=70$, $p < 10^{-10}$), with the effect being driven most strongly by the FP and Miscellaneous categories (Table \ref{tab:cause}).
-Raw counts of hook-and-line fishing gear strandings have steadily increased over the years, and while strandings with FP as the chief cause of stranding have remained overall low, the rate is higher in the second half of the study than the first (Figure \ref{fig:cause}).
-The second most common known cause of stranding in west \Hawaii\ was miscellaneous at (6\%), a category that includes a significant number of strandings associated with the 2011 T\={o}hoku tsunami, while in East \Hawaii\ FP (14\%) is the second leading cause (Table \ref{tab:cause}, Figure \ref{fig:cause}).
-%For both west and east \Hawaii, shark attack and boat impact strandings have increased over time (Figure8) (Figure 9). 
-%A reduction in human take strandings over time is seen on east \Hawaii, and a peak of miscellaneous strandings is seen in 2011 on west \Hawaii\ (Figure 8) (Figure 9). 
 
 \begin{figure}[tbp]
 \centering
@@ -286,20 +307,6 @@ The second most common known cause of stranding in west \Hawaii\ was miscellaneo
 \end{figure}
 
 
-\begin{table}[tbp]
-\caption{Raw counts and proportions of stranding cause from 1983--2022 for \Hawaii\ island, separated into east and west sides.
-Fibropapillomatosis is abbreviated FP.
-%The distribution is significantly different between sides (Chi-square test, $X_7=70$, $p < 10^{-10}$).
-}\label{tab:cause}
-<<causetab>>=
-BigIslandStrandings %>% count(Cause,Coast) %>% pivot_wider(names_from = Coast, values_from = n) %>%
-  mutate(Total=East+West) %>% mutate(across(-Cause, . %>% proportions %>% percent(0.1, suffix=""), .names="p_{.col}")) %>%
-  relocate(East, p_East, West, p_West, Total, p_Total, .after = Cause) %>%
-  set_colnames(c("Cause", "n", "%", "n", "%", "n", "%")) %>%
-  knitr::kable("latex", booktabs=T, linesep=c(rep("",7), "\\addlinespace")) %>%
-  kableExtra::add_header_above(c(" ", "East"=2, "West"=2, "Total"=2))
-@
-\end{table}
 
 To investigate changes in the relative rates of stranding causes, multinomial log-linear models were fit using date of record as a predictor. To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: Human caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original unknown category. The 2011 T\={o}hoku tsunami-related strandings, as well as the records prior to 1985 were excluded from the model fit. The Akaike Information Criterion (AIC) is used to compare a series models of models using natural splines based on date of standing with increasing degrees of freedom. The AIC increases going from a null model with no dependence on year to a predictor function with 2 degrees of freedom, and then slightly decreases again, so that a 4 degree of freedom model has an AIC 1.2 smaller than the null model. Figure \ref{fig:model} displays a 3-degree of freedom model, with confidence bands constructed using the bootstrap. The null model is represented by dotted white lines, and apparently fits within the confidence bands of the model that includes dependence on year. These results show a lack of evidence that the date of stranding provides significant information about the relative rates of stranding among the three consolidated cause categories.
 
@@ -339,7 +346,7 @@ print(triclassplot +
 \subsection{Size and gender}
 
 <<size_gender, include=FALSE>>=
-BigIslandStrandings %>% 
+
 @
 
 
