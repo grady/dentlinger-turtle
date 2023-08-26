@@ -65,7 +65,7 @@
 
 \miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii, \Oahu, \Milolii. In electronic publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
 
-<<turtles_clean, include=FALSE>>=
+<<setup, include=FALSE>>=
 mm2in <- 0.0393701
 twocol <- 84 * mm2in
 bigcol <- 174 * mm2in
@@ -85,6 +85,7 @@ library(nnet)
 library(splines)
 library(scales)
 library(readr)
+library(tibble)
 
 turtles_clean <- read.csv("turtles_clean.csv")
 turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=FALSE)
@@ -103,6 +104,7 @@ BigIslandStrandings <- read_csv("BigIslandStrandings.csv") %>%
 Ntot <- nrow(BigIslandStrandings)
 CoastCount <- BigIslandStrandings %>% count(Coast) %>% pivot_wider(names_from = Coast, values_from = n)
 CauseCount <- BigIslandStrandings %>% count(Cause) %>% mutate(p=proportions(n) %>% percent(0.1, suffix="\\%")) %>% arrange(desc(n))
+
 @
 
 \abstract{
@@ -336,6 +338,11 @@ print(triclassplot +
 
 \subsection{Size and gender}
 
+<<size_gender, include=FALSE>>=
+BigIslandStrandings %>% 
+@
+
+
 Stranded turtles in the records ranged from 19.8 cm to 99 cm straight carapace length (SCL), with a mean of 54.8 cm, across 381 juveniles, 88 subadults, and 19 adults.
 No SCL or size class was recorded in 266 of the case reports.
 Turtles stranding in east \Hawaii\ ($\mu\pm\text{SE}=58.8\pm0.78$ cm SCL, range 19.8--99 cm) were significantly larger
@@ -353,6 +360,7 @@ ggplot(BigIslandStrandings, aes(x=Cause, y=SCL)) + geom_boxplot() + labs(y="Cara
 @
 \caption{Straight carapace length (SCL) was measured in 488 records, and and plotted for each stranding cause. Fibropapillomatosis is abbreviated FP. Boxplot outliers begin at 1.5 times the inter-quartile distance.}\label{fig:length_cause}
 \end{figure}
+
 
 \subsection{FP tumor presence/absence}
 
@@ -377,19 +385,19 @@ As shown in Table \ref{tab:tumor_side}, \Sexpr{sum(tumor_side_table$N)} \orig{46
 Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii\ (Chi-square test, $X_2=\Sexpr{number(tumor_side_test$statistic)}\orig{198}$, $p < 10^{-10}$).
 
 \subsection{Stranding status}
-Of all the stranded turtles, 359 (47.6\%) stranded alive, 381 (50.5\%) stranded dead, and 14 (1.9\%) turtles had no stranding status reported. Stranding status was found to be significantly associated with cause (Chi-square test, $X_{14}=102$, $p < 10^{-10}$). More turtles stranded alive than dead because of FP, hook-and-line, and miscellaneous, while boat impact, human take, shark attack, and unknown were causes more likely to result in dead stranded turtles. Net fishing gear strandings showed equal numbers of turtles that stranded alive and dead (Table \ref{tab:cause_status}).
-More turtles stranded alive than dead in the months of November--March, while more turtles stranded dead than alive in the months of April--October (Table \ref{tab:month_status}).  Stranding status was also found to be significantly associated with stranding location (Chi-square test, $X_{df} = 23.2$, $p = 9.2 \times 10^{-6}$). West \Hawaii\ had 146 (39.7\%) turtles strand alive and 222 (60.3\%) strand dead, while east \Hawaii\ had 213 (57.3\%) turtles strand alive and 159 (42.7\%) strand dead. {\color{red}(These counts seem off slightly?)}
 
 \begin{table}[tbp]
 \caption{Survival status of stranded turtles by cause. Fibropapillomatosis is abbreviated FP.
 %Status is not independent of cause (Chi-square test, $X_{14}=102$, $p < 10^{-10})$.
 }\label{tab:cause_status}
 <<cause_status>>=
-turtles_clean %>% count(Cause, Status, .drop = FALSE) %>% 
-  pivot_wider(names_from = Status, values_from = n) %>% 
-  replace_na(replace=list(U=0)) %>% 
-  rename(Alive=A, Dead=D, "Not Recorded"=U) %>%
-  bind_rows(., summarize(., across(where(is.numeric), sum), Cause="Total")) %>%
+cause_status_table <- BigIslandStrandings %>% count(Cause, Status=InitialStatus) %>%
+  pivot_wider(names_from = Status, values_from = n, values_fill = 0) %>%
+  rename(Alive=A, Dead=D, "Not Recorded" = U) 
+
+cause_status_test <- cause_status_table %>% select(Alive, Dead) %>% chisq.test()
+
+cause_status_table %>% bind_rows(., summarize(., across(where(is.numeric), sum), Cause="Total")) %>%
   knitr::kable("latex", booktabs=T, linesep=c(rep("",7), "\\addlinespace"))
 @
 \end{table}
@@ -397,6 +405,12 @@ turtles_clean %>% count(Cause, Status, .drop = FALSE) %>%
 \begin{table}[tbp]
 \caption{Survival status of stranded turtles by month.}\label{tab:month_status}
 <<month_status>>=
+BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=FALSE)) %>%
+  count(Month, Status=InitialStatus) %>%
+  pivot_wider(names_from = Status, values_from = n, values_fill = 0) %>%
+  rename(Alive=A, Dead=D, "Not Recorded"=U) %>%
+  knitr::kable("latex", booktabs=T, linesep="")
+
 turtles_clean %>% mutate(Month=month(date, label=TRUE, abbr=FALSE)) %>% count(Month, Status, .drop = FALSE) %>% 
   pivot_wider(names_from = Status, values_from = n) %>% 
   replace_na(replace=list(U=0)) %>% 
@@ -405,6 +419,25 @@ turtles_clean %>% mutate(Month=month(date, label=TRUE, abbr=FALSE)) %>% count(Mo
 @
 \end{table}
 
+<<side_status, include=FALSE>>=
+side_status_table <- BigIslandStrandings %>% count(Coast, InitialStatus) %>% 
+  pivot_wider(names_from = InitialStatus, values_from = n, values_fill = 0) %>%
+  column_to_rownames("Coast")
+side_status_test <- side_status_table %>% select(-U) %>% chisq.test()
+@
+
+
+Of all the stranded turtles, \Sexpr{sum(side_status_table$A)} \orig{359 (47.6\%)} stranded alive, \Sexpr{sum(side_status_table$D)} \orig{381 (50.5\%)} stranded dead, and \Sexpr{sum(side_status_table$U)} \orig{14 (1.9\%)} turtles had no stranding status reported.
+Stranding status was found to be significantly associated with cause (Chi-square test, $X_{\Sexpr{cause_status_test$parameter}} = \Sexpr{number(cause_status_test$statistic)} \orig{102}$, $p < 10^{-10}$). 
+More turtles stranded alive than dead because of FP, hook-and-line, and miscellaneous, while boat impact, human take, shark attack, and unknown were causes more likely to result in dead stranded turtles. 
+Net fishing gear strandings showed equal numbers of turtles that stranded alive and dead (Table \ref{tab:cause_status}).
+More turtles stranded alive than dead in the months of November--March, while more turtles stranded dead than alive in the months of April--October (Table \ref{tab:month_status}).
+Stranding status was also found to be significantly associated with stranding location (Chi-square test, $X_{\Sexpr{side_status_test$parameter}} = \Sexpr{signif(side_status_test$statistic, 3)} \orig{23.2}$, $p = \Sexpr{side_status_test$p.value %>% signif(2)} \orig{9.2 \times 10^{-6}}$).
+West \Hawaii\ had \Sexpr{side_status_table["West","A"]} \orig{146 (39.7\%)} turtles strand alive and \Sexpr{side_status_table["West","D"]} \orig{222 (60.3\%)} strand dead, while east \Hawaii\ had \Sexpr{side_status_table["East","A"]} \orig{213 (57.3\%)} turtles strand alive and \Sexpr{side_status_table["East", "D"]} \orig{159 (42.7\%)} strand dead. 
+
+%%%%%%%%%%%%%%%
+%%% DISCUSSION
+%%%%%%%%%%%%%%%
 
 \section{Discussion}
 
