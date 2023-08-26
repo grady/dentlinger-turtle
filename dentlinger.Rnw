@@ -356,9 +356,6 @@ ggplot(BigIslandStrandings, aes(x=Cause, y=SCL)) + geom_boxplot() + labs(y="Cara
 
 \subsection{FP tumor presence/absence}
 
-As shown in Table \ref{tab:tumor_side}, 460 records indicated the absence of FP tumors, 150 records presence of a tumor, and 144 records are missing this observation. Note that the presence of a FP tumor does not necessarily mean that the primary cause of stranding was recorded as FP. 
-Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii\ (Chi-square test, $X_2=198$, $p < 10^{-10}$).
-
 \begin{table}[tbp]
 \caption{Fibropapillomatosis tumor presence in stranded turtles by side of \Hawaii\ island.
 %Tumor distribution is unequal on the two sides of the island (Chi-square test, $X_2=198$, $p < 10^{-10}$).
@@ -367,7 +364,7 @@ Tumor presence/absence is significantly associated with side of the island, with
 tumor_side_table <- BigIslandStrandings %>% count(Side=Coast, Tumor) %>% 
   pivot_wider(names_from = Tumor, values_from = n)
 
-tomor_side_test <- tumor_side_table %>% select(-Side) %>% chisq.test()
+tumor_side_test <- tumor_side_table %>% select(-Side) %>% chisq.test()
 
 tumor_side_table %>% relocate(Side, Present=Y, None=N, "Not Recorded"=U) %>%
   bind_rows(., summarise(., across(where(is.numeric), sum), Side="Total")) %>%
@@ -375,6 +372,9 @@ tumor_side_table %>% relocate(Side, Present=Y, None=N, "Not Recorded"=U) %>%
   kableExtra::add_header_above(c(" ", "Tumor"=3))
 @
 \end{table}
+
+As shown in Table \ref{tab:tumor_side}, \Sexpr{sum(tumor_side_table$N)} \orig{460} records indicated the absence of FP tumors, \Sexpr{sum(tumor_side_table$Y)} \orig{150} records presence of a tumor, and \Sexpr{sum(tumor_side_table$U)} \orig{144} records are missing this observation. Note that the presence of a FP tumor does not necessarily mean that the primary cause of stranding was recorded as FP. 
+Tumor presence/absence is significantly associated with side of the island, with turtles stranding in east \Hawaii\ more likely to have tumors than those in west \Hawaii\ (Chi-square test, $X_2=\Sexpr{number(tumor_side_test$statistic)}\orig{198}$, $p < 10^{-10}$).
 
 \subsection{Stranding status}
 Of all the stranded turtles, 359 (47.6\%) stranded alive, 381 (50.5\%) stranded dead, and 14 (1.9\%) turtles had no stranding status reported. Stranding status was found to be significantly associated with cause (Chi-square test, $X_{14}=102$, $p < 10^{-10}$). More turtles stranded alive than dead because of FP, hook-and-line, and miscellaneous, while boat impact, human take, shark attack, and unknown were causes more likely to result in dead stranded turtles. Net fishing gear strandings showed equal numbers of turtles that stranded alive and dead (Table \ref{tab:cause_status}).
