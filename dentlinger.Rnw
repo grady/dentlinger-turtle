@@ -296,17 +296,6 @@ BigIslandStrandings %>% count(Cause,Coast) %>% pivot_wider(names_from = Coast, v
   set_colnames(c("Cause", "n", "%", "n", "%", "n", "%")) %>%
   knitr::kable("latex", booktabs=T, linesep=c(rep("",7), "\\addlinespace")) %>%
   kableExtra::add_header_above(c(" ", "East"=2, "West"=2, "Total"=2))
-  
-# turtles_clean %>% count(Cause, Side) %>% 
-#   pivot_wider(names_from = Side, values_from=n) %>% 
-#   transmute(Cause, E, "Ep"=(E/sum(E)*100)%>%round(1), 
-#             W, "Wp"=(W/sum(W)*100)%>%round(1), 
-#             T=E+W, "Tp"=(T/sum(T)*100)%>%round(1)) %>%
-#   #bind_rows(., summarize(.,across(everything(), ~if(is.character(.x)){"Total"} else round(sum(.x))))) %>%
-#   set_colnames(c("Cause", "n", "%", "n", "%", "n", "%")) %>%
-#   #mutate(Total=E+W, across(-Cause, ~paste0(.x, " (", round(.x/sum(.x)*100, 1), "%)"))) %>%
-#   knitr::kable("latex", booktabs=T, linesep=c(rep("",7), "\\addlinespace")) %>%
-#   kableExtra::add_header_above(c(" ", "East"=2, "West"=2, "Total"=2))
 @
 \end{table}
 
@@ -360,8 +349,7 @@ The records contain 154 (20.42\%) female, 145 (19.23\%) male, and 455 (60.35\%) 
 
 \begin{figure}[tbp]
 <<length_cause, fig.height=3>>=
-ggplot(turtles_clean) + aes(x=Cause, y=SCL) + geom_boxplot() + 
-  labs(y="Carapace length (cm) ") +  theme_bw()
+ggplot(BigIslandStrandings, aes(x=Cause, y=SCL)) + geom_boxplot() + labs(y="Carapace length (cm) ") +  theme_bw()
 @
 \caption{Straight carapace length (SCL) was measured in 488 records, and and plotted for each stranding cause. Fibropapillomatosis is abbreviated FP. Boxplot outliers begin at 1.5 times the inter-quartile distance.}\label{fig:length_cause}
 \end{figure}
@@ -376,13 +364,13 @@ Tumor presence/absence is significantly associated with side of the island, with
 %Tumor distribution is unequal on the two sides of the island (Chi-square test, $X_2=198$, $p < 10^{-10}$).
 }\label{tab:tumor_side}
 <<tumor_side>>=
-turtles_clean %>% count(Side, Tumor, .drop = FALSE) %>%
-  mutate(Side=fct_recode(Side, East="E", West="W")) %>%
-  pivot_wider(names_from = Tumor, values_from = n) %>% 
-  select(-U, U) %>%
-  rename("None"=N, "Present"=Y, "Not Recorded"=U) %>%
-  bind_rows(., summarize(., across(where(is.numeric), sum), Side="Total")) %>%
-  #rowwise(Side) %>% mutate(Total=sum(c_across(where(is.numeric)))) %>%
+tumor_side_table <- BigIslandStrandings %>% count(Side=Coast, Tumor) %>% 
+  pivot_wider(names_from = Tumor, values_from = n)
+
+tomor_side_test <- tumor_side_table %>% select(-Side) %>% chisq.test()
+
+tumor_side_table %>% relocate(Side, Present=Y, None=N, "Not Recorded"=U) %>%
+  bind_rows(., summarise(., across(where(is.numeric), sum), Side="Total")) %>%
   knitr::kable("latex", booktabs=T, linesep=c("","\\addlinespace")) %>%
   kableExtra::add_header_above(c(" ", "Tumor"=3))
 @
