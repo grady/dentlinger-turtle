@@ -88,9 +88,6 @@ library(scales)
 library(readr)
 library(tibble)
 
-turtles_clean <- read.csv("turtles_clean.csv")
-turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=FALSE)
-
 BigIslandStrandings <- read_csv("BigIslandStrandings.csv") %>% 
   mutate(Cause=case_match(Cause,
                           "boat impact" ~ "Boat impact",
@@ -315,8 +312,6 @@ BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% cou
 
 
 
-To investigate changes in the relative rates of stranding causes, multinomial log-linear models were fit using date of record as a predictor. To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: Human caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original unknown category. The 2011 T\={o}hoku tsunami-related strandings, as well as the records prior to 1985 were excluded from the model fit. The Akaike Information Criterion (AIC) is used to compare a series models of models using natural splines based on date of standing with increasing degrees of freedom. The AIC increases going from a null model with no dependence on year to a predictor function with 2 degrees of freedom, and then slightly decreases again, so that a 4 degree of freedom model has an AIC 1.2 smaller than the null model. Figure \ref{fig:model} displays a 3-degree of freedom model, with confidence bands constructed using the bootstrap. The null model is represented by dotted white lines, and apparently fits within the confidence bands of the model that includes dependence on year. These results show a lack of evidence that the date of stranding provides significant information about the relative rates of stranding among the three consolidated cause categories.
-
 <<modelfit, include=FALSE>>=
 threeClass <- BigIslandStrandings %>% 
   mutate(Cause=case_match(Cause,
@@ -329,6 +324,11 @@ deg3model <- multinom(Cause~ns(Year, df=3), threeClass, Year >= 1985 & Year != 2
 predFrame <- tibble(Year=seq(1983, 2022, by=0.25))
 
 deg3preds <- predict(deg3model, newdata=predFrame, type="probs") %>% bind_cols(predFrame, .)
+
+deg0model <- multinom(Cause~1, threeClass, Year >= 1985 & Year != 2011, trace=FALSE)
+deg1model <- multinom(Cause~ns(Year, df=1), threeClass, Year >= 1985 & Year != 2011, trace=FALSE)
+deg2model <- multinom(Cause~ns(Year, df=2), threeClass, Year >= 1985 & Year != 2011, trace=FALSE)
+deg4model <- multinom(Cause~ns(Year, df=4), threeClass, Year >= 1985 & Year != 2011, trace=FALSE)
 @
 
 <<bootstrap, include=FALSE, cache=TRUE>>=
@@ -356,8 +356,6 @@ bootCI <- bootReplicates %>% group_by(Year) %>%
 
 \begin{figure}[tbp]
 <<modelplot, fig.height=4>>=
-load("bootci.rda")
-
 triclassplot <- BigIslandStrandings %>% 
   mutate(Cause=case_match(Cause,
                           c("Human take", "Hook/line", "Net", "Boat impact") ~ "Human",
@@ -380,36 +378,15 @@ triclassplot + geom_col() +
   labs(y="Proportion of strandings", x="Year") + 
   theme_bw() + 
   theme(legend.position=c(0.5,0.96), legend.direction = "horizontal", legend.justification = c(0.5,1), 
-         legend.background = element_rect(fill=alpha("white", 0.55))) 
-
-# triclassplot <- ggplot( turtles_count %>% 
-#          filter() %>% 
-#          group_by(year) %>% 
-#          mutate(total=sum(strandings), 
-#                 prop=strandings/total, 
-#                 cause=fct_relevel(cause, "human", "unknown", "natural"))) + 
-#   aes(year, prop, color=cause) + geom_col(aes(fill=cause)) +
-#   geom_hline(yintercept=c(0.12, 1-0.30), lty=2, color="white") #+ 
-#   #labs(title="Cause proportion over years")
-# print(triclassplot +
-#   scale_fill_grey(start=0.8, end=0.2, aesthetics=c("color","fill"),
-#   #scale_fill_brewer(type="qual", aesthetics = c("color", "fill"), palette = "Set2",
-#                     name="Cause", labels=c("Human", "Unknown", "Predation, disease\nand weather")) + 
-#   geom_ribbon(aes(year,ymin=L, ymax=U, group=cause), data=bootci, inherit.aes = FALSE,alpha=0.25, fill="white", color="white") +
-#   geom_line(aes(y=1-human, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
-#   geom_line(aes(y=natural, color=NULL), cbind(turtles_clean, predict(cubicmultnom2, type="probs")), color=1, lty=1) + 
-#   annotate("text", x=c(1983,1984,2011), y=0.01, label="*", size=5, color=c("black", "black", "white")) + 
-#   labs(y="Proportion of strandings", x="Year") + 
-#   theme_bw() + 
-#   theme(legend.position=c(0.5,0.96), legend.direction = "horizontal", legend.justification = c(0.5,1), 
-#          legend.background = element_rect(fill=alpha("white", 0.55)) )
-# )
+         legend.background = element_rect(fill=alpha("white", 0.55)))
 @
 \caption{A multinomial regression fit using natural splines with 3 degrees of freedom. 95\% confidence bands are constructed by bootstrapping. Records from years with asterisks (*) are excluded from the model. The dotted white lines correspond to a model with no dependence on year. 
 %Akaike Information Criterion (AIC) of various models: zero degrees of freedom, $\text{AIC}=1300.9$; 1 degree, $\text{AIC}=1302.9$; 2 degrees, $\text{AIC}=1304.7$; 3 degrees, $\text{AIC}=1301.0$; 4 degrees, $\text{AIC}=1299.7$
 }\label{fig:model}
 \end{figure}
 
+
+To investigate changes in the relative rates of stranding causes, multinomial log-linear models were fit using date of record as a predictor. To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: Human caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original Unknown category. The 2011 T\={o}hoku tsunami-related strandings, as well as the records prior to 1985 were excluded from the model fit. The Akaike Information Criterion (AIC) is used to compare a series models of models using natural splines based on date of standing with increasing degrees of freedom. The AIC increases going from a null model (AIC \Sexpr{signif(deg0model$AIC,5)}) with no dependence on year to a predictor function with 2 degrees of freedom (AIC \Sexpr{signif(deg2model$AIC,5)}), and then slightly decreases again, so that a 4 degree of freedom model (AIC \Sexpr{signif(deg4model$AIC,5)}) has an AIC \Sexpr{signif(deg0model$AIC - deg4model$AIC,2)} \xorig{1.2} smaller than the null model. Figure \ref{fig:model} displays a 3-degree of freedom model (AIC \Sexpr{signif(deg3model$AIC,5)}), with confidence bands constructed using the bootstrap. The null model is represented by dotted white lines, and apparently fits within the confidence bands of the model that includes dependence on year. These results show a lack of evidence that the date of stranding provides significant information about the relative rates of stranding among the three consolidated cause categories.
 
 \subsection{Size and gender}
 
@@ -457,8 +434,6 @@ were significantly larger
 (t-test, $t_{\Sexpr{round(side_size_test$parameter)}}=\Sexpr{signif(side_size_test$statistic,3)}$,
 $p=\Sexpr{signif(side_size_test$p.value, 1)}$)
 \orig{(t-test unequal variance, $t_{375}=6.32$, $p=7\times 10^{-10}$)}
-%t.test(SCL~Side, data=turtles_clean)
-%(??What test??, $W=37557$, $p = 3.1 \times 10{-7}$) %skylar's test
 than those in west \Hawaii\ 
 ($\mu\pm\text{SE} = \Sexpr{side_scl_table["West", "mean"] %>% signif(3)} 
 \pm \Sexpr{side_scl_table["West", "se"] %>% signif(1)}$ cm SCL, $n=\Sexpr{side_scl_table["West", "n"]}$)
@@ -473,7 +448,7 @@ The records contain
 \Sexpr{gender_table["U"]} \xorig{455 (60.35\%)} gender undetermined cases, also with marginally different distributions between side of the island (Chi-square, 
 $X_{\Sexpr{gender_side_test$parameter} \xorig{2}}=\Sexpr{signif(gender_side_test$statistic,2)} \orig{6.98}$,
 $p=\Sexpr{signif(gender_side_test$p.value, 2)} \orig{0.030}$). 
-%% turtles_clean %>% count(Sex, Side) %>% pivot_wider(names_from=Side, values_from = n) %>% tibble::column_to_rownames("Sex") %>% chisq.test()
+
 
 \begin{figure}[tbp]
 <<length_cause, fig.height=3>>=
