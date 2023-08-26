@@ -32,6 +32,7 @@
 \newcommand{\Oahu}{O\okina ahu}
 \newcommand{\Milolii}{Miloli\okina i}
 
+\newcommand{\orig}[1]{{\color{red}(#1)}}
 
 \title{Four decades of green turtle (\emph{Chelonia mydas}) strandings on \Hawaii\ Island (1983--2022): Causes and trends
 }
@@ -83,9 +84,23 @@ library(forcats)
 library(nnet)
 library(splines)
 library(scales)
+library(readr)
+
 turtles_clean <- read.csv("turtles_clean.csv")
 turtles_count <- turtles_clean %>% count(year, cause, name="strandings", .drop=FALSE)
-BigIslandStrandings <- read.csv("BigIslandStrandings.csv")
+BigIslandStrandings <- read_csv("BigIslandStrandings.csv") %>% 
+  mutate(Cause=case_match(Cause,
+                          "boat impact" ~ "Boat impact",
+                          "fibropapillomatosis" ~ "FP",
+                          "line" ~ "Hook/line",
+                          "human take" ~ "Human take",
+                          "miscellaneous" ~ "Misc.",
+                          "net" ~ "Net",
+                          "shark attack" ~ "Shark attack",
+                          "unknown" ~ "Unknown"
+                          ))
+
+Ntot <- nrow(BigIslandStrandings)
 CoastCount <- BigIslandStrandings %>% count(Coast) %>% pivot_wider(names_from = Coast, values_from = n)
 CauseCount <- BigIslandStrandings %>% count(Cause) %>% mutate(p=proportions(n) %>% percent(0.1, suffix="\\%")) %>% arrange(desc(n))
 @
@@ -93,9 +108,9 @@ CauseCount <- BigIslandStrandings %>% count(Cause) %>% mutate(p=proportions(n) %
 \abstract{
 Hawaiian populations of green turtles (\emph{Chelonia mydas}) have increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
 This study analyzed \Hawaii\ Island data: stranding location, date, size, sex, presence/absence of tumors, stranding status, and cause of stranding. 
-A total of \Sexpr{nrow(BigIslandStrandings)} (754) stranded green turtles were reported from 1983--2022: \Sexpr{CoastCount$East} (378) stranded on the east (windward) coast of \Hawaii\ Island and \Sexpr{CoastCount$West} (376) on the west (leeward) coast. 
+A total of \Sexpr{Ntot} (754) stranded green turtles were reported from 1983--2022: \Sexpr{CoastCount$East} \orig{378} stranded on the east (windward) coast of \Hawaii\ Island and \Sexpr{CoastCount$West} \orig{376} on the west (leeward) coast.
 Strandings peaked in 2011 and 2018 and were highest from March to August. 
-The most common known cause of stranding was hook-and-line fishing gear (\Sexpr{CauseCount$p[2]} (21.4\%) of total strandings), followed by fibropapillomatosis (\Sexpr{CauseCount$p[3]} (7.2\%)), human take (\Sexpr{CauseCount$p[4]} (4.3\%)), miscellaneous (\Sexpr{CauseCount$p[5]} (3.7\%)), boat impact (\Sexpr{CauseCount$p[6]} (3.3\%)), shark attack (\Sexpr{CauseCount$p[7]} (3.2\%)), and net (\Sexpr{CauseCount$p[8]} (2.1\%)); however, \Sexpr{CauseCount$p[1]} (54.8\%) of strandings had no known cause.
+The most common known cause of stranding was hook-and-line fishing gear (\Sexpr{CauseCount$p[2]} \orig{21.4\%} of total strandings), followed by fibropapillomatosis (\Sexpr{CauseCount$p[3]} \orig{7.2\%}), human take (\Sexpr{CauseCount$p[4]} \orig{4.3\%}), miscellaneous (\Sexpr{CauseCount$p[5]} \orig{3.7\%}), boat impact (\Sexpr{CauseCount$p[6]} \orig{3.3\%}), shark attack (\Sexpr{CauseCount$p[7]} \orig{3.2\%}), and net (\Sexpr{CauseCount$p[8]} \orig{2.1\%}); however, \Sexpr{CauseCount$p[1]} \orig{54.8\%} of strandings had no known cause.
 Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillomatosis, whereas west \Hawaii\ stranded turtles showed higher incidence of shark attacks. 
 These results provide the first analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
 }
@@ -176,7 +191,7 @@ These models produce a prediction function which may be interpreted as the class
 \section{Results}
 
 %\subsection{Stranding summary}
-A total of 754 green turtles stranded on \Hawaii\ Island from June 1983 to June 2022. Of those strandings, 376 (49.9\%) of those strandings were located on the leeward or west coast of \Hawaii\ Island, while 378 (50.1\%) were located on the windward side or east coast of \Hawaii\ Island (Figure \ref{fig:map}, Table \ref{tab:monthside}). 
+A total of \Sexpr{Ntot} \orig{754} green turtles stranded on \Hawaii\ Island from June 1983 to June 2022. Of those strandings, \Sexpr{CoastCount$West} (\Sexpr{percent(CoastCount$West/Ntot, 0.1, suffix="\\%")}) \orig{376 (49.9\%)} of those strandings were located on the leeward or west coast of \Hawaii\ Island, while \Sexpr{CoastCount$East} (\Sexpr{percent(CoastCount$East/Ntot, 0.1, suffix="\\%")}) \orig{378 (50.1\%)} were located on the windward side or east coast of \Hawaii\ Island (Figure \ref{fig:map}, Table \ref{tab:monthside}). 
 
 \begin{figure}[tbp]
 \centering
@@ -209,25 +224,15 @@ tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) +
 \subsection{Temporal trends}
 
 The number of strandings on \Hawaii\ Island have fluctuated over the years but show an overall increase over time (Figure \ref{fig:sides}). 
-%Strandings rose after 1983 and leveled off until 1987 when strandings significantly declined. After 1987, strandings once again increased.
-%Two main peaks in strandings were seen throughout the years, one in 2011 and one in 2018. 
 Across both sides of the island, strandings were less frequent in winter, November--February, than in other months (Table \ref{tab:monthside}). The highest totals were observed between March and August.
-%For all of \Hawaii\ Island, strandings were most frequent from March--August, peaking in June.
-%West \Hawaii\ showed a similar trend with March--August having the highest intensity, peaking in March. 
-%East \Hawaii\ showed fewer strandings per month, with one main peak in June.
-%For both west and east \Hawaii, the months of September, November, and December had the lowest monthly strandings, but October showed a large spike (Table \ref{tab:monthside}).
 
 \begin{figure}[tbp]
 
 \centering
 <<strandings, fig.height=3>>=
-(turtles_clean %>% count(year, Side, name="strandings", .drop=FALSE) %>% ggplot()) + 
-  aes(year, strandings, fill=Side) +
-  #geom_area(stat="align", position=position_stack(reverse=TRUE)) + 
-  geom_col() +
-  geom_vline(xintercept = 2019.5, lty=2) + 
-  scale_fill_grey(start=0.6, end=0.2, labels=c("East Hawaii Island", "West Hawaii Island")) +
-  #scale_fill_brewer(palette="Accent", labels=c("East Hawaii Island", "West Hawaii Island")) +
+(BigIslandStrandings %>% count(Year, Side=Coast, name = "Strandings") %>% ggplot(aes(x=Year, y=Strandings, fill=Side, color=Side))) +
+  geom_col() + geom_vline(xintercept = 2019.5, lty=2) + 
+  scale_fill_grey(start=0.6, end=0.2, labels=c("East Hawaii Island", "West Hawaii Island"), aesthetics = c("color", "fill")) +
   labs(y="Number of strandings", x="Year") + 
   theme_bw() + 
   theme(legend.position=c(0.05,0.96), legend.direction = "vertical", legend.justification = c(0,1), 
@@ -240,7 +245,7 @@ Across both sides of the island, strandings were less frequent in winter, Novemb
 \begin{table}[tbp]
 \caption{Strandings in each month for \Hawaii\ island, separated into east and west sides.}\label{tab:monthside}
 <<monthside>>=
-turtles_clean %>% mutate(Month=month(date, label=TRUE, abbr=TRUE), Side=fct_recode(Side,East="E", West="W")) %>% count(Month, Side) %>% 
+BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% count(Month,Side=Coast) %>%
   pivot_wider(names_from = Month, values_from=n) %>% 
   bind_rows(., summarize(., across(where(is.numeric), sum), Side="Total")) %>%
   rowwise(Side) %>% mutate(Total=sum(c_across(where(is.numeric)))) %>% 
@@ -251,14 +256,12 @@ turtles_clean %>% mutate(Month=month(date, label=TRUE, abbr=TRUE), Side=fct_reco
 
 %\subsection{Causes of stranding}
 
-Of the 754 stranded turtles in the records, slightly over half had no known cause that could be determined (the ``unknown'' cause).
+Of the \Sexpr{Ntot} \orig{754} stranded turtles in the records, slightly over half had no known cause that could be determined (the ``unknown'' cause).
 The most common known cause of stranding was hook-and-line fishing gear, accounting for about 1 in 5 strandings.
 %Of the 754 stranded turtles, 413 (54.8\%) had no known cause of stranding that could be determined (``unknown'' cause). 
 %The most common known cause of stranding was hook-and-line fishing gear, accounting for 161 (21.4\%) of all strandings. 
-The distribution of causes is significantly different between the East and West sides of the island (Chi-square test, $X_7=70$, $p < 10^{-10}$), with the effect being driven most strongly by the FP and Miscellaneous categories. (Table \ref{tab:cause}).
+The distribution of causes is significantly different between the East and West sides of the island (Chi-square test, $X_7=70$, $p < 10^{-10}$), with the effect being driven most strongly by the FP and Miscellaneous categories (Table \ref{tab:cause}).
 Raw counts of hook-and-line fishing gear strandings have steadily increased over the years, and while strandings with FP as the chief cause of stranding have remained overall low, the rate is higher in the second half of the study than the first (Figure \ref{fig:cause}).
-%A chi-squared test reveals that the distribution of stranding causes varies by side of the island. 
-%Hook-and-line fishing gear was the most common cause on both sides of the island.
 The second most common known cause of stranding in west \Hawaii\ was miscellaneous at (6\%), a category that includes a significant number of strandings associated with the 2011 T\={o}hoku tsunami, while in East \Hawaii\ FP (14\%) is the second leading cause (Table \ref{tab:cause}, Figure \ref{fig:cause}).
 %For both west and east \Hawaii, shark attack and boat impact strandings have increased over time (Figure8) (Figure 9). 
 %A reduction in human take strandings over time is seen on east \Hawaii, and a peak of miscellaneous strandings is seen in 2011 on west \Hawaii\ (Figure 8) (Figure 9). 
@@ -292,16 +295,23 @@ Fibropapillomatosis is abbreviated FP.
 %The distribution is significantly different between sides (Chi-square test, $X_7=70$, $p < 10^{-10}$).
 }\label{tab:cause}
 <<causetab>>=
-turtles_clean %>% count(Cause, Side) %>% 
-  pivot_wider(names_from = Side, values_from=n) %>% 
-  transmute(Cause, E, "Ep"=(E/sum(E)*100)%>%round(1), 
-            W, "Wp"=(W/sum(W)*100)%>%round(1), 
-            T=E+W, "Tp"=(T/sum(T)*100)%>%round(1)) %>%
-  #bind_rows(., summarize(.,across(everything(), ~if(is.character(.x)){"Total"} else round(sum(.x))))) %>%
+BigIslandStrandings %>% count(Cause,Coast) %>% pivot_wider(names_from = Coast, values_from = n) %>%
+  mutate(Total=East+West) %>% mutate(across(-Cause, . %>% proportions %>% percent(0.1, suffix=""), .names="p_{.col}")) %>%
+  relocate(East, p_East, West, p_West, Total, p_Total, .after = Cause) %>%
   set_colnames(c("Cause", "n", "%", "n", "%", "n", "%")) %>%
-  #mutate(Total=E+W, across(-Cause, ~paste0(.x, " (", round(.x/sum(.x)*100, 1), "%)"))) %>%
   knitr::kable("latex", booktabs=T, linesep=c(rep("",7), "\\addlinespace")) %>%
   kableExtra::add_header_above(c(" ", "East"=2, "West"=2, "Total"=2))
+  
+# turtles_clean %>% count(Cause, Side) %>% 
+#   pivot_wider(names_from = Side, values_from=n) %>% 
+#   transmute(Cause, E, "Ep"=(E/sum(E)*100)%>%round(1), 
+#             W, "Wp"=(W/sum(W)*100)%>%round(1), 
+#             T=E+W, "Tp"=(T/sum(T)*100)%>%round(1)) %>%
+#   #bind_rows(., summarize(.,across(everything(), ~if(is.character(.x)){"Total"} else round(sum(.x))))) %>%
+#   set_colnames(c("Cause", "n", "%", "n", "%", "n", "%")) %>%
+#   #mutate(Total=E+W, across(-Cause, ~paste0(.x, " (", round(.x/sum(.x)*100, 1), "%)"))) %>%
+#   knitr::kable("latex", booktabs=T, linesep=c(rep("",7), "\\addlinespace")) %>%
+#   kableExtra::add_header_above(c(" ", "East"=2, "West"=2, "Total"=2))
 @
 \end{table}
 
