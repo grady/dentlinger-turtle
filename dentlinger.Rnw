@@ -109,7 +109,9 @@ CauseCount <- BigIslandStrandings %>% count(Cause) %>% mutate(p=proportions(n) %
 \abstract{
 Hawaiian populations of green turtles (\emph{Chelonia mydas}) have increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
 This study analyzed \Hawaii\ Island data: stranding location, date, size, sex, presence/absence of tumors, stranding status, and cause of stranding. 
-A total of \Sexpr{Ntot} \xorig{754} stranded green turtles were reported from 1983--2022: \Sexpr{CoastCount$East} \orig{378} stranded on the east (windward) coast of \Hawaii\ Island and \Sexpr{CoastCount$West} \orig{376} on the west (leeward) coast.
+A total of \Sexpr{Ntot} \xorig{754} stranded green turtles were reported from 1983--2022: 
+\Sexpr{CoastCount$East} \orig{378} stranded on the east (windward) coast of \Hawaii\ Island and 
+\Sexpr{CoastCount$West} \orig{376} on the west (leeward) coast.
 Strandings peaked in 2011 and 2018 and were highest from March to August. 
 The most common known cause of stranding was 
 hook-and-line fishing gear (\Sexpr{CauseCount$p[2]} \xorig{21.4\%} of total strandings), 
@@ -199,7 +201,12 @@ These models produce a prediction function which may be interpreted as the class
 
 %\subsection{Stranding summary}
 
-A total of \Sexpr{Ntot} \xorig{754} green turtles stranded on \Hawaii\ Island from June 1983 to June 2022. Of those strandings, \Sexpr{CoastCount$West} (\Sexpr{percent(CoastCount$West/Ntot, 0.1, suffix="\\%")}) \orig{376 (49.9\%)} of those strandings were located on the leeward or west coast of \Hawaii\ Island, while \Sexpr{CoastCount$East} (\Sexpr{percent(CoastCount$East/Ntot, 0.1, suffix="\\%")}) \orig{378 (50.1\%)} were located on the windward side or east coast of \Hawaii\ Island (Figure \ref{fig:map}, Table \ref{tab:monthside}). 
+A total of \Sexpr{Ntot} \xorig{754} green turtles stranded on \Hawaii\ Island from June 1983 to June 2022. 
+Of those strandings, 
+\Sexpr{CoastCount$West} (\Sexpr{percent(CoastCount$West/Ntot, 0.1, suffix="\\%")}) \orig{376 (49.9\%)}
+were located on the leeward or west coast of \Hawaii\ Island, while 
+\Sexpr{CoastCount$East} (\Sexpr{percent(CoastCount$East/Ntot, 0.1, suffix="\\%")}) \orig{378 (50.1\%)} 
+were located on the windward side or east coast of \Hawaii\ Island (Figure \ref{fig:map}, Table \ref{tab:monthside}). 
 
 \begin{figure}[tbp]
 \centering
@@ -251,7 +258,8 @@ cause_side_table %>% mutate(Total=East+West,
 
 Of the \Sexpr{Ntot} \xorig{754} stranded turtles in the records, slightly over half had no known cause that could be determined (the ``unknown'' cause).
 The most common known cause of stranding was hook-and-line fishing gear, accounting for about 1 in 5 strandings.
-The distribution of causes is significantly different between the East and West sides of the island (Chi-square test, $X_{\Sexpr{cause_side_test$parameter}}= \Sexpr{signif(cause_side_test$statistic, 3)}  \xorig{70}$, $p < 10^{-10}$), with the effect being driven most strongly by the FP and Miscellaneous categories (Table \ref{tab:cause}).
+The distribution of causes is significantly different between the East and West sides of the island (Chi-square test, $X_{\Sexpr{cause_side_test$parameter}}= \Sexpr{signif(cause_side_test$statistic, 3)}  \xorig{70}$, $p < 10^{-10}$), 
+with the effect being driven most strongly by the FP and Miscellaneous categories (Table \ref{tab:cause}).
 
 \subsection{Temporal trends}
 
@@ -386,7 +394,18 @@ triclassplot + geom_col() +
 \end{figure}
 
 
-To investigate changes in the relative rates of stranding causes, multinomial log-linear models were fit using date of record as a predictor. To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: Human caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original Unknown category. The 2011 T\={o}hoku tsunami-related strandings, as well as the records prior to 1985 were excluded from the model fit. The Akaike Information Criterion (AIC) is used to compare a series models of models using natural splines based on date of standing with increasing degrees of freedom. The AIC increases going from a null model (AIC \Sexpr{signif(deg0model$AIC,5)}) with no dependence on year to a predictor function with 2 degrees of freedom (AIC \Sexpr{signif(deg2model$AIC,5)}), and then slightly decreases again, so that a 4 degree of freedom model (AIC \Sexpr{signif(deg4model$AIC,5)}) has an AIC \Sexpr{signif(deg0model$AIC - deg4model$AIC,2)} \xorig{1.2} smaller than the null model. Figure \ref{fig:model} displays a 3-degree of freedom model (AIC \Sexpr{signif(deg3model$AIC,5)}), with confidence bands constructed using the bootstrap. The null model is represented by dotted white lines, and apparently fits within the confidence bands of the model that includes dependence on year. These results show a lack of evidence that the date of stranding provides significant information about the relative rates of stranding among the three consolidated cause categories.
+To investigate changes in the relative rates of stranding causes, multinomial log-linear models were fit using date of record as a predictor. 
+To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: Human caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original Unknown category. 
+The 2011 T\={o}hoku tsunami-related strandings, as well as the records prior to 1985 were excluded from the model fit.
+The Akaike Information Criterion (AIC) is used to compare a series models of models using natural splines based on date of standing with increasing degrees of freedom.
+The AIC increases going from a null model (AIC \Sexpr{signif(deg0model$AIC,5)}) with no dependence on year
+to a predictor function with 2 degrees of freedom (AIC \Sexpr{signif(deg2model$AIC,5)}), 
+and then slightly decreases again, so that a 4 degree of freedom model (AIC \Sexpr{signif(deg4model$AIC,5)})
+has an AIC \Sexpr{signif(deg0model$AIC - deg4model$AIC,2)} \xorig{1.2} smaller than the null model. 
+Figure \ref{fig:model} displays a 3-degree of freedom model (AIC \Sexpr{signif(deg3model$AIC,5)}),
+with confidence bands constructed using the bootstrap.
+The null model is represented by dotted white lines, and apparently fits within the confidence bands of the model that includes dependence on year. 
+These results show a lack of evidence that the date of stranding provides significant information about the relative rates of stranding among the three consolidated cause categories.
 
 \subsection{Size and gender}
 
@@ -596,10 +615,18 @@ The relative rates of strandings by cause over time is of particular interest fo
 The overall rate of observation depends on population size and human reporting behavior in a complex way that is difficult to disentangle, but by looking at the distribution of causes over time we may be able to identify structural changes in the cause of strandings.
 While the record collection process kept eight categories of cause, for modelling purposes we reduced these to 3 broad categories: direct intentional and accidental human causes, such as boat impacts and fishing and hunting related injuries; natural events, predation, and disease; and unknown causes. 
 
-The distribution of these three consolidated causes has been relatively stable since the early 1990s (Figure \ref{fig:model}), providing unconvincing evidence of any major shifts between the relative risks between direct human causes and the other categories. One way of interpreting this result is that the increased numbers of strandings over time can be explained entirely by the growth in turtle populations and increases in reporting by the public. While keeping the proportion of human-caused strandings constant over time may be regarded as a minor conservation success story, given the significant growth in human population and coastal activity over the same time period, humans remain a significant source of danger to turtles. There remains much room for improvement, in particular with regards to hook-and-line injuries.
+The distribution of these three consolidated causes has been relatively stable since the early 1990s (Figure \ref{fig:model}), providing unconvincing evidence of any major shifts between the relative risks between direct human causes and the other categories.
+One way of interpreting this result is that the increased numbers of strandings over time can be explained entirely by the growth in turtle populations and increases in reporting by the public. 
+While keeping the proportion of human-caused strandings constant over time may be regarded as a minor conservation success story, given the significant growth in human population and coastal activity over the same time period, humans remain a significant source of danger to turtles.
+There remains much room for improvement, in particular with regards to hook-and-line injuries.
 
 
-The current study found that different sides of \Hawaii\ Island had different distributions of stranding cause. West \Hawaii\ Island had a higher proportion of shark attack and boat impact strandings, while east \Hawaii\ had more FP and human take strandings. Increased shark attack strandings on west \Hawaii\ may be because of the larger population of tiger sharks found along the west coast \citep{meyer2009long}. Tiger sharks are well-known predators of sea turtles, and green turtles are often found in their stomach contents \citep{witzell1987selective, lowe1996ontogenetic}. West \Hawaii\ also has a large tourism industry, with many snorkel, manta ray, and marine mammal watching tours operating in the same coastal waters that green turtles occupy. These tours, as well as commercial vessels, frequent the many shallow bays located in west \Hawaii\ that are important foraging habitats for green turtles. Increased boat presence accompanied with high vessel speeds, varying water depth, and poor water visibility can all factor into a higher proportion of boat impact strandings on the west side of the island \citep{fuentes2021conservation}.
+The current study found that different sides of \Hawaii\ Island had different distributions of stranding cause. West \Hawaii\ Island had a higher proportion of shark attack and boat impact strandings, while east \Hawaii\ had more FP and human take strandings.
+Increased shark attack strandings on west \Hawaii\ may be because of the larger population of tiger sharks found along the west coast \citep{meyer2009long}. 
+Tiger sharks are well-known predators of sea turtles, and green turtles are often found in their stomach contents \citep{witzell1987selective, lowe1996ontogenetic}. 
+West \Hawaii\ also has a large tourism industry, with many snorkel, manta ray, and marine mammal watching tours operating in the same coastal waters that green turtles occupy. 
+These tours, as well as commercial vessels, frequent the many shallow bays located in west \Hawaii\ that are important foraging habitats for green turtles. 
+Increased boat presence accompanied with high vessel speeds, varying water depth, and poor water visibility can all factor into a higher proportion of boat impact strandings on the west side of the island \citep{fuentes2021conservation}.
 
 The majority of green turtles that stranded on \Hawaii\ Island were juveniles. Similarly, juveniles predominated the stranded green and hawksbill turtles throughout the Hawaiian Islands \citep{chaloupka2008cause, brunson2022three}.
 Juvenile green turtles were also the most common size class stranded in New Caledonia \citep{read2023twenty}, Australia \citep{flint2015trends}, and Brazil \citep{monteiro2016long}. 
@@ -611,21 +638,31 @@ A spatial trend in size-classes was also reported by \cite{chaloupka2008cause}: 
 An explanation for the size-class differences in stranded turtles on \Hawaii\ Island is that stranded turtles with the highest SCL values were the result of shark attacks. \footnote{\color{red} Grady: This is inconsistent with above sentence?}
 \cite{bornatowski2012shark} found that the probability that a green turtle in Brazil stranded with a shark bite increased with size, and \cite{chaloupka2008cause} reported the same trend for green turtles in the main Hawaiian Islands. Smaller green turtles are also frequently attacked by sharks, but may be completely consumed and thus do not wash ashore after such event. 
 	
-There was no gender-bias of stranded green turtles on \Hawaii\ Island: male and female strandings occurred with a 1:1.06 ratio. The lack of a gender-bias for green turtles was also shown in the main Hawaiian Islands \citep{work2004retrospective, chaloupka2008cause}. The present and prior studies are consistent with the 1:1 sex ratio of Hawaiian green turtles found by \cite{wibbels1993sex}. Unlike in the Hawaiian Islands, many green turtle populations around the world appear to have more females than males \citep{flint2010health, cheng2019twenty, read2023twenty}. Clutches of sea turtles are sensitive to temperature change, and an increase in the temperature during incubation can drastically change sex ratios of nests, leading to clutches of all females. As temperatures continue to rise as a result of climate change, the Hawaiian population of green turtles may eventually see the same skew seen in other locations around the world \citep{hawkes2009climate}.
+There was no gender-bias of stranded green turtles on \Hawaii\ Island: male and female strandings occurred with a 1:1.06 ratio.
+The lack of a gender-bias for green turtles was also shown in the main Hawaiian Islands \citep{work2004retrospective, chaloupka2008cause}. 
+The present and prior studies are consistent with the 1:1 sex ratio of Hawaiian green turtles found by \cite{wibbels1993sex}. Unlike in the Hawaiian Islands, many green turtle populations around the world appear to have more females than males \citep{flint2010health, cheng2019twenty, read2023twenty}. 
+Clutches of sea turtles are sensitive to temperature change, and an increase in the temperature during incubation can drastically change sex ratios of nests, leading to clutches of all females. 
+As temperatures continue to rise as a result of climate change, the Hawaiian population of green turtles may eventually see the same skew seen in other locations around the world \citep{hawkes2009climate}.
 
-More than 60\% of the stranded turtles on \Hawaii\ Island had no tumors indicative of FP. This percentage may vary slightly as not every turtle in this study underwent a necropsy and some might have had internal tumors with no visible external tumors. The reduction of incidence of FP has been documented previously in Hawaiian green turtles. Twenty-one of 66 turtles observed with tumors in one summer were then seen later with no tumors \citep{bennett2000photographic}. The low population of turtles with FP on \Hawaii\ Island is consistent with the 2022 stranding report for green turtles on Maui, in which only one case of FP was reported \citep{cutt2023impact}. 
+More than 60\% of the stranded turtles on \Hawaii\ Island had no tumors indicative of FP. This percentage may vary slightly as not every turtle in this study underwent a necropsy and some might have had internal tumors with no visible external tumors.
+The reduction of incidence of FP has been documented previously in Hawaiian green turtles.
+Twenty-one of 66 turtles observed with tumors in one summer were then seen later with no tumors \citep{bennett2000photographic}.
+The low population of turtles with FP on \Hawaii\ Island is consistent with the 2022 stranding report for green turtles on Maui, in which only one case of FP was reported \citep{cutt2023impact}. 
 
-Turtles were more likely to have FP on east \Hawaii\ Island, whereas FP was very rare on green turtles that stranded on west \Hawaii\ Island. The west (Kona) coast of \Hawaii\ Island had no diagnosed cases of FP for many of the years that FP was prevalent in the other Hawaiian Islands \citep{balazs1991current, aguirre2000blood, work2001immune}. 
+Turtles were more likely to have FP on east \Hawaii\ Island, whereas FP was very rare on green turtles that stranded on west \Hawaii\ Island. 
+The west (Kona) coast of \Hawaii\ Island had no diagnosed cases of FP for many of the years that FP was prevalent in the other Hawaiian Islands \citep{balazs1991current, aguirre2000blood, work2001immune}. 
 In Florida, turtles with tumors are more likely to become entangled in fishing line, thus the higher percentage of hook-and-line strandings that occurred on east \Hawaii\ may be a result of higher FP presence \citep{foley2005fibropapillomatosis}. 
 However, \cite{chaloupka2008cause} found no correlation between FP and fishing gear strandings in the other main Hawaiian Islands. 
 Similar to the spatial variation in FP infection on \Hawaii\ Island, FP was more often found in \Oahu\ and Maui than on Kauai \citep{chaloupka2008cause}. 
 Green turtles that stranded on the western (Gulf) coast of Florida (51.9\%) were more likely to have tumors than turtles that stranded on the eastern (Atlantic) coast (11.9\%) \citep{foley2005fibropapillomatosis}. 
 In Australia, FP varied in prevalence from 0 to 11.6\% at 15 sites all along the Queensland coast \citep{jones2022spatial}. 
 
-A variety of factors have been hypothesized for the varying prevalence of FP in different locations and may be the reason for the contrasting FP abundance on west and east \Hawaii\ Island. For example, FP in Florida was greatest in areas with the greatest habitat degradation and pollution, most shallow water areas, and lowest wave-energy level, indicating that one or more of these conditions may affect FP \citep{foley2005fibropapillomatosis}.
+A variety of factors have been hypothesized for the varying prevalence of FP in different locations and may be the reason for the contrasting FP abundance on west and east \Hawaii\ Island.
+For example, FP in Florida was greatest in areas with the greatest habitat degradation and pollution, most shallow water areas, and lowest wave-energy level, indicating that one or more of these conditions may affect FP \citep{foley2005fibropapillomatosis}.
 In Brazil, highly urbanized areas have a higher FP prevalence than lightly urbanized areas \citep{bastos2022coastal}. 
 Additionally, FP may be related to water temperature, with higher water temperatures correlated with greater FP prevalence \citep{manes2022occurrence}. 
-Perhaps the greatest factor that could contribute to the absence of FP on west \Hawaii\ Island is the precipitation pattern on the leeward side of the island. The windward (east) side, experiences abundant, consistent rainfall and has large rivers and many streams \citep{juvik1998atlas}. 
+Perhaps the greatest factor that could contribute to the absence of FP on west \Hawaii\ Island is the precipitation pattern on the leeward side of the island.
+The windward (east) side, experiences abundant, consistent rainfall and has large rivers and many streams \citep{juvik1998atlas}. 
 Heavy rain may bring more land-based pollutants to rivers, and the discharge from these rivers located in urbanized areas may disrupt the immune system of green turtles, making them more susceptible to FP \citep{manes2022occurrence}. 
 In addition, coastal waters in west \Hawaii\ experience nutrient pollution via submarine groundwater discharge which could impact green turtle health \citep{abaya2018spatial, abaya2018multi, panelo2022spatial}.
 	
@@ -647,14 +684,27 @@ The considerable contribution of hook-and-line fishing gear to strandings highli
 The authors declare that no funds, grants, or other support were received to assist in the preparation of this manuscript.
 The authors have no relevant financial or non-financial interests to disclose.
 
-Study conception and design by Skylar Dentlinger and Karla J. McDermid. Initial analysis and first draft prepared by Skylar Dentlinger. Follow-up analyses and modelling by Grady Weyenberg. All authors contributed to editing and revision of the manuscript and have read and approved the finalized version.
+Study conception and design by Skylar Dentlinger and Karla J. McDermid. 
+Initial analysis and first draft prepared by Skylar Dentlinger. 
+Follow-up analyses and modelling by Grady Weyenberg. 
+All authors contributed to editing and revision of the manuscript and have read and approved the finalized version.
 
-This is an observational study compiled from publicly available records. No ethical approval is required.
+This is an observational study compiled from publicly available records. 
+No ethical approval is required.
 All data analysed during this study are included in this published article and its supplementary information files.
 
 
 \section{Acknowledgements}
-We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship: Summer Martin, Brittany Clemans, Jen Sims, Megan Lamson, Rebecca Ostertag, NOAA Marine Turtle Biology \& Assessment Program, University of  \Hawaii\ at Hilo Marine Option Program Sea Turtle Stranding Response Team, \Hawaii\ Preparatory Academy Sea Turtle Research Program, and the State of \Hawaii\ Department of Land and Natural Resources.
+We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship:
+Summer Martin, 
+Brittany Clemans, 
+Jen Sims, 
+Megan Lamson, 
+Rebecca Ostertag, 
+NOAA Marine Turtle Biology \& Assessment Program,
+University of  \Hawaii\ at Hilo Marine Option Program Sea Turtle Stranding Response Team,
+\Hawaii\ Preparatory Academy Sea Turtle Research Program,
+and the State of \Hawaii\ Department of Land and Natural Resources.
 
 \bibliography{turtles}
 
