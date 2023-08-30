@@ -87,6 +87,8 @@ library(splines)
 library(scales)
 library(readr)
 library(tibble)
+library(english)
+library(stringr)
 
 BigIslandStrandings <- read_csv("BigIslandStrandings.csv") %>% 
   mutate(Cause=case_match(Cause,
@@ -566,7 +568,9 @@ while east \Hawaii\ had
 
 \section{Discussion}
 
-Seven hundred and fifty-four green turtles were recorded stranded on \Hawaii\ Island in the period 1983-2022, which represents an unknown fraction of total strandings on Hawaiian shores in that time. 
+\Sexpr{str_to_sentence(english(nrow(BigIslandStrandings)))} 
+%Seven hundred and fifty-four
+green turtles were recorded stranded on \Hawaii\ Island in the period 1983-2022, which represents an unknown fraction of total strandings on Hawaiian shores in that time. 
 Stranding programs rely on reports from the public, and are therefore dependent on the density of human activity at the shoreline as well as public knowledge of the reporting procedures. 
 However, if a location is regularly accessed by more than a few people, a stranding is likely to be eventually reported, and it is reasonable to believe that this will happen independent of the variables observed in these records.
 %However, strandings that are reported are probably an accurate reflection of the distribution, demographics, and causes of \Hawaii\ Island strandings. 
@@ -644,8 +648,8 @@ The present and prior studies are consistent with the 1:1 sex ratio of Hawaiian 
 Clutches of sea turtles are sensitive to temperature change, and an increase in the temperature during incubation can drastically change sex ratios of nests, leading to clutches of all females. 
 As temperatures continue to rise as a result of climate change, the Hawaiian population of green turtles may eventually see the same skew seen in other locations around the world \citep{hawkes2009climate}.
 
-More than 60\% of the stranded turtles on \Hawaii\ Island had no tumors indicative of FP. This percentage may vary slightly as not every turtle in this study underwent a necropsy and some might have had internal tumors with no visible external tumors.
-The reduction of incidence of FP has been documented previously in Hawaiian green turtles.
+More than 60\% of the stranded turtles on \Hawaii\ Island had no tumors indicative of FP, although this is likely an overestimate of the true value, as not every turtle in this study underwent a necropsy that could reveal the presence of internal tumors that would otherwise go unreported.
+However, the overall reduction of FP prevalence has been documented previously in Hawaiian green turtles.
 Twenty-one of 66 turtles observed with tumors in one summer were then seen later with no tumors \citep{bennett2000photographic}.
 The low population of turtles with FP on \Hawaii\ Island is consistent with the 2022 stranding report for green turtles on Maui, in which only one case of FP was reported \citep{cutt2023impact}. 
 
@@ -666,7 +670,7 @@ The windward (east) side, experiences abundant, consistent rainfall and has larg
 Heavy rain may bring more land-based pollutants to rivers, and the discharge from these rivers located in urbanized areas may disrupt the immune system of green turtles, making them more susceptible to FP \citep{manes2022occurrence}. 
 In addition, coastal waters in west \Hawaii\ experience nutrient pollution via submarine groundwater discharge which could impact green turtle health \citep{abaya2018spatial, abaya2018multi, panelo2022spatial}.
 	
-The relatively even distribution of turtles that stranded alive (359) versus dead (381) on \Hawaii\ Island is markedly different from the findings of \cite{chaloupka2008cause}, where on \Oahu, Maui, and Kauai approximately 75\% of green turtles stranded dead. 
+The relatively even distribution of turtles that stranded alive (\Sexpr{sum(side_status_table$A)}) \xorig{(359)} versus dead \Sexpr{sum(side_status_table$D)} \xorig{(381)} on \Hawaii\ Island in the present study is markedly different from the findings of \cite{chaloupka2008cause}, where on \Oahu, Maui, and Kauai approximately 75\% of green turtles stranded dead. 
 In the present study, stranding status was found to vary temporally, by cause, and spatially. 
 Green turtles were more likely to strand alive in the winter months (November--March), and dead in the summer months (April--October).
 Additionally, more turtles stranded dead than alive because of boat impacts, human take, and shark attacks, similar to other Hawaiian Islands, where boat impact and shark attack were the hazards most likely to result in a dead turtle \citep{chaloupka2008cause}.
