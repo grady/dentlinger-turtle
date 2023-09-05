@@ -128,7 +128,7 @@ Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillom
 These results provide the first analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
 }
 
-\keywords{sea turtles, mortality, fishing gear, fibropapillomatosis, \Hawaii}
+\keywords{sea turtles, mortality, fishing gear, fibropapillomatosis, survey}
 
 \begin{document}
 
@@ -171,7 +171,7 @@ In the present study, a comprehensive analysis of 39 years of \Hawaii\ Island gr
 \section{Methods}
 
 \subsection{Data Collection}
-Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Response Program. 
+Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Research Program. 
 The database used in this study was compiled from records available at \url{https://georgehbalazs.com/field-notebooks-by-george-h-balazs/hawaii/}. 
 The west and east coasts of \Hawaii\ Island are different in terms of climate (the windward east coast receives much more rainfall than the leeward west coast), terrain, currents, and population, so the data used in this study were analyzed for the island as a whole, as well as by west and east coast. 
 West \Hawaii\ included locations from \Milolii\ north to Kawaihae, and east \Hawaii\ included locations from South Point north to Hawi (Figure \ref{fig:map}). 
