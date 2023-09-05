@@ -232,7 +232,7 @@ tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) +
   tm_shape(BigIslandStrandings %>% 
              st_as_sf(coords=c("Long", "Lat"), crs=4326, na.fail=FALSE) %>% 
              filter(Site != "Mountain View")) + 
-  tm_symbols(shape="Coast", title.shape="Side", alpha=0.2, size=0.3, col="black", border.alpha=1, border.lwd =  1) + 
+  tm_symbols(shape="Coast", title.shape="Coast", alpha=0.2, size=0.3, col="black", border.alpha=1, border.lwd =  1) + 
   tm_legend(position=c(0.95,0.95), just=c(1,1), frame=TRUE) 
 @
 
@@ -276,9 +276,9 @@ The second most common known cause of stranding in west \Hawaii\ was miscellaneo
 
 \centering
 <<strandings, fig.height=3>>=
-(BigIslandStrandings %>% count(Year, Side=Coast, name = "Strandings") %>% ggplot(aes(x=Year, y=Strandings, fill=Side, color=Side))) +
+(BigIslandStrandings %>% count(Year, Coast, name = "Strandings") %>% ggplot(aes(x=Year, y=Strandings, fill=Coast, color=Coast))) +
   geom_col() + geom_vline(xintercept = 2019.5, lty=2) + 
-  scale_fill_grey(start=0.6, end=0.2, labels=c("East Hawaii Island", "West Hawaii Island"), aesthetics = c("color", "fill")) +
+  scale_fill_grey(start=0.6, end=0.2, labels=c("East Hawaii", "West Hawaii"), aesthetics = c("color", "fill")) +
   labs(y="Number of strandings", x="Year") + 
   theme_bw() + 
   theme(legend.position=c(0.05,0.96), legend.direction = "vertical", legend.justification = c(0,1), 
@@ -291,10 +291,10 @@ The second most common known cause of stranding in west \Hawaii\ was miscellaneo
 \begin{table}[tbp]
 \caption{Strandings in each month for \Hawaii\ island, separated into east and west sides.}\label{tab:monthside}
 <<monthside>>=
-BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% count(Month,Side=Coast) %>%
+BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% count(Month,Coast) %>%
   pivot_wider(names_from = Month, values_from=n) %>% 
-  bind_rows(., summarize(., across(where(is.numeric), sum), Side="Total")) %>%
-  rowwise(Side) %>% mutate(Total=sum(c_across(where(is.numeric)))) %>% 
+  bind_rows(., summarize(., across(where(is.numeric), sum), Coast="Total")) %>%
+  rowwise(Coast) %>% mutate(Total=sum(c_across(where(is.numeric)))) %>% 
   knitr::kable("latex", booktabs=T, linesep=c("","\\addlinespace"))
 @
 \end{table}
@@ -305,11 +305,11 @@ BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% cou
 \begin{figure}[tbp]
 \centering
 <<cause_time, fig.height=5>>=
-(BigIslandStrandings %>% count(Year, Cause, Side=Coast, name="Strandings") %>% ggplot(aes(x=Year, y=Strandings, fill=Side, color=Side))) +
+(BigIslandStrandings %>% count(Year, Cause, Coast, name="Strandings") %>% ggplot(aes(x=Year, y=Strandings, fill=Coast, color=Coast))) +
   geom_col() + 
   facet_wrap(vars(Cause), scales="fixed") + 
   geom_vline(xintercept = 2019.5, lty=2) + 
-  scale_fill_grey(start=0.6, end=0.2, labels=c("East Hawaii Island", "West Hawaii Island"), aesthetics = c("fill", "color")) +
+  scale_fill_grey(start=0.6, end=0.2, labels=c("East Hawaii", "West Hawaii"), aesthetics = c("fill", "color")) +
   labs(y="Number of strandings", x="Year") + 
   theme_bw() + 
   theme(legend.position=c(5/6,1/6), legend.direction = "vertical", legend.justification = c(0.5,0.5), 
@@ -485,13 +485,13 @@ ggplot(BigIslandStrandings, aes(x=Cause, y=SCL)) + geom_boxplot() + labs(y="Cara
 %Tumor distribution is unequal on the two sides of the island (Chi-square test, $X_2=198$, $p < 10^{-10}$).
 }\label{tab:tumor_side}
 <<tumor_side>>=
-tumor_side_table <- BigIslandStrandings %>% count(Side=Coast, Tumor) %>% 
+tumor_side_table <- BigIslandStrandings %>% count(Coast, Tumor) %>% 
   pivot_wider(names_from = Tumor, values_from = n)
 
-tumor_side_test <- tumor_side_table %>% select(-Side) %>% chisq.test()
+tumor_side_test <- tumor_side_table %>% select(-Coast) %>% chisq.test()
 
-tumor_side_table %>% relocate(Side, Present=Y, None=N, "Not Recorded"=U) %>%
-  bind_rows(., summarise(., across(where(is.numeric), sum), Side="Total")) %>%
+tumor_side_table %>% relocate(Coast, Present=Y, None=N, "Not Recorded"=U) %>%
+  bind_rows(., summarise(., across(where(is.numeric), sum), Coast="Total")) %>%
   knitr::kable("latex", booktabs=T, linesep=c("","\\addlinespace")) %>%
   kableExtra::add_header_above(c(" ", "Tumor"=3))
 @
