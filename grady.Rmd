@@ -405,3 +405,90 @@ ggplot(turtles_clean) + aes(x=Cause, y=SCL) + geom_boxplot() +
   labs(y="Carapace length (cm) ")
 ```
 
+## Skylar's big excel file
+
+```{r}
+BigIslandStrandings1 <- read_xlsx("BigIslandStrandings.xlsx", sheet=1)
+BigIslandStrandings2 <- read_xlsx("BigIslandStrandings.xlsx", sheet=2)
+
+library(stringr)
+
+fix_coords <- function(x, sign=1){
+  if(isTRUE(str_detect(x,"[°']"))){
+    str_replace_all(x,"[°']", " ") %>% measurements::conv_unit("deg_min_sec", "dec_deg") %>% as.numeric %>% print %>% abs %>% multiply_by(sign)
+  } else {
+      as.numeric(x) %>% abs %>% multiply_by(sign)}
+  }
+
+BigIslandStrandings$`Lat DD...23` %>% purrr::map_vec(fix_coords)
+BigIslandStrandings$`Long DD...24` %>% purrr::map_vec(fix_coords, sign=-1)
+
+BigIslandStrandings1 <- BigIslandStrandings1 %>% mutate(across(starts_with("Lat DD"), fix_coords), across(starts_with("Long DD"), ~fix_coords(.x, -1)))
+BigIslandStrandings2 <- BigIslandStrandings2 %>% mutate(across(starts_with("Lat DD"), fix_coords), across(starts_with("Long DD"), ~fix_coords(.x, -1)))
+
+lat_long <- bind_rows(
+  BigIslandStrandings1 %>% select(starts_with(c("Lat", "Long")), Site) %>% rename("Lat"=1, "Long"=3) %>% select(1,3, Site) %>% mutate(Side="East"),
+  BigIslandStrandings2 %>% select(starts_with(c("Lat", "Long")), Site) %>% rename("Lat"=1, "Long"=3) %>% select(1,3, Site) %>% mutate(Side="West")
+)
+
+
+BigIslandStrandings <- rbind(
+  BigIslandStrandings1 %>% relocate(Date, Year, Month, Side, Site, Cause, 
+                                  InitialStatus="Init Status", 
+                                  FinalStatus="Survival Status", Sex, SCL:Plastron, Tumor="Tumor Present?",
+                                  Lat="Lat DD...23", Long="Long DD...24", Mass="WEIGHT_LB") %>% select(1:Mass),
+  BigIslandStrandings2 %>% relocate(Date, Year, Month, Side, Site, Cause,
+                                  InitialStatus="Init Status...31",
+                                  FinalStatus="Survival Status...32",
+                                  Sex, SCL:Plastron, Tumor="Tumor Present?", 
+                                  Lat="Lat DD...29", Long="Long DD...30", Mass="WEIGHT_LB") %>% select(1:Mass)
+) %>% mutate(Lat = ifelse(Lat>90, NA, Lat), 
+             Long=ifelse(Long>-150, NA, Long), ## some 99.9999 values
+             Mass = Mass %>% ifelse(. > 777, NA, .) %>% #na_if(0) %>% na_if(777.7) %>% na_if(888.8) %>% na_if(999.9) %>% 
+               units::set_units(lb) %>% units::set_units(kg),
+             across(SCL:Plastron, ~units::set_units(na_if(.x, 0), cm))
+             )
+BigIslandStrandings %>% reframe(across(Site, unique)) %>% arrange(Site)
+BigIslandStrandings %>% readr::write_csv("BigIslandStrandings.csv")
+```
+
+```{r}
+library(tmap)
+library(sf)
+hawaii.sf <- read_sf("Coastline/Coastline.shp") 
+#hawaii.sf <- read_sf("coast_n83.shp")
+#st_bbox(hawaii.sf %>% filter(isle=="Hawaii"))
+
+turtlepoints <- data.frame(lat=c(19.75, 19.3), 
+                           long=c(-155.0, -155.85), 
+                           Side=c("East","West")) %>% st_as_sf(coords=c("long", "lat"), crs=4326)
+
+turtlepoints <- hawaii.sf %>% filter(isle=="Hawaii") %>% 
+  rmapshaper::ms_simplify(0.001) %>% st_segmentize(1000) %>% 
+  st_coordinates() %>% as.data.frame() %>% slice_sample(n=100) %>% 
+  cbind(., Side=ifelse(.$X< -155.8, "West", "East")) %>% st_as_sf(coords=c("X", "Y"), crs=4326)
+
+turtlepoints <- lat_long %>% na.omit %>% st_as_sf(coords=c("Long", "Lat"), crs=4326)
+turtlepoints <- BigIslandStrandings %>% st_as_sf(coords=c("Long", "Lat"), crs=4326, na.fail=FALSE)
+
+turtlepoints <- BigIslandStrandings %>% mutate(Dist= hawaii.sf[13,] %>% 
+                          st_cast("LINESTRING", warn=FALSE) %>% 
+                          st_distance(turtlepoints, .) %>% drop)
+
+BigIslandStrandings %>% mutate(Dist = turtlepoints$Dist) %>% readr::write_csv("BigIslandStrandings.csv", na="")                        
+#readr::write_csv(turtlepoints, "turtlepoints.csv")
+
+turtlepoints %>% filter(Dist > units::set_units(5000, m)) %>% print(n=50)
+turtlepoints %>% arrange(desc(Dist)) %>% print(n=50)
+
+tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) + 
+  tm_graticules(alpha=0.4, n.x=4, n.y=4) + 
+  tm_borders() + tm_compass() + tm_scale_bar() + 
+  tm_fill(alpha=0.3) + 
+  #tm_credits("PLACEHOLDER", position=c("center", "center"), size=1.5) + 
+  tm_shape(turtlepoints %>% filter(Dist > units::set_units(3000, m))) + 
+  tm_symbols(shape="Side", alpha=0.2, size=0.3, col="black", border.alpha=1, border.lwd =  1) + 
+  #tm_text(text="Site", size=0.6) + 
+  tm_legend(position=c(0.95,0.95), just=c(1,1), frame=TRUE) 
+```
+
