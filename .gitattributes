@@ -1,6 +1,6 @@
 *.bbl -diff -merge linguist-generated
 *.tex -diff -merge linguist-generated
 *.pdf -diff -merge linguist-generated
-*.Rnw linguist-language=TeX
+*.Rnw linguist-language=TeX linguist-detectable
 *.cls linguist-vendored
 *.bst linguist-vendored
