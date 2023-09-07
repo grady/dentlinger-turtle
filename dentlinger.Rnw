@@ -72,10 +72,20 @@ twocol <- 84 * mm2in
 bigcol <- 174 * mm2in
 smallcol <- 119 * mm2in
 
+make_plot_namer <- function(prefix="Figure-", n=1L, width=2){
+  function(x){
+    x2 <- file.path(dirname(x), paste0(prefix, formatC(n, width=width, flag="0"),".", tools::file_ext(x)))
+    n <<- n + 1L
+    if (file.rename(x, x2)) x2 else x
+  }
+}
+
 knitr::opts_chunk$set(
   echo = FALSE, warning = FALSE, message = FALSE, 
-  fig.width = bigcol, fig.height = 6
+  fig.width = bigcol, fig.height = 6,
+  fig.process = make_plot_namer(width=1)
 )
+
 library(tidyr)
 library(dplyr)
 library(magrittr)
