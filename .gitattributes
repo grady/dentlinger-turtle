@@ -1,0 +1,3 @@
+*.bbl -diff -merge linguist-generated=true
+*.tex -diff -merge linguist-generated=true
+*.pdf -diff -merge linguist-generated=true
