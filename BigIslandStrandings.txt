@@ -1,0 +1,19 @@
+BigIslandStrandings.csv - 754 rows, 16 columns
+
+Date - Character: Date of record YYYY-MM-DD
+Year - Numeric: Year
+Month - Character: Month
+Coast - Character: East/West
+Site - Character: Location name
+Cause - Charater: Primary reason for stranding
+InitialStatus - Character: D/A/U
+FinalStatus - Character: D/A/U
+Sex - Character: F/M/U
+SCL - Numeric: Straight Carapace Length in cm
+CCL - Numeric: Curved Carapace Length in cm
+SCW - Numeric: Straight Carapace Width in cm
+CCW - Numeric: Curved Carapace Width in cm
+Plastron - Numeric: Plastron length in cm
+Tumor - Character: Y/N/U
+Lat - Numeric: Latitude in decimal degrees (North)
+Long - Numeric: Longitude in decimal degrees (West)

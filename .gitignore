@@ -8,6 +8,8 @@
 
 springer/
 bst/
+cache/
+figure/
 
 *.log
 *.aux
