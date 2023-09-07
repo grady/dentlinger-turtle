@@ -1,3 +1,6 @@
 *.bbl -diff -merge linguist-generated
 *.tex -diff -merge linguist-generated
 *.pdf -diff -merge linguist-generated
+*.Rmd linguist-detectable
+*.cls linguist-vendored
+*.bst linguist-vendored
