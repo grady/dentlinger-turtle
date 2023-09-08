@@ -9,7 +9,7 @@ jobs:
       - name: Print R version
         run: version
         shell: Rscript {0}
-      - uses: r-lib/actions/setup-tinytex
+      - uses: r-lib/actions/setup-tinytex@v2
       - name: Print pdflatex version
         run: pdflatex --version
         
