@@ -82,6 +82,7 @@ make_plot_namer <- function(prefix="Figure-", n=1L, width=2){
 
 knitr::opts_chunk$set(
   echo = FALSE, warning = FALSE, message = FALSE, 
+  error = FALSE, ## die on compilation error
   fig.width = bigcol, fig.height = 6,
   fig.process = make_plot_namer(width=1)
 )
@@ -91,14 +92,11 @@ library(dplyr)
 library(magrittr)
 library(ggplot2)
 library(lubridate)
-library(forcats)
 library(nnet)
 library(splines)
 library(scales)
 library(readr)
-library(tibble)
 library(english)
-library(stringr)
 
 BigIslandStrandings <- read_csv("BigIslandStrandings.csv") %>% 
   mutate(Cause=case_match(Cause,
@@ -229,10 +227,7 @@ were located on the windward side or east coast of \Hawaii\ Island (Figure \ref{
 library(tmap)
 library(sf)
 hawaii.sf <- read_sf("Coastline/Coastline.shp") 
-#hawaii.sf <- read_sf("coast_n83.shp")
-#st_bbox(hawaii.sf %>% filter(isle=="Hawaii"))
 
-#BigIslandStrandings <- readr::read_csv("BigIslandStrandings.csv") %>% st_as_sf(coords=c("Long", "Lat"), crs=4326, na.fail=FALSE)
 
 tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) + 
   tm_graticules(alpha=0.4, n.x=4, n.y=4) + 
