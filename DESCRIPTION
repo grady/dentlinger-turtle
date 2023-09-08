@@ -1,1 +1,16 @@
 Package: none
+Imports: 
+  knitr, 
+  kableExtra,
+  dplyr,
+  english,
+  ggplot2,
+  lubridate,
+  magrittr,
+  purrr,
+  readr,
+  scales,
+  sf,
+  splines,
+  tidyr,
+  tmap
