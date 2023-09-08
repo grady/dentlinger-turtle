@@ -15,3 +15,7 @@ figure/
 *.aux
 *concordance.tex
 *synctex.gz
+
+*.tex
+*.bbl
+*.zip
