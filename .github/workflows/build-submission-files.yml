@@ -8,6 +8,26 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
       - name: Print R version
         run: version
+        shell: Rscript {0}        
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        extra-packages: |
+          any::knitr
+          any::kableExtra
+          any::tidyr
+          any::dplyr
+          any::lubridate
+          any::magrittr
+          any::ggplot2
+          any::lubridate
+          any::splines
+          any::scales
+          any::readr
+          any::english
+          any::tmap
+          any::sf
+          any::purrr
+      - name: R packages
+        run: installed.packages()
         shell: Rscript {0}
       - uses: r-lib/actions/setup-tinytex@v2
       - name: Print pdflatex version
