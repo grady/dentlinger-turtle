@@ -1,15 +1,15 @@
-\documentclass[sn-basic,NameDate]{sn-jnl}
+\documentclass[sn-basic,NameDate,pdflatex]{sn-jnl}
 
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{manyfoot}
 \usepackage{booktabs}
 
-\usepackage[document]{ragged2e}
 \usepackage{parskip}
 
-\hyphenpenalty=10000
+\raggedright
 \hbadness=10000
+\vbadness=10000
 
 \setlength{\tabcolsep}{4pt}
 
