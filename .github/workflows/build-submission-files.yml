@@ -42,7 +42,7 @@ jobs:
       - name: Create pages directory
         run: |
           mkdir _site
-          ln -s -t _site figure dentlinger.pdf
+          ln -s -r -t _site figure dentlinger.pdf
           ls -a -l _site
       - uses: actions/upload-pages-artifact@v2
 
