@@ -21,7 +21,7 @@ jobs:
           key: knitr-cache
           path: cache
       - name: Render manuscript
-        run: knitr::rnw2pdf("dentlinger.Rnw")
+        run: knitr::rnw2pdf("dentlinger.Rnw", compiler="pdflatex", clean=FALSE)
         shell: Rscript {0}
       - name: Print dir listing
         run: ls -l
