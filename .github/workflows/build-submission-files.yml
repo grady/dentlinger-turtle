@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir _site
           ln -s -r -t _site figure dentlinger.pdf
-          ls -a -l -R _site
+          ls -a -l -R -L _site
       - uses: jayanta525/github-pages-directory-listing@v3.0.0
         with:
           FOLDER: _site/figure
