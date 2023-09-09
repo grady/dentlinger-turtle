@@ -16,11 +16,15 @@ jobs:
       - name: Print R packages
         run: installed.packages()
         shell: Rscript {0}
+      - uses: actions/cache@v3
+        with: 
+          key: knitr-cache
+          path: cache
       - name: Render manuscript
         run: knitr::rnw2pdf("dentlinger.Rnw")
         shell: Rscript {0}
-      - name: Print latex log
-        run: cat dentlinger.log
+      - name: Print dir listing
+        run: ls -l
       - name: Store artifacts
         uses: actions/upload-artifact@v3
         with:
