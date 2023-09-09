@@ -1,7 +1,7 @@
 name: Build Submission Files
 on:
   push:
-    branches: [main]
+    branches: [$default-branch]
 jobs: 
   sweave-latex:
     runs-on: ubuntu-latest
@@ -44,6 +44,9 @@ jobs:
           mkdir _site
           ln -s -r -t _site figure dentlinger.pdf
           ls -a -l _site
+      - uses: jayanta525/github-pages-directory-listing@v3
+        with:
+          FOLDER: _site
       - uses: actions/upload-pages-artifact@v2
   deploy:
     needs: sweave-latex
@@ -52,9 +55,9 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/configure-pages@v3
       - uses: actions/deploy-pages@v2
   
 
