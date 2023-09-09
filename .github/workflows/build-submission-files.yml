@@ -42,7 +42,7 @@ jobs:
           mkdir _site
           ln -s -r -t _site figure dentlinger.pdf
           ls -a -l _site
-      - uses: jayanta525/github-pages-directory-listing@v3
+      - uses: jayanta525/github-pages-directory-listing@v3.0.0
         with:
           FOLDER: _site
       - uses: actions/upload-pages-artifact@v2
@@ -55,7 +55,7 @@ jobs:
       name: github-pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/configure-pages@v3.0.0
+      - uses: actions/configure-pages@v3
       - uses: actions/deploy-pages@v2
   
 
