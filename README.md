@@ -6,4 +6,5 @@ Dentlinger S, et al. (2023) Four decades of green turtle _(Chelonia mydas)_ stra
 
 ![PDF build](https://github.com/grady/dentlinger-turtle/actions/workflows/build-submission-files.yml/badge.svg)
 
-- Manuscript (pdf) https://grady.github.io/dentlinger-turtle/dentlinger.pdf
+- [Manuscript (pdf)](https://grady.github.io/dentlinger-turtle/dentlinger.pdf)
+- [Figures](https://grady.github.io/dentlinger-turtle/figure/)

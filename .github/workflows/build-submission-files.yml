@@ -41,10 +41,10 @@ jobs:
         run: |
           mkdir _site
           ln -s -r -t _site figure dentlinger.pdf
-          ls -a -l _site
+          ls -a -l -R _site
       - uses: jayanta525/github-pages-directory-listing@v3.0.0
         with:
-          FOLDER: _site
+          FOLDER: _site/figure
       - uses: actions/upload-pages-artifact@v2
   deploy:
     needs: sweave-latex
