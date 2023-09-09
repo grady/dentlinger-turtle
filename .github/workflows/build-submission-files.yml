@@ -16,6 +16,23 @@ jobs:
       - name: R packages
         run: installed.packages()
         shell: Rscript {0}
+      - name: Render manuscript
+        run: knitr::rnw2pdf("dentlinger.Rnw")
+        shell: Rscript {0}
+      - name: Print latex log
+        run: cat dentlinger.log
+      - name: Store artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          path: |
+            dentlinger.log
+            dentlinger.tex
+            dentlinger.bbl
+            dentlinger.pdf
+            turtles.bib
+            sn-basic.bst
+            sn-jnl.cls
+            figure/*.pdf
 
         
       
