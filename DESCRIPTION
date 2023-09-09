@@ -13,6 +13,7 @@ Imports:
   scales,
   sf,
   splines,
+  stringr,
   tibble,
   tidyr,
   tmap
