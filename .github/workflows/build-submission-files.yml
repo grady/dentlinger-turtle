@@ -1,7 +1,5 @@
 name: Build Submission Files
-on:
-  push:
-    branches: [$default-branch]
+on: [push]
 jobs: 
   sweave-latex:
     runs-on: ubuntu-latest
