@@ -1,5 +1,7 @@
 name: Build Submission Files
-on: [push]
+on:
+  push:
+    branches: [main]
 jobs: 
   sweave-latex:
     runs-on: ubuntu-latest
@@ -37,6 +39,12 @@ jobs:
             sn-basic.bst
             sn-jnl.cls
             figure/*.pdf
+      - name: Create pages directory
+        run: |
+          mkdir _site
+          ln -s -t _site figure dentlinger.pdf
+          ls -a -l _site
+      - uses: actions/upload-pages-artifact@v2
 
         
       
