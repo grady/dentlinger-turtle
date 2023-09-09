@@ -3,3 +3,7 @@ Dentlinger S, et al. (2023) Four decades of green turtle _(Chelonia mydas)_ stra
 - data (csv): [BigIslandStrandings.csv](BigIslandStrandings.csv)
 - metadata: [BigIslandStrandings.txt](BigIslandStrandings.txt)
 
+
+![PDF build](https://github.com/grady/dentlinger-turtle/actions/workflows/build-submission-files.yml/badge.svg)
+
+- Manuscript (pdf) https://grady.github.io/dentlinger-turtle/dentlinger.pdf
