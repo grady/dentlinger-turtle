@@ -13,7 +13,7 @@ jobs:
       - name: Print pdflatex version
         run: pdflatex --version 
       - uses: r-lib/actions/setup-r-dependencies@v2
-      - name: R packages
+      - name: Print R packages
         run: installed.packages()
         shell: Rscript {0}
       - name: Render manuscript

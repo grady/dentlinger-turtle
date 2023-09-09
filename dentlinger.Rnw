@@ -97,6 +97,7 @@ library(splines)
 library(scales)
 library(readr)
 library(english)
+library(tibble)
 
 BigIslandStrandings <- read_csv("BigIslandStrandings.csv") %>% 
   mutate(Cause=case_match(Cause,
