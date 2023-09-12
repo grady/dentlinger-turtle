@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "The citation for this data is as follows."
-title: "Four decades of green turtle _(Chelonia mydas)_ strandings on Hawaii Island (1983--2022): Causes and trends"
+title: "Four decades of green turtle (Chelonia mydas) strandings on Hawaii Island (1983-2022)"
 authors:
 - family-names: "Dentlinger"
   given-names: "Skylar"
@@ -18,9 +18,9 @@ authors:
 - family-names: "Balazs"
   given-names: "George H"
 repository-code: "https://github.com/gradysw/dentlinger-turtle"
-note: "[Manuscript in preparation]"
 type: dataset
 preferred-citation: 
+  abbreviation: Dentlinger2023
   authors:
   - family-names: "Dentlinger"
     given-names: "Skylar"
@@ -37,7 +37,7 @@ preferred-citation:
     orcid: "https://orcid.org/0009-0008-5951-0749"
   - family-names: "Balazs"
     given-names: "George H"
-  title: "Four decades of green turtle _(Chelonia mydas)_ strandings on Hawaii Island (1983--2022): Causes and trends"
+  title: "Four decades of green turtle (Chelonia mydas) strandings on Hawaii Island (1983-2022): Causes and trends"
   year: 2023
-  note: "[Manuscript in preparation]"
+  notes: "[Manuscript in preparation]"
   type: article
