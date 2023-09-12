@@ -273,7 +273,7 @@ with the effect being driven most strongly by the FP and Miscellaneous categorie
 
 \subsection{Temporal trends}
 
-The number of strandings on \Hawaii\ Island have fluctuated over the years but show an overall increase over time (Figure \ref{fig:sides}). 
+The number of strandings on \Hawaii\ Island has fluctuated over the years but shows an overall increase over time (Figure \ref{fig:sides}). 
 Across both sides of the island, strandings were less frequent in winter, November--February, than in other months (Table \ref{tab:monthside}). 
 The highest totals were observed between March and August.
 Raw counts of hook-and-line fishing gear strandings have steadily increased over the years, and while strandings with FP as the chief cause of stranding have remained overall low, the number of FP-caused strandings was higher after 2000 (Figure \ref{fig:cause}).
