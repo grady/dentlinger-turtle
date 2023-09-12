@@ -140,7 +140,7 @@ Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillom
 These results provide the first analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
 }
 
-\keywords{sea turtles, mortality, fishing gear, fibropapillomatosis, survey}
+\keywords{sea turtles, mortality, fishing gear entanglement, fibropapillomatosis, Hawaiian Islands, marine reptile mortality, Pacific Ocean}
 
 \begin{document}
 
@@ -156,7 +156,7 @@ Therefore, green turtles are susceptible to threats in both offshore and coastal
 
 Green turtles have experienced a long history of exploitation.
 The species was used for meat by indigenous coastal people around the world, as well as by European royals in the 18th and 19th centuries \citep{witzell1994origin}.
-Hawaiian green turtles have been additionally impacted by hunting at foraging grounds, by harvesting of both eggs and femails at nesting grounds, and by the destruction of their nesting habitat. 
+Hawaiian green turtles have been additionally impacted by hunting at foraging grounds, by harvesting of both eggs and females at nesting grounds, and by the destruction of their nesting habitat. 
 Since protection began under the Endangered Species Act, a reduction in such exploitation has been observed \citep{balazs2004thirty}.
 However, large marine vertebrates, including green turtles, face other threats, and are often victims of bycatch, becoming accidentally entangled or hooked by commercial or recreational fisheries activities targeting other species \citep{lewison2004understanding}. 
 Bycatch is harmful to green turtles because it can cause drowning, and internal/external injuries from hooks and line entanglements. 
@@ -467,14 +467,14 @@ than those in west \Hawaii\
 ($\mu\pm\text{SE} = \Sexpr{side_scl_table["West", "mean"] %>% signif(3)} 
 \pm \Sexpr{side_scl_table["West", "se"] %>% signif(1)}$ cm SCL, $n=\Sexpr{side_scl_table["West", "n"]}$)
 %\orig{($\mu\pm\text{SE} = 51.3\pm0.51$ cm SCL, range 19.8--83 cm)}. 
-Figure \ref{fig:length_cause} shows SCL distributions for each cause, and while the distribution of SCL is not independent of Cause (ANOVA, 
+Figure \ref{fig:length_cause} shows SCL distributions for each cause, and while the distribution of SCL is not independent of cause (ANOVA, 
 $F(\Sexpr{size_cause_test$Df})=\Sexpr{size_cause_test["Cause","F value"] %>% signif(3)}$, 
 $p=\Sexpr{size_cause_test["Cause","Pr(>F)"] %>% signif(2)}$), 
 the differences between the groups are small compared to the within-group variances.
 The records contain 
 \Sexpr{gender_table["F"]} female, 
 \Sexpr{gender_table["M"]} male, and 
-\Sexpr{gender_table["U"]} gender undetermined cases, also with marginally different distributions between side of the island (Chi-square, 
+\Sexpr{gender_table["U"]} gender undetermined cases, also with marginally different distributions between sides of the island (Chi-square, 
 $X_{\Sexpr{gender_side_test$parameter}}=\Sexpr{signif(gender_side_test$statistic,2)}$,
 $p=\Sexpr{signif(gender_side_test$p.value, 2)}$). 
 
