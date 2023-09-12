@@ -692,14 +692,17 @@ The considerable contribution of hook-and-line fishing gear to strandings highli
 
 \section{Compliance with Ethical Standards}
 
+\subsection{Disclosures and declarations}
 The authors declare that no funds, grants, or other support were received to assist in the preparation of this manuscript.
 The authors have no relevant financial or non-financial interests to disclose.
 
+\subsection{Author contributions}
 Study conception and design by Skylar Dentlinger and Karla J. McDermid. 
 Initial analysis and first draft prepared by Skylar Dentlinger. 
 Follow-up analyses and modeling by Grady Weyenberg. 
 All authors contributed to editing and revision of the manuscript and have read and approved the finalized version.
 
+\subsection{Data transparency}
 This is an observational study compiled from publicly available records. 
 No ethical approval is required.
 All data analyzed during this study are included in this published article and its supplementary information files.
