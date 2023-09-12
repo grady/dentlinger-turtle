@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "The citation for this manuscript is as follows."
+authors:
+- family-names: "Dentlinger"
+  given-names: "Skylar"
+- family-names: "McDermid"
+  given-names: "Karla J"
+  orcid: "https://orcid.org/0000-0002-7663-6545"
+- family-names: "Weyenberg"
+  given-names: "Grady"
+  orcid: "https://orcid.org/0000-0001-6128-1772"
+- family-names: "Jim"
+  given-names: "Laura M R"
+- family-names: "Rice"
+  given-names: "Marc R"
+  orcid: "https://orcid.org/0009-0008-5951-0749"
+- family-names: "Balazs"
+  given-names: "George H"
+title: "Four decades of green turtle _(Chelonia mydas)_ strandings on Hawaii Island (1983--2022): Causes and trends"
+journal:
+year: 2023
+doi:
+volume:
+pages:
+url: "https://github.com/gradysw/dentlinger-turtle"
+note: "[Manuscript in preparation]"
+type: article
