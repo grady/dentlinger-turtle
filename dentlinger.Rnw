@@ -690,11 +690,7 @@ Continued monitoring of turtle strandings and careful data collection on strande
 
 The considerable contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts, such as barbless hooks and effective line removal techniques (\url{https://dlnr.hawaii.gov/dobor/marineanimalhotline/}), focused on green turtle interactions with fisheries.
 
-\section{Compliance with Ethical Standards}
-
-\subsection{Disclosures and declarations}
-The authors declare that no funds, grants, or other support were received to assist in the preparation of this manuscript.
-The authors have no relevant financial or non-financial interests to disclose.
+\section{Declarations}
 
 \subsection{Author contributions}
 Study conception and design by Skylar Dentlinger and Karla J. McDermid. 
@@ -702,11 +698,16 @@ Initial analysis and first draft prepared by Skylar Dentlinger.
 Follow-up analyses and modeling by Grady Weyenberg. 
 All authors contributed to editing and revision of the manuscript and have read and approved the finalized version.
 
-\subsection{Data transparency}
+\subsection{Conflict of Interest}
+The authors declare that no funds, grants, or other support were received to assist in the preparation of this manuscript.
+The authors have no relevant financial or non-financial interests to disclose.
+
+\subsection{Ethics approval}
 This is an observational study compiled from publicly available records. 
 No ethical approval is required.
-All data analyzed during this study are included in this published article and its supplementary information files.
 
+\subsection{Data Availability}
+All data analyzed during this study are included in this published article and its supplementary information files.
 
 \section{Acknowledgements}
 We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship:
