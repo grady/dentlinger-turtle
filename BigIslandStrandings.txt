@@ -6,14 +6,17 @@ Month - Character: Month
 Coast - Character: East/West
 Site - Character: Location name
 Cause - Charater: Primary reason for stranding
-InitialStatus - Character: D/A/U
-FinalStatus - Character: D/A/U
-Sex - Character: F/M/U
+InitialStatus - Character: [D]ead/[A]live/[U]nknown
+FinalStatus - Character: [D]ead/[A]live/[U]nknown
+Sex - Character: [F]emale/[M]ale/[U]nknown
 SCL - Numeric: Straight Carapace Length in cm
 CCL - Numeric: Curved Carapace Length in cm
 SCW - Numeric: Straight Carapace Width in cm
 CCW - Numeric: Curved Carapace Width in cm
 Plastron - Numeric: Plastron length in cm
-Tumor - Character: Y/N/U
+Tumor - Character: [Y]es/[N]o/[U]nknown
 Lat - Numeric: Latitude in decimal degrees (North)
 Long - Numeric: Longitude in decimal degrees (West)
+
+Load into R with:
+BigIslandStrandings <- readr::read_csv("BigIslandStrandings.csv")
