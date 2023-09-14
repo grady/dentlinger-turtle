@@ -26,9 +26,9 @@ jobs:
       - name: Print dir listing
         run: ls -l
       - name: Store artifacts
-        name: submission-files
         uses: actions/upload-artifact@v3
         with:
+          name: submission-files
           path: |
             dentlinger.log
             dentlinger.tex
