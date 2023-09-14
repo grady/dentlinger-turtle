@@ -136,7 +136,7 @@ boat impact (\Sexpr{CauseCount$p[6]}),
 shark attack (\Sexpr{CauseCount$p[7]}), 
 and net (\Sexpr{CauseCount$p[8]});
 however, \Sexpr{CauseCount$p[1]} of strandings had no known cause.
-Statistical modeling failed to provide convincing evidence of temporal changes in the distribution of strandings across three consolidated cause categories: human caused; predation, disease, and weather; and unknown.
+Statistical modeling failed to provide convincing evidence of temporal changes in the distribution of strandings across three consolidated cause categories: human-caused; predation, disease, and weather; and unknown.
 Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillomatosis, whereas west \Hawaii\ stranded turtles showed higher incidence of shark attacks. 
 These results provide the first analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
 }
@@ -406,7 +406,8 @@ triclassplot + geom_col() +
 
 
 To investigate changes in the relative rates of stranding causes, multinomial log-linear models were fit using date of record as a predictor. 
-To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: Human caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original unknown category. 
+To reduce the variance of the fitted model parameters, the causes as recorded were consolidated into 3 categories: 
+Human-caused (hook-and-line, boat impact, human take, and net); predation, disease and weather (shark attack, FP, and Misc.); and the original unknown category. 
 The 2011 T\={o}hoku tsunami-related strandings, as well as the records prior to 1985 were excluded from the model fit.
 The Akaike Information Criterion (AIC) is used to compare a series models of models using natural splines based on date of standing with increasing degrees of freedom.
 The AIC increases going from a null model (AIC \Sexpr{signif(deg0model$AIC,5)}) with no dependence on year
