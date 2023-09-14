@@ -136,11 +136,12 @@ boat impact (\Sexpr{CauseCount$p[6]}),
 shark attack (\Sexpr{CauseCount$p[7]}), 
 and net (\Sexpr{CauseCount$p[8]});
 however, \Sexpr{CauseCount$p[1]} of strandings had no known cause.
+Statistical modeling failed to provide convincing evidence of temporal changes in the distribution of strandings across three consolidated cause categories: human caused; predation, disease, and weather; and unknown.
 Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillomatosis, whereas west \Hawaii\ stranded turtles showed higher incidence of shark attacks. 
 These results provide the first analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
 }
 
-\keywords{sea turtles, mortality, fishing gear entanglement, fibropapillomatosis, Hawaiian Islands, marine reptile mortality, Pacific Ocean}
+\keywords{sea turtles; fishing gear entanglement; fibropapillomatosis; Hawaiian Islands; marine reptile mortality; Pacific Ocean}
 
 \begin{document}
 
