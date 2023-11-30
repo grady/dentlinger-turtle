@@ -6,8 +6,9 @@
 \usepackage{booktabs}
 
 \usepackage{parskip}
+\usepackage[nolists]{endfloat}
 
-\raggedright
+%\raggedright
 \hbadness=10000
 \vbadness=10000
 
@@ -39,14 +40,14 @@
 }
 \author[1]{\fnm{Skylar} \sur{Dentlinger}\textsuperscript{\dag}}
 
-\author*[1]{\fnm{Karla J.} \sur{McDermid}}\email{mcdermid@hawaii.edu, orcid.org/0000-0002-7663-6545}
+\author*[1]{\fnm{Karla J.} \sur{McDermid}}\email{mcdermid@hawaii.edu}%, orcid.org/0000-0002-7663-6545}
 %\equalcont{These authors contributed equally to this work.}
 
-\author[2]{\fnm{Grady} \sur{Weyenberg}}\email{gradysw@hawaii.edu, orcid.org/0000-0001-6128-1772}
+\author[2]{\fnm{Grady} \sur{Weyenberg}}\email{gradysw@hawaii.edu}%, orcid.org/0000-0001-6128-1772}
 %\equalcont{These authors contributed equally to this work.}
 
 \author[3]{\fnm{Laura M. R.} \sur{Jim}}
-\author[3]{\fnm{Marc R.} \sur{Rice}}\email{mrice@hpa.edu, orcid.org/0009-0008-5951-0749}
+\author[3]{\fnm{Marc R.} \sur{Rice}}\email{mrice@hpa.edu}%, orcid.org/0009-0008-5951-0749}
 \author[4]{\fnm{George H.} \sur{Balazs}}
 
 \affil[1]{\orgdiv{Department of Marine Science}, \orgname{University of \Hawaii\ at Hilo},
@@ -61,8 +62,9 @@
 \affil[4]{\orgname{Golden Honu Services of Oceania}, 
 \orgaddress{\city{Honolulu}, \state{Hawaii}, \country{USA}}}
 
-\presentaddress{\textsuperscript{\dag} \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}}}
+\presentaddress{\textsuperscript{\dag} \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}.}}
 
+\date{\today}
 
 \miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii, \Oahu, \Milolii. In electronic publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
 
@@ -146,7 +148,7 @@ These results provide the first analyses of stranding data from \Hawaii\ Island 
 \begin{document}
 
 \maketitle
-
+\vskip 12pt
 \section{Introduction}
 Green turtles (\emph{Chelonia mydas}) are the most abundant large marine herbivores found throughout the world and in the Hawaiian Islands. 
 Hawaiian populations of green turtles that were once depleted have increased since their 1974 protection under Hawaiian Law and their 1978 protection under the Endangered Species Act \citep{balazs2004thirty}. 
@@ -250,7 +252,7 @@ tm_shape(hawaii.sf, simplify=0.0125, bbox=c(-156.15, 18.91, -154.8, 20.27)) +
 \end{figure}
 
 \begin{table}[tbp]
-\caption{Raw counts and proportions of stranding cause from 1983--2022 for \Hawaii\ island, separated into east and west sides.
+\caption{\color{black}Raw counts and proportions of stranding cause from 1983--2022 for \Hawaii\ island, separated into east and west sides.
 Fibropapillomatosis is abbreviated FP.
 %The distribution is significantly different between sides (Chi-square test, $X_7=70$, $p < 10^{-10}$).
 }\label{tab:cause}
@@ -299,7 +301,7 @@ The second most common known cause of stranding in west \Hawaii\ was miscellaneo
 \end{figure}
 
 \begin{table}[tbp]
-\caption{Strandings in each month for \Hawaii\ island, separated into east and west sides.}\label{tab:monthside}
+\caption{\color{black}Strandings in each month for \Hawaii\ island, separated into east and west sides.}\label{tab:monthside}
 <<monthside>>=
 BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=TRUE)) %>% count(Month,Coast) %>%
   pivot_wider(names_from = Month, values_from=n) %>% 
@@ -492,7 +494,7 @@ ggplot(BigIslandStrandings, aes(x=Cause, y=SCL)) + geom_boxplot() + labs(y="Cara
 \subsection{FP tumor presence/absence}
 
 \begin{table}[tbp]
-\caption{Fibropapillomatosis tumor presence in stranded turtles by side of \Hawaii\ island.
+\caption{\color{black}Fibropapillomatosis tumor presence in stranded turtles by side of \Hawaii\ island.
 %Tumor distribution is unequal on the two sides of the island (Chi-square test, $X_2=198$, $p < 10^{-10}$).
 }\label{tab:tumor_side}
 <<tumor_side>>=
@@ -518,9 +520,7 @@ Tumor presence/absence is significantly associated with side of the island, with
 \subsection{Stranding status}
 
 \begin{table}[tbp]
-\caption{Survival status of stranded turtles by cause. Fibropapillomatosis is abbreviated FP.
-%Status is not independent of cause (Chi-square test, $X_{14}=102$, $p < 10^{-10})$.
-}\label{tab:cause_status}
+\caption{\color{black}Survival status of stranded turtles by cause. Fibropapillomatosis is abbreviated FP.}\label{tab:cause_status}
 <<cause_status>>=
 cause_status_table <- BigIslandStrandings %>% count(Cause, Status=InitialStatus) %>%
   pivot_wider(names_from = Status, values_from = n, values_fill = 0) %>%
@@ -534,7 +534,7 @@ cause_status_table %>% bind_rows(., summarize(., across(where(is.numeric), sum),
 \end{table}
 
 \begin{table}[tbp]
-\caption{Survival status of stranded turtles by month.}\label{tab:month_status}
+\caption{\color{black}Survival status of stranded turtles by month.}\label{tab:month_status}
 <<month_status>>=
 BigIslandStrandings %>% mutate(Month=month(Date, label=TRUE, abbr=FALSE)) %>%
   count(Month, Status=InitialStatus) %>%
@@ -695,10 +695,10 @@ The considerable contribution of hook-and-line fishing gear to strandings highli
 \section{Declarations}
 
 \subsection{Author contributions}
-Study conception and design by Skylar Dentlinger and Karla J. McDermid. 
+Study conception and design by Skylar Dentlinger, George Balazs, and Karla J. McDermid. 
 Initial analysis and first draft prepared by Skylar Dentlinger. 
-Follow-up analyses and modeling by Grady Weyenberg. 
-All authors contributed to editing and revision of the manuscript and have read and approved the finalized version.
+Follow-up analyses, modeling, and final manuscript and code preparation by Grady Weyenberg.
+All authors made significant contributions to editing and revision of the manuscript, provided important intellectual content, and have read and approved the finalized version.
 
 \subsection{Conflict of Interest}
 The authors declare that no funds, grants, or other support were received to assist in the preparation of this manuscript.
@@ -715,6 +715,8 @@ All data analyzed during this study are included in this published article and i
 We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship:
 Summer Martin, 
 Brittany Clemans, 
+Shandell Brunson (deceased), 
+Shawn Murakawa
 Jen Sims, 
 Megan Lamson, 
 Rebecca Ostertag, 

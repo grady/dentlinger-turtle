@@ -412,7 +412,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Titles %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \renewcommand\refname{References}%
-\renewcommand\figurename{Fig.}% defined as per springer style 
+\renewcommand\figurename{Figure}%
 \renewcommand\tablename{Table}%
 \renewcommand\appendixname{Appendix}%
 \renewcommand\abstractname{Abstract}%
@@ -436,10 +436,10 @@
 \def\SubTitlefont{\reset@font\fontsize{14bp}{16.5bp}\selectfont\titraggedcenter}%
 \def\Authorfont{\reset@font\fontsize{12bp}{14.5bp}\selectfont\boldmath\titraggedcenter}%
 \def\addressfont{\reset@font\fontsize{11bp}{13.5bp}\selectfont\titraggedcenter}%
-\def\abstractheadfont{\reset@font\fontsize{9bp}{11bp}\bfseries\selectfont\titraggedcenter}%
-\def\abstractsubheadfont{\reset@font\fontsize{9bp}{11bp}\bfseries\selectfont}%
-\def\abstractfont{\reset@font\fontsize{9bp}{11bp}\selectfont\leftskip=24pt\rightskip=24pt\parfillskip=0pt plus 1fil}%
-\def\keywordfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont\leftskip=24pt\rightskip=24pt plus0.5fill}%
+\def\abstractheadfont{\reset@font\fontsize{10bp}{12bp}\bfseries\selectfont\titraggedcenter}%
+\def\abstractsubheadfont{\reset@font\fontsize{10bp}{12bp}\bfseries\selectfont}%
+\def\abstractfont{\reset@font\fontsize{10bp}{12bp}\selectfont\onehalfspacing\leftskip=0pt\rightskip=0pt\parfillskip=0pt plus 1fil}%
+\def\keywordfont{\reset@font\fontsize{10bp}{12bp}\selectfont\leftskip=0pt\rightskip=0pt plus0.5fill}%
 \def\historyfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont\leftskip=24pt\rightskip=24pt plus0.5fill}%
 
 %% Article Type
@@ -538,12 +538,12 @@
 \if@corauemail%
    \g@addto@macro\corrauthemail{%
    \setcounter{footnote}{0}%
-   \textcolor{blue}{#1};\ %
+   \textcolor{blue}{\emph{#1}};\ %
    }%
 \else%
    \g@addto@macro\authemail{%
    \setcounter{footnote}{0}%
-   \textcolor{blue}{#1};\ %
+   \textcolor{blue}{\emph{#1}};\ %
    }%
 \fi}
 
@@ -638,12 +638,12 @@
 
 \def\printabstract{\ifx\@abstract\empty\else\@abstract\fi\par}%
 
-\def\printkeywords{\ifx\@keywords\empty\else\@keywords\fi\par}%
+\def\printkeywords{\ifx\@keywords\empty\else\@keywords\fi}%
 
 %
 %% Keywords
 \def\keywordname{Keywords}%
-\def\keywords#1{\ifx#1\empty\else\def\@keywords{\par\addvspace{10pt}{\keywordfont{\bfseries\keywordname:} #1\par}}\fi}%
+\def\keywords#1{\ifx#1\empty\else\def\@keywords{\par\addvspace{10pt}{\keywordfont{\bfseries\keywordname:} #1}}\fi}%
 \def\@keywords{}%
 
 %% PACs
@@ -758,18 +758,23 @@
         \ifpresentaddress{\par\@presentaddresstext\par}\fi%
 	}
      \fi%
+     {Submitted: \@date\par}%
      {\printabstract\par}%
-     {\printkeywords\par}%
-     \ifx\@pacs\empty\else%
-       \loop\ifnum\PacsCount>0%
-          \csname\romannumeral\PacsTmpCnt StorePacsTxt\endcsname\par%
-          \StepDownCounter{\PacsCount}%
-          \StepUpCounter{\PacsTmpCnt}%
-       \repeat%
-    \fi%
+     {\printkeywords}%
+    % \ifx\@pacs\empty\else%
+    %   \loop\ifnum\PacsCount>0%
+    %      \csname\romannumeral\PacsTmpCnt StorePacsTxt\endcsname\par%
+    %      \StepDownCounter{\PacsCount}%
+    %      \StepUpCounter{\PacsTmpCnt}%
+    %   \repeat%
+    %\fi%
     %%{\printhistory\par}%
     %%{\ifx\@motto\empty\else\@motto\fi}%
-    \removelastskip\vskip36pt\vskip0pt}%
+    %\removelastskip
+    %\vskip36pt
+    %\vskip0pt
+}%
+    
 
 \usepackage{cuted}%
 \@ifpackageloaded{cuted}{\gdef\@setmarks{}}{}%
@@ -1496,9 +1501,9 @@
 %
 \pagestyle{headings}%
 \pagenumbering{arabic}%
-\sloppy%
-\frenchspacing%
-\flushbottom%
+%\sloppy%
+%\frenchspacing%
+%\flushbottom%
 
 %%% special parameters for TeX
 \adjdemerits=100
