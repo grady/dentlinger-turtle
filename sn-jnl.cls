@@ -152,7 +152,7 @@
 \DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}%
 %
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize{10bp}{12bp}%
+   \@setfontsize\normalsize{12bp}{14bp}%
    \abovedisplayskip 12\p@ \@plus2\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus3\p@%
    \belowdisplayshortskip 3\p@ \@plus3\p@ \@minus3\p@%
@@ -183,7 +183,7 @@
    \belowdisplayskip \abovedisplayskip}%
 %
 \renewcommand\footnotesize{%
-   \@setfontsize\footnotesize{7}{8}%
+   \@setfontsize\footnotesize{10}{12}%
    \abovedisplayskip 5\p@ \@plus2\p@ \@minus4\p@
    \abovedisplayshortskip \z@ \@plus\p@
    \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
@@ -236,16 +236,16 @@
 \setlength{\skip\footins}{18\p@ \@plus 6\p@ \@minus 3\p@}%
 %
 \RequirePackage[%
-    reversemp,
+    %reversemp,
     paperwidth=210mm,
     paperheight=297mm,
     top={26mm},
     headheight={12pt},
     headsep={5.15mm},
     text={160mm,216mm},
-    marginparsep=5mm,
-    marginparwidth=12mm,
-    bindingoffset=6mm,
+    %marginparsep=5mm,
+    %marginparwidth=12mm,
+    %bindingoffset=6mm,
     footskip=10.13mm,twocolumn]{geometry}%
 %
 \renewcommand\footnoterule{%
@@ -256,16 +256,17 @@
 \else%
 %% For single column used smallcond design trim and page size %%
 \RequirePackage[%
-    reversemp,
+    %reversemp,
     paperwidth=210mm,
     paperheight=297mm,
     top={26mm},
     headheight={5.5pt},
     headsep={5.6mm},
-    text={31pc,194.25mm},
-    marginparsep=5mm,
-    marginparwidth=12mm,
-    bindingoffset=6mm,
+    hmargin={26mm},
+    %text={31pc,194.25mm},
+    %marginparsep=5mm,
+    %marginparwidth=12mm,
+    %bindingoffset=6mm,
     footskip=10mm]{geometry}
 %
     \setlength\maxdepth{0pt}%
@@ -432,14 +433,14 @@
 %
 %%% Font Def
 \def\Artcatfont{\reset@font\fontsize{8bp}{10bp}\selectfont}%
-\def\Titlefont{\reset@font\fontsize{17bp}{22.5bp}\selectfont\titraggedcenter}%
+\def\Titlefont{\reset@font\fontsize{14bp}{21bp}\selectfont\titraggedcenter}%
 \def\SubTitlefont{\reset@font\fontsize{14bp}{16.5bp}\selectfont\titraggedcenter}%
-\def\Authorfont{\reset@font\fontsize{12bp}{14.5bp}\selectfont\boldmath\titraggedcenter}%
-\def\addressfont{\reset@font\fontsize{11bp}{13.5bp}\selectfont\titraggedcenter}%
-\def\abstractheadfont{\reset@font\fontsize{10bp}{12bp}\bfseries\selectfont\titraggedcenter}%
-\def\abstractsubheadfont{\reset@font\fontsize{10bp}{12bp}\bfseries\selectfont}%
-\def\abstractfont{\reset@font\fontsize{10bp}{12bp}\selectfont\onehalfspacing\leftskip=0pt\rightskip=0pt\parfillskip=0pt plus 1fil}%
-\def\keywordfont{\reset@font\fontsize{10bp}{12bp}\selectfont\leftskip=0pt\rightskip=0pt plus0.5fill}%
+\def\Authorfont{\reset@font\fontsize{12bp}{16bp}\selectfont\boldmath\titraggedcenter}%
+\def\addressfont{\reset@font\fontsize{12bp}{16bp}\selectfont\titraggedcenter}%
+\def\abstractheadfont{\reset@font\fontsize{12bp}{16bp}\bfseries\selectfont\titraggedcenter}%
+\def\abstractsubheadfont{\reset@font\fontsize{12bp}{14bp}\bfseries\selectfont}%
+\def\abstractfont{\reset@font\fontsize{12bp}{14bp}\selectfont\onehalfspacing\leftskip=0pt\rightskip=0pt\parfillskip=0pt plus 1fil}%
+\def\keywordfont{\reset@font\fontsize{12bp}{14bp}\selectfont\leftskip=0pt\rightskip=0pt plus0.5fill}%
 \def\historyfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont\leftskip=24pt\rightskip=24pt plus0.5fill}%
 
 %% Article Type
@@ -840,9 +841,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Page Styles %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %
-\def\opheaderfont{\reset@font\fontsize{10bp}{0bp}\selectfont}%
-\def\headerfont{\reset@font\fontsize{10bp}{0bp}\selectfont}%
-\def\footerfont{\reset@font\fontsize{10bp}{0bp}\selectfont}%
+\def\opheaderfont{\reset@font\fontsize{12bp}{0bp}\selectfont}%
+\def\headerfont{\reset@font\fontsize{12bp}{0bp}\selectfont}%
+\def\footerfont{\reset@font\fontsize{12bp}{0bp}\selectfont}%
 
 %% Regular Page Style      
 \def\ps@headings{%
@@ -938,13 +939,13 @@
   \fi
   \@xsect{#5}}
 %
-\def\sectionfont{\reset@font\fontfamily{\rmdefault}\fontsize{14bp}{16bp}\bfseries\selectfont\raggedright\boldmath}%
+\def\sectionfont{\reset@font\fontfamily{\rmdefault}\fontsize{12bp}{14bp}\bfseries\selectfont\raggedright\boldmath}%
 \def\subsectionfont{\reset@font\fontfamily{\rmdefault}\fontsize{12bp}{14bp}\bfseries\selectfont\raggedright\boldmath}%
-\def\subsubsectionfont{\reset@font\fontsize{11bp}{13bp}\bfseries\selectfont\raggedright\boldmath}%
-\def\paragraphfont{\reset@font\fontsize{10bp}{12bp}\bfseries\itshape\selectfont\raggedright}%
+\def\subsubsectionfont{\reset@font\fontsize{12bp}{14bp}\bfseries\selectfont\raggedright\boldmath}%
+\def\paragraphfont{\reset@font\fontsize{12bp}{14bp}\bfseries\itshape\selectfont\raggedright}%
 %
 \def\subparagraphfont{\itshape}%
-\def\bmheadfont{\reset@font\fontfamily{\rmdefault}\fontsize{10bp}{12bp}\bfseries\selectfont\raggedright\boldmath}%
+\def\bmheadfont{\reset@font\fontfamily{\rmdefault}\fontsize{12bp}{14bp}\bfseries\selectfont\raggedright\boldmath}%
 %
 \renewcommand\section{\@startsection{section}{1}{\z@}%
                                     {-12pt \@plus -4pt \@minus -2pt}%
@@ -1193,7 +1194,7 @@
 
 %% Figure
 
-\def\figurecaptionfont{\reset@font\fontfamily{\rmdefault}\fontsize{8}{9.5}\selectfont}%
+\def\figurecaptionfont{\reset@font\fontfamily{\rmdefault}\fontsize{12}{18}\selectfont}%
 
 \newdimen\figwidth%
 \newdimen\figheight%
@@ -1229,10 +1230,10 @@
 %
 \@ifpackageloaded{booktabs}{\cmidrulewidth=.15pt}{}%
 %
-\def\tablecaptionfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont}%
-\def\tablebodyfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont}%
-\def\tablecolheadfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont\bfseries\boldmath}%
-\def\tablefootnotefont{\reset@font\fontsize{8bp}{9.5bp}\selectfont}%
+\def\tablecaptionfont{\reset@font\fontsize{12bp}{16bp}\selectfont}%
+\def\tablebodyfont{\reset@font\fontsize{12bp}{14bp}\selectfont}%
+\def\tablecolheadfont{\reset@font\fontsize{12bp}{14bp}\selectfont\bfseries\boldmath}%
+\def\tablefootnotefont{\reset@font\fontsize{12bp}{16bp}\selectfont}%
 
 %% Table Macro
 
@@ -1526,7 +1527,7 @@
 \newskip\biofigadjskip%
 \biofigadjskip=0pt%
 %
-\def\authbiotextfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont}%
+\def\authbiotextfont{\reset@font\fontsize{12bp}{16bp}\selectfont}%
 %
 \newenvironment{biography}[2]{\par\addvspace{11.5pt plus3.375pt minus1.6875pt}%\lineno@off%
 \def\author##1{{\bfseries##1}}%

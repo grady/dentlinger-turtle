@@ -38,7 +38,7 @@
 
 \title{Four decades of green turtle (\emph{Chelonia mydas}) strandings on \Hawaii\ Island (1983--2022): Causes and trends
 }
-\author[1]{\fnm{Skylar} \sur{Dentlinger}\textsuperscript{\dag}}
+\author[1,5]{\fnm{Skylar} \sur{Dentlinger}}
 
 \author*[1]{\fnm{Karla J.} \sur{McDermid}}\email{mcdermid@hawaii.edu}%, orcid.org/0000-0002-7663-6545}
 %\equalcont{These authors contributed equally to this work.}
@@ -62,9 +62,10 @@
 \affil[4]{\orgname{Golden Honu Services of Oceania}, 
 \orgaddress{\city{Honolulu}, \state{Hawaii}, \country{USA}}}
 
-\presentaddress{\textsuperscript{\dag} \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}.}}
 
-\date{\today}
+\affil[5]{Present address: \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}.}}
+
+\date{XxXxX}
 
 \miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii, \Oahu, \Milolii. In electronic publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
 
@@ -149,7 +150,7 @@ These results provide the first analyses of stranding data from \Hawaii\ Island 
 
 \maketitle
 \vskip 12pt
-\section{Introduction}
+\section{Background}
 Green turtles (\emph{Chelonia mydas}) are the most abundant large marine herbivores found throughout the world and in the Hawaiian Islands. 
 Hawaiian populations of green turtles that were once depleted have increased since their 1974 protection under Hawaiian Law and their 1978 protection under the Endangered Species Act \citep{balazs2004thirty}. 
 Green turtles migrate long distances during their lifetime, from nesting to foraging grounds \citep{balazs2015review}. 
@@ -183,7 +184,7 @@ The knowledge gained from stranding patterns can be used to establish mitigation
 
 In the present study, a comprehensive analysis of 39 years of \Hawaii\ Island green turtle strandings is presented to (1) identify the causes of strandings affecting green turtles around \Hawaii\  Island, (2) assess trends in strandings, and (3) identify differences and similarities between strandings in west and east \Hawaii\ Island. 
 
-\section{Methods}
+\section{Materials and Methods}
 
 \subsection{Data Collection}
 Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Research Program. 
@@ -692,6 +693,20 @@ Continued monitoring of turtle strandings and careful data collection on strande
 
 The considerable contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts, such as barbless hooks and effective line removal techniques (\url{https://dlnr.hawaii.gov/dobor/marineanimalhotline/}), focused on green turtle interactions with fisheries.
 
+\section{Acknowledgements}
+We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship:
+Summer Martin, 
+Brittany Clemans, 
+Shandell Brunson (deceased), 
+Shawn Murakawa,
+Jen Sims, 
+Megan Lamson, 
+Rebecca Ostertag, 
+NOAA Marine Turtle Biology \& Assessment Program,
+University of  \Hawaii\ at Hilo Marine Option Program Sea Turtle Stranding Response Team,
+\Hawaii\ Preparatory Academy Sea Turtle Research Program,
+and the State of \Hawaii\ Department of Land and Natural Resources.
+
 \section{Declarations}
 
 \subsection{Author contributions}
@@ -700,30 +715,17 @@ Initial analysis and first draft prepared by Skylar Dentlinger.
 Follow-up analyses, modeling, and final manuscript and code preparation by Grady Weyenberg.
 All authors made significant contributions to editing and revision of the manuscript, provided important intellectual content, and have read and approved the finalized version.
 
-\subsection{Conflict of Interest}
+\subsection{Competing Interests}
 The authors declare that no funds, grants, or other support were received to assist in the preparation of this manuscript.
 The authors have no relevant financial or non-financial interests to disclose.
+
+\subsection{Data Availability}
+All data analyzed during this study are included in this published article and its supplementary information files.
 
 \subsection{Ethics approval}
 This is an observational study compiled from publicly available records. 
 No ethical approval is required.
 
-\subsection{Data Availability}
-All data analyzed during this study are included in this published article and its supplementary information files.
-
-\section{Acknowledgements}
-We would like to thank the following individuals, agencies, and organizations that contributed to data collection and/or mentorship:
-Summer Martin, 
-Brittany Clemans, 
-Shandell Brunson (deceased), 
-Shawn Murakawa
-Jen Sims, 
-Megan Lamson, 
-Rebecca Ostertag, 
-NOAA Marine Turtle Biology \& Assessment Program,
-University of  \Hawaii\ at Hilo Marine Option Program Sea Turtle Stranding Response Team,
-\Hawaii\ Preparatory Academy Sea Turtle Research Program,
-and the State of \Hawaii\ Department of Land and Natural Resources.
 
 \bibliography{turtles}
 
