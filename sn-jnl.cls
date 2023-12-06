@@ -425,21 +425,22 @@
 \def\raggedright{\rightskip0pt plus 1fil\parfillskip=0pt\relax}%
 \def\raggedcenter{\leftskip=0pt plus 0.5fil\rightskip=0pt plus 0.5fil%
 \parfillskip=0pt\let\hb=\break}%
-\def\titraggedcenter{\leftskip=12pt plus 0.5fil\rightskip=12pt plus 0.5fil%
-\parfillskip=0pt\let\hb=\break}%
+%\def\titraggedcenter{\leftskip=12pt plus 0.5fil\rightskip=12pt plus 0.5fil%
+%\parfillskip=0pt\let\hb=\break}%
+\def\titraggedcenter{\raggedright}%
 \def\absraggedcenter{\leftskip=24pt plus 0.5fil\rightskip=24pt plus 0.5fil%
 \parfillskip=0pt\let\hb=\break}%
 
 %
 %%% Font Def
 \def\Artcatfont{\reset@font\fontsize{8bp}{10bp}\selectfont}%
-\def\Titlefont{\reset@font\fontsize{14bp}{21bp}\selectfont\titraggedcenter}%
-\def\SubTitlefont{\reset@font\fontsize{14bp}{16.5bp}\selectfont\titraggedcenter}%
+\def\Titlefont{\reset@font\fontsize{12bp}{21bp}\bfseries\selectfont\titraggedcenter}%
+\def\SubTitlefont{\reset@font\fontsize{12bp}{16.5bp}\selectfont\titraggedcenter}%
 \def\Authorfont{\reset@font\fontsize{12bp}{16bp}\selectfont\boldmath\titraggedcenter}%
 \def\addressfont{\reset@font\fontsize{12bp}{16bp}\selectfont\titraggedcenter}%
 \def\abstractheadfont{\reset@font\fontsize{12bp}{16bp}\bfseries\selectfont\titraggedcenter}%
 \def\abstractsubheadfont{\reset@font\fontsize{12bp}{14bp}\bfseries\selectfont}%
-\def\abstractfont{\reset@font\fontsize{12bp}{14bp}\selectfont\onehalfspacing\leftskip=0pt\rightskip=0pt\parfillskip=0pt plus 1fil}%
+\def\abstractfont{\reset@font\fontsize{12bp}{14bp}\selectfont\onehalfspacing\leftskip=0pt}%\rightskip=0pt\parfillskip=0pt plus 1fil}%
 \def\keywordfont{\reset@font\fontsize{12bp}{14bp}\selectfont\leftskip=0pt\rightskip=0pt plus0.5fill}%
 \def\historyfont{\reset@font\fontsize{8bp}{9.5bp}\selectfont\leftskip=24pt\rightskip=24pt plus0.5fill}%
 
@@ -1669,7 +1670,7 @@
 \fi%
   \bibliographystyle{sn-basic}%
   \setlength{\bibsep}{1em}%
-  \def\bibfont{\reset@font\fontfamily{\rmdefault}\normalsize\selectfont}%
+  \def\bibfont{\reset@font\fontfamily{\rmdefault}\normalsize\selectfont\rightskip0pt plus 1fil\parfillskip=0pt\relax}%
 \fi%
 \if@Mathphys@refstyle%
 \if@Numbered@refstyle%
