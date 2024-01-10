@@ -18,6 +18,9 @@
 \usepackage{setspace}
 \onehalfspacing
 
+\usepackage{datetime2}
+\DTMsetstyle{ddmmyyyy}
+
 \bibpunct{(}{)}{;}{a}{}{,}
 
 \usepackage{lineno}

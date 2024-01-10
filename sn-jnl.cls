@@ -760,7 +760,7 @@
         \ifpresentaddress{\par\@presentaddresstext\par}\fi%
 	}
      \fi%
-     {Submitted: \@date\par}%
+     {(Submitted \@date)\par}%
      {\printabstract\par}%
      {\printkeywords}%
     % \ifx\@pacs\empty\else%
