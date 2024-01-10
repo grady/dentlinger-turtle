@@ -1,6 +1,7 @@
 \documentclass[sn-basic,NameDate,pdflatex]{sn-jnl}
 
-\usepackage{lmodern}
+\usepackage{mathptmx}
+%\usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{manyfoot}
 \usepackage{booktabs}
@@ -38,32 +39,35 @@
 
 \title{Four decades of green turtle (\emph{Chelonia mydas}) strandings on \Hawaii\ Island (1983--2022): Causes and trends
 }
-\author[1,5]{\fnm{Skylar} \sur{Dentlinger}}
+\author[1]{\fnm{Skylar} \sur{Dentlinger}}
 
-\author*[1]{\fnm{Karla J.} \sur{McDermid}}\email{mcdermid@hawaii.edu}%, orcid.org/0000-0002-7663-6545}
+\author*[2]{\fnm{Karla J.} \sur{McDermid}}%, orcid.org/0000-0002-7663-6545}
 %\equalcont{These authors contributed equally to this work.}
 
-\author[2]{\fnm{Grady} \sur{Weyenberg}}\email{gradysw@hawaii.edu}%, orcid.org/0000-0001-6128-1772}
+\author*[3]{\fnm{Grady} \sur{Weyenberg}}%, orcid.org/0000-0001-6128-1772}
 %\equalcont{These authors contributed equally to this work.}
 
-\author[3]{\fnm{Laura M. R.} \sur{Jim}}
-\author[3]{\fnm{Marc R.} \sur{Rice}}\email{mrice@hpa.edu}%, orcid.org/0009-0008-5951-0749}
-\author[4]{\fnm{George H.} \sur{Balazs}}
+\author[4]{\fnm{Laura M. R.} \sur{Jim}}
+\author[5]{\fnm{Marc R.} \sur{Rice}} %, orcid.org/0009-0008-5951-0749}
+\author[6]{\fnm{George H.} \sur{Balazs}}
 
 \affil[1]{\orgdiv{Department of Marine Science}, \orgname{University of \Hawaii\ at Hilo},
-\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}}}
+\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}; Current address: \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}.}} E-mail: {skylarde@hawaii.edu}}
 
-\affil[2]{\orgdiv{Department of Mathematics}, \orgname{University of \Hawaii\ at Hilo}, 
-\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}}}
+\affil[2]{\orgdiv{Department of Marine Science}, \orgname{University of \Hawaii\ at Hilo},
+\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}. $^*$Correspondence: E-mail: {mcdermid@hawaii.edu}}}
 
-\affil[3]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
-\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}}}
+\affil[3]{\orgdiv{Department of Mathematics}, \orgname{University of \Hawaii\ at Hilo}, 
+\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}. $^*$Correspondence: E-mail: {gradysw@hawaii.edu}}}
 
-\affil[4]{\orgname{Golden Honu Services of Oceania}, 
-\orgaddress{\city{Honolulu}, \state{Hawaii}, \country{USA}}}
+\affil[4]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
+\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. E-mail: {laurajim@hpa.edu}}}
 
+\affil[5]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
+\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. E-mail: {mrice@hpa.edu}}}
 
-\affil[5]{Present address: \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}.}}
+\affil[6]{\orgname{Golden Honu Services of Oceania}, 
+\orgaddress{\city{Honolulu}, \state{Hawaii}, \country{USA}. E-mail: {itsahonuworld@hotmail.com}}}
 
 \date{XxXxX}
 
@@ -139,7 +143,7 @@ boat impact (\Sexpr{CauseCount$p[6]}),
 shark attack (\Sexpr{CauseCount$p[7]}), 
 and net (\Sexpr{CauseCount$p[8]});
 however, \Sexpr{CauseCount$p[1]} of strandings had no known cause.
-Statistical modeling failed to provide convincing evidence of temporal changes in the distribution of strandings across three consolidated cause categories: human-caused; predation, disease, and weather; and unknown.
+Statistical modeling did not provide convincing evidence of temporal changes in the distribution of strandings across three consolidated cause categories: human-caused; predation, disease, and weather; and unknown.
 Stranded turtles on east \Hawaii\ Island had a higher frequency of fibropapillomatosis, whereas west \Hawaii\ stranded turtles showed higher incidence of shark attacks. 
 These results provide the first comprehensive analyses of stranding data from \Hawaii\ Island and provide information that can inform resource managers, policy makers, and the public about the various types and magnitudes of impacts, anthropogenic and natural, to green turtles so that mitigation measures can be put into practice.
 Our findings allow for comparison with other green turtle populations worldwide.
@@ -148,6 +152,7 @@ Our findings allow for comparison with other green turtle populations worldwide.
 \keywords{sea turtles; fishing gear entanglement; fibropapillomatosis; Hawaiian Islands; marine reptile mortality; Pacific Ocean}
 
 \begin{document}
+%\SweaveOpts{concordance=TRUE}
 
 \maketitle
 \vskip 12pt
@@ -181,7 +186,7 @@ They are eaten by scavengers, sink, and/or decompose while in currents or eddies
 Therefore, the number of sea turtle strandings that is recorded is likely a minimal estimate \citep{hart2006interpreting}. 
 Stranding response programs can provide important insight into the health, welfare, and conservation status of sea turtle populations. Analyses of the data collected by these programs provide valuable information on mortality patterns and can aid regulatory managers \citep{crowder1995effects}. 
 Although \cite{chaloupka2008cause} mentioned that 6\% of statewide strandings occurred on \Hawaii\  Island  from 1982--2003, long-term stranding data specifically from \Hawaii\ Island have not been thoroughly analyzed previously.
-\Hawaii\ Island merits additional scientific scrutiny of its green turtle stranding patterns with the most up-to-date, inclusive data available  because of the island's large size (over half of total Hawaiian land area), southernmost location, lowest human population density, and important turtle foraging and resting areas---recently proposed as critical habitat by the US Fish and Wildlife Service and the National Oceanic and Atmospheric Administration \citep{fed2023designation, fed2023proposed}.
+\Hawaii\ Island merits additional scientific scrutiny of its green turtle stranding patterns with the most up-to-date, inclusive data available  because of the island's large size (over half of total Hawaiian land area), southernmost location in the archipelago, lowest human population density, and important turtle foraging and resting areas---recently proposed as critical habitat by the US Fish and Wildlife Service and the National Oceanic and Atmospheric Administration \citep{fed2023designation, fed2023proposed}.
 
 The knowledge gained from stranding patterns can be used to establish mitigation measures to reduce strandings and maintain healthy green turtle populations.  
 
@@ -190,7 +195,7 @@ In the present study, a comprehensive analysis of 39 years of \Hawaii\ Island gr
 \section{Materials and Methods}
 
 \subsection{Data Collection}
-Data were collected on turtles stranded on \Hawaii\ Island from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Research Program. 
+Data were collected on turtles stranded on \Hawaii\ Island ($19.5439$ N, $155.6659$ W, land area $10,430$ km$^2$ with coastal circumference of $428$ km) from 1983--2022 by members of the Pacific Islands Fisheries Science Center under the US National Marine Fisheries Services, the University of \Hawaii\ at Hilo Sea Turtle Stranding Response Team, and the \Hawaii\ Preparatory Academy Sea Turtle Research Program. 
 The database used in this study was compiled from records available at \url{https://georgehbalazs.com/field-notebooks-by-george-h-balazs/hawaii/}. 
 The west and east coasts of \Hawaii\ Island are different in terms of climate (the windward east coast receives much more rainfall than the leeward west coast), terrain, currents, and population, so the data used in this study were analyzed for the island as a whole, as well as by west and east coast. 
 West \Hawaii\ included locations from \Milolii\ north to Kawaihae, and east \Hawaii\ included locations from South Point north to Hawi (Figure \ref{fig:map}). 
@@ -273,7 +278,7 @@ cause_side_table %>% mutate(Total=East+West,
 @
 \end{table}
 
-Of the \Sexpr{Ntot} stranded turtles in the records, slightly over half had no known cause that could be determined (the ``unknown'' cause).
+Of the \Sexpr{Ntot} stranded turtles in the records, slightly over half had no discernable cause that could be determined (the ``unknown'' cause).
 The most common known cause of stranding was hook-and-line fishing gear, accounting for about 1 in 5 strandings.
 The distribution of causes is significantly different between the east and west coasts of the island (Chi-square test, $X_{\Sexpr{cause_side_test$parameter}}= \Sexpr{signif(cause_side_test$statistic, 3)}$, $p < 10^{-10}$), 
 with the effect being driven most strongly by the FP and Miscellaneous categories (Table \ref{tab:cause}).
@@ -596,7 +601,7 @@ Increased public awareness of strandings and response programs and the greater u
 However, the increase in reported strandings appears to slow in the early 2000s (Figure \ref{fig:sides}), stabilizing at approximately 25--30 per year.
 This trend was also noticed in studies covering the other main Hawaiian Islands \citep{chaloupka2008cause}. 
 
-There are two years post 2005 which show an unusually large number of Green turtle strandings: 2011 and 2018. The peak in 2011 is associated with the March 2011 magnitude 9.0 T\={o}hoku earthquake off the coast of Japan and the subsequent tsunami, large waves, and hazardous currents that it caused around \Hawaii\ Island, and particularly its western shoreline \citep{cheung2013surges}. 
+There are two years post 2005 which show an unusually large number of green turtle strandings: 2011 and 2018. The peak in 2011 is associated with the March 2011 magnitude 9.0 T\={o}hoku earthquake off the coast of Japan and the subsequent tsunami, large waves, and hazardous currents that it caused around \Hawaii\ Island, and particularly its western shoreline \citep{cheung2013surges}. 
 The waves and currents associated with tsunamis bring marine life onshore with them and can wash turtles inland. 
 Two hawksbill turtles were reported stranded in \Hawaii\ as a result of the 2011 earthquake \citep{brunson2022three}, and a 2009 tsunami in Samoa similarly led to 52 turtles stranding on land \citep{bell2011marine}. 
 The apparent downward trend of strandings after 2018 is probably not because fewer turtles stranded, but is rather due to human behavioral changes caused by the COVID-19 pandemic.
@@ -606,11 +611,12 @@ All of these factors lead to a sharp drop in the number of people visiting \Hawa
 
 The highest rates of green turtle strandings occurred during the Hawaiian spring and summer months, from March--August.
 This is similar to the findings on \Oahu\ where green turtle strandings were highest from March--June \citep{chaloupka2008cause}, and for adult hawksbills in the Hawaiian Archipelago where strandings were highest from June--September \citep{brunson2022three}. 
-Similarly, strandings of loggerhead, green, and leatherback turtles in Brazil were highest during the austral spring and summer seasons \citep{monteiro2016long}. 
+Similarly, strandings of loggerhead, green, and leatherback turtles in Brazil were highest during the austral spring and summer seasons \citep{monteiro2016long}.
+Peak sea turtle stranding months during 2010-2019 in the Gulf of Mexico were also in the spring to summer (March to August) \citep{howell2021}.
 Strandings on \Hawaii\ Island were lowest during the months of September, November, and December, but a secondary peak in the month of October was seen.
 This same peak was observed in the 2022 green turtle strandings on Maui \citep{cutt2023impact} and
 \Oahu\ showed a similar secondary peak of strandings in September \citep{chaloupka2008cause}. 
-This trend of strandings seen in the Hawaiian Islands may indicate seasonal abundance of turtles, seasonal activity of humans, or seasonality of shoreline surf, currents, and winds \citep{chaloupka2008cause}.
+The spring/summer stranding patterns seen on \Hawaii\ Island and other areas may reflect seasonal variation in turtle abundance, differences in mortality events, shifts in shoreline human activity (and stranding reporting), or changes in surf, currents, and winds that can push carcasses to shore.
 
 Hook-and-line fishing gear was the most common known cause of stranding of green turtles on \Hawaii\ Island as a whole.
 Fishing gear strandings show a similar qualitative pattern to the overall time series (Figure \ref{fig:cause}), increasing from 1983 to the mid 2000s and then apparently leveling off. 
@@ -691,8 +697,10 @@ The present study found that turtles that stranded as a result of FP were more l
 More turtles stranded dead than alive on west \Hawaii and more turtles stranded alive than dead on east \Hawaii, probably because shark attacks and boat impacts are more common on west \Hawaii, while FP is reported almost exclusively on eastern shores. 
 \cite{chaloupka2008cause} found that the probability of mortality in a stranding decreased with turtle size, and this pattern is also observed in this data across the two sides of \Hawaii\ Island.
 
+\section{Conclusions}
+
 Despite the large percentage of unknown causes of stranding, this long-term data set provides important information on \Hawaii\ Island green turtle strandings.
-Continued monitoring of turtle strandings and careful data collection on stranded individuals is critical to the conservation of green turtles.
+Continued monitoring of turtle strandings and careful data collection on stranded individuals are critical to the conservation of green turtles.
 
 The considerable contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts, such as barbless hooks and effective line removal techniques (\url{https://dlnr.hawaii.gov/dobor/marineanimalhotline/}), focused on green turtle interactions with fisheries.
 

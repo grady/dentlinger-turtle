@@ -152,7 +152,7 @@
 \DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}%
 %
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize{12bp}{14bp}%
+   \@setfontsize\normalsize{12bp}{16bp}%
    \abovedisplayskip 12\p@ \@plus2\p@ \@minus1\p@
    \abovedisplayshortskip \z@ \@plus3\p@%
    \belowdisplayshortskip 3\p@ \@plus3\p@ \@minus3\p@%
@@ -437,7 +437,7 @@
 \def\Titlefont{\reset@font\fontsize{12bp}{21bp}\bfseries\selectfont\titraggedcenter}%
 \def\SubTitlefont{\reset@font\fontsize{12bp}{16.5bp}\selectfont\titraggedcenter}%
 \def\Authorfont{\reset@font\fontsize{12bp}{16bp}\selectfont\boldmath\titraggedcenter}%
-\def\addressfont{\reset@font\fontsize{12bp}{16bp}\selectfont\titraggedcenter}%
+\def\addressfont{\reset@font\fontsize{12bp}{16bp}\itshape\selectfont\titraggedcenter}%
 \def\abstractheadfont{\reset@font\fontsize{12bp}{16bp}\bfseries\selectfont\titraggedcenter}%
 \def\abstractsubheadfont{\reset@font\fontsize{12bp}{14bp}\bfseries\selectfont}%
 \def\abstractfont{\reset@font\fontsize{12bp}{14bp}\selectfont\onehalfspacing\leftskip=0pt}%\rightskip=0pt\parfillskip=0pt plus 1fil}%
