@@ -72,7 +72,7 @@
 \affil[6]{\orgname{Golden Honu Services of Oceania}, 
 \orgaddress{\city{Honolulu}, \state{Hawaii}, \country{USA}. E-mail: {itsahonuworld@hotmail.com}}}
 
-\date{XxXxX}
+\date{\today}
 
 \miscnote{Note to publisher: The Hawaiian letter \okina okina is typeset in this manuscript as an open quote, e.g. \Hawaii, \Oahu, \Milolii. In electronic publication, it should be rendered as unicode U+02BB MODIFIER LETTER TURNED COMMA.}
 
