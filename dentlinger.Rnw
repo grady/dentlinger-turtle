@@ -155,7 +155,7 @@ Our findings allow for comparison with other green turtle populations worldwide.
 \keywords{sea turtles; fishing gear entanglement; fibropapillomatosis; Hawaiian Islands; marine reptile mortality; Pacific Ocean}
 
 \begin{document}
-%\SweaveOpts{concordance=TRUE}
+
 
 \maketitle
 \vskip 12pt
