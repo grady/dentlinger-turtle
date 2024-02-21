@@ -18,8 +18,8 @@
 \usepackage{setspace}
 \onehalfspacing
 
-%\usepackage{datetime2}
-%\DTMsetstyle{ddmmyyyy}
+\usepackage{datetime2}
+\DTMsetstyle{ddmmyyyy}
 
 \bibpunct{(}{)}{;}{a}{}{,}
 
@@ -723,15 +723,19 @@ In \Hawaii, public awareness of sea turtles is high, but we must continue to edu
 The considerable contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts, such as barbless hooks and effective line removal techniques (\url{https://dlnr.hawaii.gov/dobor/marineanimalhotline/}), focused on green turtle interactions with fisheries.
 
 \section{Acknowledgements}
-We would like to thank the following individuals, agencies, and organizations that contributed to data collection, data availability, and/or mentorship:
+We would like to thank the following individuals, agencies, and organizations that contributed to data collection, data availability, and/or mentorship over the last four decades:
 Summer Martin, 
 Brittany Clemans, 
 Shandell Brunson (deceased), 
 Shawn Murakawa,
-Jen Sims, 
 Irene Kelly,
+Jen Sims, 
 Megan Lamson, 
 Rebecca Ostertag, 
+John Coney,
+Leon Hallacher,
+Walter Dudley,
+Jason Turner,
 NOAA Marine Turtle Biology \& Assessment Program,
 NOAA Pacific Islands Fisheries Science Center, 
 NOAA Pacific Islands Regional Office, 
