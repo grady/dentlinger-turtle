@@ -597,14 +597,14 @@ However, if a location is regularly accessed by more than a few people, a strand
 
 Strandings on \Hawaii\ Island showed an overall increase in rate between 1983 and 2022. Green turtle strandings have also increased on the other main Hawaiian Islands since 1982 \citep{chaloupka2008cause}.
 One important reason for this increase is a positive one: Green turtle populations in the Hawaiian Islands have recovered significantly since their 1974 protection by the State of \Hawaii\ under Regulation 36 and their 1978 protection under the Endangered Species Act \citep{balazs2004thirty, bennett2008book}.
-The increase in population size will directly lead to additional observed stranding events, even if the risk to an individual turtle remains constant over time \citep{boulon2000trends}. 
+The increase in turtle population size will directly lead to additional observed stranding events, even if the risk to an individual turtle remains constant over time \citep{boulon2000trends}. 
 Additionally, the human population increase on \Hawaii\ Island and the rise in numbers of visitors at the shoreline increase the chance of encountering and reporting a stranding. 
 In general, the locations of strandings shown in Figure \ref{fig:map} reflect beaches and other shoreline areas with easy public access.
 Increased public awareness of strandings and response programs and the greater use of cell phones and the internet probably have led to more reporting over time.
 However, the increase in reported strandings appears to slow in the early 2000s (Figure \ref{fig:sides}), stabilizing at approximately 25--30 per year.
 This trend was also noticed in studies covering the other main Hawaiian Islands \citep{chaloupka2008cause}.
 In a turtle carcass drifter experiment along the shores of the Mississippi, public reporting of stranded carcasses was unexpectedly low: on popular mainland beaches, only 50\% of the stranded turtles were reported; on accessible, but more remote barrier islands, only 11.1\% of stranded carcasses were reported by citizens, and 0\% of turtle carcasses that drifted into marshes were reported \citep{cook2021use}.  
-These results send a strong message that remoteness of and public accessibility to stranding areas greatly influence the  discovery of turtles, but also that even "structured stranding networks with established reporting mechanisms" may be overestimating the rate of reporting by the public, which influences the conclusions that can be drawn from citizen-derived data.
+These results send a strong message that remoteness of and public accessibility to stranding areas greatly influence the  discovery of turtles, and that even "structured stranding networks with established reporting mechanisms" may be overestimating the rate of reporting by the public, which influences the conclusions that can be drawn from citizen-derived data.
 
 There are two years post 2005 which show an unusually large number of green turtle strandings: 2011 and 2018. The peak in 2011 is associated with the March 2011 magnitude 9.0 T\={o}hoku earthquake off the coast of Japan and the subsequent tsunami, large waves, and hazardous currents that it caused around \Hawaii\ Island, and particularly its western shoreline \citep{cheung2013surges}. 
 The waves and currents associated with tsunamis bring marine life onshore with them and can wash turtles inland. 
@@ -622,8 +622,8 @@ Strandings on \Hawaii\ Island were lowest during the months of September, Novemb
 This same peak was observed in the 2022 green turtle strandings on Maui \citep{cutt2023impact} and
 \Oahu\ showed a similar secondary peak of strandings in September \citep{chaloupka2008cause}. 
 Although the major Hawaiian green turtle nesting season is mid-April to September/October in the Northwestern Hawaiian Islands \citep{niethammer1997reproductive},  no seasonal variation in green turtle abundance within localized coastal Hawaiian foraging grounds has been documented (Balazs unpublished).
-The higher spring/summer stranding patterns seen on \Hawaii\ Island may reflect seasonal differences in water temperature which affects carcass decomposition rates \citep{cook2021use}, shifts in shoreline human activity and stranding reporting, or changes in surf, currents, and winds that can push carcasses to shore.
-In the Hawaiian Islands, northeasterly tradewinds are the most common weather pattern, especially in the summer; however, other weather patterns could influence turtle carcass drift, including migratory mid-latitude low pressure systems that are common October to April with about nine fronts passing over \Hawaii\ Island in a season, during which winds shift from southwesterly to northerly; Kona Storms or cold-core lows, November to April, although rare with unpredictable paths, can cause waterspouts, torrential rain, and high surf; in addition, tropical cyclones from June to mid-November, can bring high surf, storm surge, and strong onshore winds to \Hawaii\ Island \citep{longman2021twenty,nullet2023hawaii}.
+The higher spring/summer stranding patterns seen on \Hawaii\ Island may reflect seasonal differences in water temperature which affects carcass decomposition rates \citep{cook2021use}, periodic shifts in shoreline human activity and stranding reporting, or cyclical changes in surf, currents, and winds that can push carcasses to shore.
+In the Hawaiian Islands, northeasterly trade winds are the most common weather pattern, especially in the summer; however, other weather patterns could influence turtle carcass drift, including migratory mid-latitude low pressure systems that are common October to April with about nine fronts passing over \Hawaii\ Island in a season, during which winds shift from southwesterly to northerly; Kona Storms or cold-core lows, November to April, although rare with unpredictable paths, that can cause waterspouts, torrential rain, and high surf; tropical cyclones from June to mid-November, that can bring high surf, storm surge, and strong onshore winds to \Hawaii\ Island \citep{longman2021twenty,nullet2023hawaii}; in addition, El Ni\~{n}o Southern Oscillation events that sporadically impact the Hawaiian Islands can cause weakened trade winds, less rainfall, and warmer ocean temperatures (El Niño phase) between November to April or stronger trade winds, greater rainfall, and cooler ocean temperatures (La Niña phase) \citep{longman2021impacts}.
 The spring/summer stranding patterns seen on \Hawaii\ Island and other areas may reflect seasonal variation in turtle abundance, differences in mortality events, shifts in shoreline human activity (and stranding reporting), or changes in surf, currents, and winds that can push carcasses to shore.
 
 Hook-and-line fishing gear was the most common known cause of stranding of green turtles on \Hawaii\ Island as a whole.
@@ -636,11 +636,11 @@ These interactions are often a result of lost and/or discarded fishing gear or f
 Hook-and-line fishing gear strandings were also prevalent on \Oahu, Maui, and Kauai, making up the second most common cause of stranding of green turtles \citep{chaloupka2008cause}.
 Similar to the findings of the present study, fishing gear was the foremost cause of stranding for green turtles on Maui in 2022, with 81\% of the total strandings showing interactions \citep{cutt2023impact}.
 
-Unfortunately, the number of hook-and-line strandings may be even greater than estimated. 
+The number of hook-and-line strandings may be even greater than estimated. 
 \cite{work2015causes} performed necropsies (postmortem autopsies) on stranded turtles throughout the Pacific and found that 48\% of foreign body ingestion cases (mostly all associated with fishing gear) showed no external sign of fishing line interactions.
 Green turtle strandings resulting from interactions with fishing gear are prevalent around the world, including the U.S. Virgin Islands \citep{boulon2000trends}, Brazil \citep{guimares2021distribution}, Taiwan \citep{cheng2019twenty}, New Caledonia \citep{read2023twenty}, and Greece \citep{panagopoulos2003stranding}. 
 However, unlike the line/hook entanglements on \Hawaii\ Island, in Taiwan, pond nets were the most common fishing gear causing turtle strandings over 23 years \citep{cheng2019twenty}. 
-In contrast, at Samanda\u{g} Beach on the eastern Mediterranean coast of southern T\"{u}rkiye (Turkey), from 2002-2017, fishing activities caused only 7\% of the green turtle standings, while marine pollution accounted for 56\% of strandings \citep{sonmez2018sixteen}. Fibropapillomatosis was the second most common cause of stranding in this study, whereas \cite{chaloupka2008cause} found FP to be the main cause of stranding in green turtles in \Oahu, Maui, and Kauai. 
+In contrast, at Samanda\u{g} Beach on the eastern Mediterranean coast of southern T\"{u}rkiye (Turkey), from 2002-2017, fishing activities caused only 7\% of the green turtle standings, while marine pollution accounted for 56\% of strandings \citep{sonmez2018sixteen}. Fibropapillomatosis was the second most common cause of stranding on \Hawaii\ Island, whereas \cite{chaloupka2008cause} found FP to be the main cause of stranding in green turtles in \Oahu, Maui, and Kauai. 
 
 The relative rates of strandings by cause over time is of particular interest for managers and conservationists because it can indicate particular sources of danger to turtle populations. 
 The overall rate of observation depends on population size and human reporting behavior in a complex way that is difficult to disentangle, but by looking at the distribution of causes over time we may be able to identify structural changes in the cause of strandings.
@@ -651,7 +651,7 @@ For example, 50\% of strandings in New Caledonia were unknown, defined as ``no n
 In our study and others, given the circumstances of discovery (time, weather patterns, location, retrieval), condition of the animal (undetermined health and behavior prior to stranding, unspecified time of death, decomposition, or scavenging), and limited resources for extensive diagnostic procedures (necropsies, histopathology, toxicology, and microbiology), many stranded turtles remain forever in the category of unknown causes of mortality.
 However, the goal should be to increase reporting of strandings by the public, to encourage detailed observations at time of discovery, and develop systematic survey programs by scientists to detect stranded turtles even in areas not frequented by the public, because robust understanding of stranding patterns and causes of mortality is key to the survival of green turtles in \Hawaii.
 
-In this study, the record collection process kept eight categories of cause, however, for modelling purposes we reduced these to three broad categories: direct intentional and accidental human causes, such as boat impacts and fishing and hunting related injuries; natural events, predation, and disease; and unknown causes.
+In this study, the record collection process kept eight categories of stranding cause, however, for modelling purposes we reduced these to three broad categories: direct intentional and accidental human causes, such as boat impacts and fishing and hunting related injuries; natural events, predation, and disease; and unknown causes.
 The distribution of these three consolidated causes has been relatively stable since the early 1990s (Figure \ref{fig:model}), providing unconvincing evidence of any major shifts between the relative risks between direct human causes and the other categories.
 One way of interpreting this result is that the increased numbers of strandings over time can be explained entirely by the growth in turtle populations and increases in reporting by the public. 
 While keeping the proportion of human-caused strandings constant over time may be regarded as a minor conservation success story, given the significant growth in human population and coastal activity over the same time period, humans remain a significant source of danger to turtles.
@@ -667,7 +667,7 @@ Increased boat presence accompanied with high vessel speeds, varying water depth
 
 The majority of green turtles that stranded on \Hawaii\ Island were juveniles. Similarly, juveniles predominated the stranded green and hawksbill turtles throughout the Hawaiian Islands \citep{chaloupka2008cause, brunson2022three}.
 Juvenile green turtles were also the most common size class stranded in New Caledonia \citep{read2023twenty}, Australia \citep{flint2015trends}, and Brazil \citep{monteiro2016long}. 
-However, in T\"{u}rkiye and Taiwan, most strandings involved sub-adult and juvenile turtles \citep{sonmez2018sixteen, cheng2019twenty}.
+However, in T\"{u}rkiye and Taiwan, most green turtle strandings involved sub-adult and juvenile turtles \citep{sonmez2018sixteen, cheng2019twenty}.
 The high proportion of juveniles stranding may be a result of increased nesting populations at French Frigate Shoals in the Northwestern Hawaiian Islands leading to an increase in juveniles moving from nesting to foraging areas \citep{balazs2004thirty}.
 Juvenile turtles may be more immunologically na\"{i}ve and susceptible to environmental stressors that could contribute to stranding \citep{flint2015trends}. 
 
@@ -683,7 +683,7 @@ Clutches of sea turtles are sensitive to temperature change, and an increase in 
 As temperatures continue to rise as a result of climate change, the Hawaiian population of green turtles may eventually see the same skew seen in other locations around the world \citep{hawkes2009climate}.
 
 More than 60\% of the stranded turtles on \Hawaii\ Island had no tumors indicative of FP.
-No cases of internal FP tumors have been reported when no tumors occur externally \citep{work2004retrospective}. 
+No cases of internal FP tumors have been reported without the presence of external tumors \citep{work2004retrospective}. 
 A decline in FP prevalence has been documented previously in Hawaiian green turtles. 
 Twenty-one of 66 turtles observed with tumors in one summer on Maui were seen later with no tumors \citep{bennett2000photographic}, indicating regression of the FP.  
 The low number of stranded turtles with FP on \Hawaii\ Island is consistent with the 2022 stranding report for green turtles on Maui, in which only one case of FP was reported \citep{cutt2023impact}.
@@ -716,11 +716,8 @@ More turtles stranded dead than alive on west \Hawaii and more turtles stranded 
 
 \section{Conclusions}
 
-Despite the large percentage of unknown causes of stranding, this long-term data set provides important information on \Hawaii\ Island green turtle strandings.
-Continued monitoring of turtle strandings and careful data collection on stranded individuals are critical to the conservation of green turtles.
-In \Hawaii, public awareness of sea turtles is high, but we must continue to educate people on what to do if a hooked, entangled, injured or stranded turtle is found, including posting signs at critical sites with stranding reporting information.
-
-The considerable contribution of hook-and-line fishing gear to strandings highlights the continuing need for additional mitigation efforts, such as barbless hooks and effective line removal techniques (\url{https://dlnr.hawaii.gov/dobor/marineanimalhotline/}), focused on green turtle interactions with fisheries.
+Despite the large percentage of unknown causes of stranding, this long-term data set provides important information on \Hawaii\ Island green turtle strandings. 
+The considerable contribution of hook-and-line fishing gear to strandings emphasizes the need for additional mitigation efforts, such as barbless hooks and effective line removal techniques (\url{https://dlnr.hawaii.gov/dobor/marineanimalhotline/}). In \Hawaii, the public has a high level of awareness of sea turtles, but we have an imperative to increase the availability of information on what a person should do if a hooked, entangled, injured or stranded turtle is found. Continued monitoring of turtle strandings and careful data collection on stranded individuals are critical to the conservation of green turtles. 
 
 \section{Acknowledgements}
 We would like to thank the following individuals, agencies, and organizations that contributed to data collection, data availability, and/or mentorship over the last four decades:
