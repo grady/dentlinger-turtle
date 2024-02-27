@@ -64,7 +64,7 @@
 \orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}. $^*$Correspondence: E-mail: {gradysw@hawaii.edu}}}
 
 \affil[4]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
-\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. E-mail: {laurajim@hpa.edu}}}
+\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. E-mail: {laura.jim@hpa.edu}}}
 
 \affil[5]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
 \orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. E-mail: {mrice@hpa.edu}}}
@@ -131,7 +131,7 @@ CauseCount <- BigIslandStrandings %>% count(Cause) %>% mutate(p=proportions(n) %
 @
 
 \abstract{
-Hawaiian populations of green turtles (\emph{Chelonia mydas}) have increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
+The Hawaiian population of green turtles (\emph{Chelonia mydas}) has increased since Federal and State protections were implemented in the mid 1970s, and reported stranding events have also increased. 
 This study analyzed \Hawaii\ Island data: stranding location, date, size, sex, presence/absence of tumors, stranding status, as well as cause of stranding. 
 A total of \Sexpr{Ntot} stranded green turtles were reported from 1983--2022: 
 \Sexpr{CoastCount$East} stranded on the east (windward) coast of \Hawaii\ Island and 
@@ -161,7 +161,7 @@ Our findings allow for comparison with other green turtle populations worldwide.
 \vskip 12pt
 \section{Background}
 Green turtles (\emph{Chelonia mydas}) are the most abundant large marine herbivores found throughout the world and in the Hawaiian Islands. 
-Hawaiian populations of green turtles that were once depleted have increased since their 1974 protection under Hawaiian Law and their 1978 protection under the Endangered Species Act \citep{balazs2004thirty}. 
+The Hawaiian population of green turtles that was once depleted has increased since its 1974 protection under Hawaiian Law and 1978 protection under the Endangered Species Act \citep{balazs2004thirty}. 
 Green turtles migrate long distances during their lifetime, from nesting to foraging grounds \citep{balazs2015review}. 
 In the Hawaiian Islands, 96\% of nesting occurs on the sand islets at French Frigate Shoals, located in the Northwestern Hawaiian Islands \citep{mtbap2022}. 
 Migration patterns and complicated life history patterns cause green turtles to occupy many habitats during their lifespans including pelagic environments during their early years and during migrations, as well coastal areas in their later years \citep{balazs1980synopsis, bolten2003variation}.
@@ -624,7 +624,6 @@ This same peak was observed in the 2022 green turtle strandings on Maui \citep{c
 Although the major Hawaiian green turtle nesting season is mid-April to September/October in the Northwestern Hawaiian Islands \citep{niethammer1997reproductive},  no seasonal variation in green turtle abundance within localized coastal Hawaiian foraging grounds has been documented (Balazs unpublished).
 The higher spring/summer stranding patterns seen on \Hawaii\ Island may reflect seasonal differences in water temperature which affects carcass decomposition rates \citep{cook2021use}, periodic shifts in shoreline human activity and stranding reporting, or cyclical changes in surf, currents, and winds that can push carcasses to shore.
 In the Hawaiian Islands, northeasterly trade winds are the most common weather pattern, especially in the summer; however, other weather patterns could influence turtle carcass drift, including migratory mid-latitude low pressure systems that are common October to April with about nine fronts passing over \Hawaii\ Island in a season, during which winds shift from southwesterly to northerly; Kona Storms or cold-core lows, November to April, although rare with unpredictable paths, that can cause waterspouts, torrential rain, and high surf; tropical cyclones from June to mid-November, that can bring high surf, storm surge, and strong onshore winds to \Hawaii\ Island \citep{longman2021twenty,nullet2023hawaii}; in addition, El Ni\~{n}o Southern Oscillation events that sporadically impact the Hawaiian Islands can cause weakened trade winds, less rainfall, and warmer ocean temperatures (El Niño phase) between November to April or stronger trade winds, greater rainfall, and cooler ocean temperatures (La Niña phase) \citep{longman2021impacts}.
-The spring/summer stranding patterns seen on \Hawaii\ Island and other areas may reflect seasonal variation in turtle abundance, differences in mortality events, shifts in shoreline human activity (and stranding reporting), or changes in surf, currents, and winds that can push carcasses to shore.
 
 Hook-and-line fishing gear was the most common known cause of stranding of green turtles on \Hawaii\ Island as a whole.
 Fishing gear strandings show a similar qualitative pattern to the overall time series (Figure \ref{fig:cause}), increasing from 1983 to the mid 2000s and then apparently leveling off. 
