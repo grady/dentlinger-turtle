@@ -39,6 +39,7 @@ jobs:
             sn-jnl.cls
             figure/*.pdf
             figure/*.png
+            figure/*.tiff
       - name: Create pages directory
         run: |
           mkdir _site

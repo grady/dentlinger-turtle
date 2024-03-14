@@ -86,6 +86,7 @@ make_plot_namer <- function(prefix="Figure-", n=1L, width=2){
   function(x){
     x2 <- file.path(dirname(x), paste0(prefix, formatC(n, width=width, flag="0"),".", tools::file_ext(x)))
     magick::image_write(magick::image_read_pdf(x), path=fs::path_ext_set(x2, "png"), density=300)
+    magick::image_write(magick::image_read_pdf(x), path=fs::path_ext_set(x2, "tiff"), density=1200, format="tiff")
     n <<- n + 1L
     if (file.rename(x, x2)) x2 else x
   }
