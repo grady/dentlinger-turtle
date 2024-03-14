@@ -58,16 +58,22 @@
 \orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}; Current address: \orgdiv{Rosenstiel School of Marine and Atmospheric Science}, \orgname{University of Miami}, \orgaddress{\city{Miami}, \state{Florida}, \postcode{33149}, \country{USA}.}} E-mail: {skylarde@hawaii.edu}}
 
 \affil[2]{\orgdiv{Department of Marine Science}, \orgname{University of \Hawaii\ at Hilo},
-\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}. $^*$Correspondence: E-mail: {mcdermid@hawaii.edu}}}
+\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}. 
+\href{https://orcid.org/0000-0002-7663-6545}{orcid.org/0000-0002-7663-6545}
+$^*$Correspondence: E-mail: {mcdermid@hawaii.edu}}}
 
 \affil[3]{\orgdiv{Department of Mathematics}, \orgname{University of \Hawaii\ at Hilo}, 
-\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}. $^*$Correspondence: E-mail: {gradysw@hawaii.edu}}}
+\orgaddress{\city{Hilo}, \state{Hawaii}, \postcode{96720}, \country{USA}. 
+\href{https://orcid.org/0000-0001-6128-1772}{orcid.org/0000-0001-6128-1772}
+$^*$Correspondence: E-mail: {gradysw@hawaii.edu}}}
 
 \affil[4]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
 \orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. E-mail: {laura.jim@hpa.edu}}}
 
 \affil[5]{\orgdiv{Sea Turtle Research Program}, \orgname{\Hawaii\ Preparatory Academy}, 
-\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. E-mail: {mrice@hpa.edu}}}
+\orgaddress{\city{Kamuela}, \state{Hawaii}, \postcode{96743}, \country{USA}. 
+\href{https://orcid.org/0009-0008-5951-0749}{orcid.org/0009-0008-5951-0749}
+E-mail: {mrice@hpa.edu}}}
 
 \affil[6]{\orgname{Golden Honu Services of Oceania}, 
 \orgaddress{\city{Honolulu}, \state{Hawaii}, \country{USA}. E-mail: {itsahonuworld@hotmail.com}}}
