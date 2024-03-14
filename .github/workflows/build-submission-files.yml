@@ -38,6 +38,7 @@ jobs:
             sn-basic.bst
             sn-jnl.cls
             figure/*.pdf
+            figure/*.png
       - name: Create pages directory
         run: |
           mkdir _site

@@ -78,14 +78,14 @@
 
 <<setup, include=FALSE>>=
 mm2in <- 0.0393701
-twocol <- 84 * mm2in
-bigcol <- 174 * mm2in
+twocol <- 80 * mm2in
+bigcol <- 170 * mm2in
 smallcol <- 119 * mm2in
 
 make_plot_namer <- function(prefix="Figure-", n=1L, width=2){
   function(x){
     x2 <- file.path(dirname(x), paste0(prefix, formatC(n, width=width, flag="0"),".", tools::file_ext(x)))
-    magick::image_write(magick::image_read_pdf(x), path=fs::path_ext_set(x2, "png"))
+    magick::image_write(magick::image_read_pdf(x), path=fs::path_ext_set(x2, "png"), density=300)
     n <<- n + 1L
     if (file.rename(x, x2)) x2 else x
   }
@@ -499,7 +499,7 @@ $p=\Sexpr{signif(gender_side_test$p.value, 2)}$).
 <<length_cause, fig.height=3>>=
 ggplot(BigIslandStrandings, aes(x=Cause, y=SCL)) + geom_boxplot() + labs(y="Carapace length (cm) ") +  theme_bw()
 @
-\caption{Straight carapace length (SCL) was measured in 488 records, and and plotted for each stranding cause. Fibropapillomatosis is abbreviated FP. Boxplot outliers begin at 1.5 times the inter-quartile distance.}\label{fig:length_cause}
+\caption{Straight carapace length (SCL) was measured in 488 records, and plotted for each stranding cause. Fibropapillomatosis is abbreviated FP. Boxplot outliers begin at 1.5 times the inter-quartile distance.}\label{fig:length_cause}
 \end{figure}
 
 

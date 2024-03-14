@@ -797,7 +797,9 @@ FUNCTION {n.dashify}
 }
 
 FUNCTION {word.in}
-{ bbl.in capitalize
+{ 
+  bbl.in capitalize
+  "\emph{" swap$ * "}" *
   ":" *
   " " * }
 
