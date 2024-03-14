@@ -26,6 +26,11 @@
 \usepackage{lineno}
 \linenumbers
 
+\usepackage{tocloft}
+\cftpagenumbersoff{figure}
+%\renewcommand{\cftdotsep}{\cftnodots}
+\hypersetup{linktoc=none}
+
 %\newcommand{\okina}{`}
 \DeclareRobustCommand{\okina}{%
   \raisebox{\dimexpr\fontcharht\font`A-\height}{%
@@ -768,5 +773,9 @@ No ethical approval is required.
 
 
 \bibliography{turtles}
+
+\clearpage
+
+\listoffigures
 
 \end{document}

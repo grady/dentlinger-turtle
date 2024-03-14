@@ -888,7 +888,7 @@
 
 \def\ps@plain{\let\@mkboth\@gobbletwo%
 \let\@oddhead\@empty\let\@evenhead\@empty%
-\def\@oddfoot{\vbox to 18pt{\vfill\reset@font\rmfamily\hfil ddd\thepage\hfil}}%
+\def\@oddfoot{\vbox to 18pt{\vfill\reset@font\rmfamily\hfil\thepage\hfil}}%
 \let\@evenfoot\@oddfoot}%
 
 %
