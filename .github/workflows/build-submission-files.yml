@@ -25,21 +25,13 @@ jobs:
         shell: Rscript {0}
       - name: Print dir listing
         run: ls -l
+      - run: git archive -o dentlinger.zip --format zip HEAD
+      - run: zip dentlinger.zip dentlinger.pdf figure/*
       - name: Store artifacts
         uses: actions/upload-artifact@v3
         with:
           name: submission-files
-          path: |
-            dentlinger.log
-            dentlinger.tex
-            dentlinger.bbl
-            dentlinger.pdf
-            turtles.bib
-            sn-basic.bst
-            sn-jnl.cls
-            figure/*.pdf
-            figure/*.png
-            figure/*.tiff
+          path: dentlinger.zip
       - name: Create pages directory
         run: |
           mkdir _site
